@@ -204,45 +204,13 @@ function LandingPage({ setCurrentPage }) {
               </div>
             </div>
 
-            {/* Right Content - Visual */}
+            {/* Right Content - Hero Image */}
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                {/* Protected Senior Card */}
-                <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur border border-green-500/30 rounded-2xl p-6 transform hover:scale-105 transition-transform">
-                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
-                    <Shield className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-white font-bold text-center mb-2">Protected</h3>
-                  <p className="text-green-200 text-sm text-center">Your loved ones, shielded from harm</p>
-                </div>
-
-                {/* Scammer Warning Card */}
-                <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 backdrop-blur border border-red-500/30 rounded-2xl p-6 transform hover:scale-105 transition-transform">
-                  <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg animate-pulse">
-                    <AlertTriangle className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-white font-bold text-center mb-2">Danger Zone</h3>
-                  <p className="text-red-200 text-sm text-center">Scammers are hunting 24/7</p>
-                </div>
-
-                {/* Email Threat */}
-                <div className="col-span-2 bg-slate-800/50 backdrop-blur border border-slate-700 rounded-2xl p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-red-400 text-xs font-mono">From: security@amaz0n-alert.com</p>
-                      <p className="text-white text-sm font-medium truncate">⚠️ URGENT: Your account has been compromised!</p>
-                      <p className="text-slate-400 text-xs mt-1">Click here immediately to secure your account...</p>
-                    </div>
-                  </div>
-                  <div className="mt-3 flex items-center gap-2">
-                    <XCircle className="w-4 h-4 text-red-500" />
-                    <span className="text-red-400 text-xs font-medium">SCAM DETECTED — Learn to spot these</span>
-                  </div>
-                </div>
-              </div>
+              <img
+                src="./hero-banner.jpg"
+                alt="Senior Cyber Secure - Your Shield. Your Community. Your Peace of Mind. A shield protecting families from cyber threats."
+                className="rounded-2xl shadow-2xl border border-white/10 w-full h-auto"
+              />
             </div>
           </div>
         </div>
