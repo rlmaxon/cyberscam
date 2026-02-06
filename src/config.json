@@ -1,0 +1,154 @@
+{
+  "site": {
+    "name": "Senior Cyber Secure",
+    "tagline": "Parent Protection Kit",
+    "heroImage": "./hero-banner.jpg",
+    "heroAlt": "Senior Cyber Secure - Your Shield. Your Community. Your Peace of Mind. A shield protecting families from cyber threats.",
+    "copyright": "\u00a9 2026 Senior Cyber Secure Education & Safety. All rights reserved."
+  },
+
+  "store": {
+    "url": "https://www.etsy.com",
+    "name": "Etsy"
+  },
+
+  "products": [
+    {
+      "category": "Antivirus",
+      "tagline": "Your Digital Bodyguard",
+      "description": "Scans your computer for \"germs\" (viruses and malware) and blocks dangerous websites before they can harm you.",
+      "iconKey": "shield",
+      "color": "blue",
+      "items": [
+        { "name": "Norton 360", "price": "$49.99/year", "url": "https://norton.com", "rating": 4.5 },
+        { "name": "Bitdefender", "price": "$39.99/year", "url": "https://bitdefender.com", "rating": 4.7 },
+        { "name": "Malwarebytes", "price": "$44.99/year", "url": "https://malwarebytes.com", "rating": 4.4 }
+      ]
+    },
+    {
+      "category": "VPN",
+      "tagline": "The Privacy Tunnel",
+      "description": "Hides your location and encrypts your internet connection from prying eyes, especially important on public WiFi.",
+      "iconKey": "eye",
+      "color": "purple",
+      "items": [
+        { "name": "NordVPN", "price": "$3.99/month", "url": "https://nordvpn.com", "rating": 4.6 },
+        { "name": "ExpressVPN", "price": "$6.67/month", "url": "https://expressvpn.com", "rating": 4.5 },
+        { "name": "Surfshark", "price": "$2.49/month", "url": "https://surfshark.com", "rating": 4.4 }
+      ]
+    },
+    {
+      "category": "Password Manager",
+      "tagline": "The Secure Digital Keychain",
+      "description": "Remembers all your long, complex passwords so you don't have to. One master password unlocks them all securely.",
+      "iconKey": "key",
+      "color": "green",
+      "items": [
+        { "name": "1Password", "price": "$2.99/month", "url": "https://1password.com", "rating": 4.8 },
+        { "name": "Dashlane", "price": "$4.99/month", "url": "https://dashlane.com", "rating": 4.5 },
+        { "name": "Bitwarden", "price": "Free / $10/year", "url": "https://bitwarden.com", "rating": 4.6 }
+      ]
+    },
+    {
+      "category": "Data Removal",
+      "tagline": "The Digital Janitor",
+      "description": "Scrubs your personal information from \"People Search\" websites that sell your data to scammers.",
+      "iconKey": "trash2",
+      "color": "orange",
+      "items": [
+        { "name": "DeleteMe", "price": "$129/year", "url": "https://joindeleteme.com", "rating": 4.5 },
+        { "name": "Incogni", "price": "$77.88/year", "url": "https://incogni.com", "rating": 4.3 },
+        { "name": "Kanary", "price": "$89/year", "url": "https://kanary.com", "rating": 4.2 }
+      ]
+    }
+  ],
+
+  "emergency": {
+    "reporting": [
+      {
+        "name": "FBI Internet Crime Complaint Center (IC3)",
+        "description": "Report internet-related crime and fraud",
+        "phone": null,
+        "url": "https://www.ic3.gov",
+        "urgent": true
+      },
+      {
+        "name": "FTC Fraud Reporting",
+        "description": "Federal Trade Commission fraud reports",
+        "phone": "1-877-382-4357",
+        "url": "https://reportfraud.ftc.gov",
+        "urgent": true
+      },
+      {
+        "name": "AARP Fraud Watch Helpline",
+        "description": "Free support for scam victims and questions",
+        "phone": "1-877-908-3360",
+        "url": "https://www.aarp.org/money/scams-fraud/helpline/",
+        "urgent": false
+      },
+      {
+        "name": "National Elder Fraud Hotline",
+        "description": "DOJ-funded support for elder fraud victims",
+        "phone": "1-833-372-8311",
+        "url": null,
+        "urgent": false
+      }
+    ],
+    "credit": [
+      {
+        "name": "AnnualCreditReport.com",
+        "description": "FREE credit reports from all 3 bureaus (federally mandated)",
+        "phone": "1-877-322-8228",
+        "url": "https://www.annualcreditreport.com",
+        "badge": "FREE"
+      },
+      {
+        "name": "Equifax Fraud Alert",
+        "description": "Place a fraud alert (they notify the other bureaus)",
+        "phone": "1-800-525-6285",
+        "url": "https://www.equifax.com/personal/credit-report-services/credit-fraud-alerts/",
+        "badge": null
+      },
+      {
+        "name": "Experian Fraud Alert",
+        "description": "Place a fraud alert or credit freeze",
+        "phone": "1-888-397-3742",
+        "url": "https://www.experian.com/fraud/center.html",
+        "badge": null
+      },
+      {
+        "name": "TransUnion Fraud Alert",
+        "description": "Place a fraud alert or credit freeze",
+        "phone": "1-800-680-7289",
+        "url": "https://www.transunion.com/fraud-alerts",
+        "badge": null
+      }
+    ],
+    "government": [
+      {
+        "name": "Social Security Administration",
+        "description": "Report Social Security scams or fraud",
+        "phone": "1-800-772-1213",
+        "url": "https://www.ssa.gov"
+      },
+      {
+        "name": "Internal Revenue Service (IRS)",
+        "description": "Report tax-related scams",
+        "phone": "1-800-829-1040",
+        "url": "https://www.irs.gov/identity-theft-fraud-scams"
+      },
+      {
+        "name": "Medicare",
+        "description": "Report Medicare fraud or scams",
+        "phone": "1-800-633-4227",
+        "url": "https://www.medicare.gov/basics/reporting-medicare-fraud"
+      },
+      {
+        "name": "Identity Theft Resource Center",
+        "description": "Free assistance for identity theft victims",
+        "phone": "1-888-400-5530",
+        "url": "https://www.idtheftcenter.org"
+      }
+    ]
+  }
+}

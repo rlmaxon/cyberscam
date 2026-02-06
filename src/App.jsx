@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, AlertTriangle, Lock, Eye, EyeOff, Phone, Mail, MessageSquare, Globe, ChevronRight, ChevronDown, ExternalLink, CheckCircle, XCircle, Users, DollarSign, TrendingUp, AlertCircle, FileText, CreditCard, Search, Menu, X, Home, BookOpen, ShoppingBag, Headphones, Settings, LogOut, Play, ArrowRight, Star, Zap, Database, Key, Trash2, Monitor, Smartphone, Chrome, Apple, Bot } from 'lucide-react';
+import config from './config.json';
 
 // ==================== MAIN APP ====================
 export default function SeniorCyberSecure() {
@@ -187,13 +188,13 @@ function LandingPage({ setCurrentPage }) {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a 
-                  href="https://www.etsy.com" 
-                  target="_blank" 
+                <a
+                  href={config.store.url}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-lg"
                 >
-                  Get the Kit on Etsy <ExternalLink className="w-5 h-5" />
+                  Get the Kit on {config.store.name} <ExternalLink className="w-5 h-5" />
                 </a>
                 <button 
                   onClick={() => setCurrentPage('login')}
@@ -207,8 +208,8 @@ function LandingPage({ setCurrentPage }) {
             {/* Right Content - Hero Image */}
             <div className="relative">
               <img
-                src="./hero-banner.jpg"
-                alt="Senior Cyber Secure - Your Shield. Your Community. Your Peace of Mind. A shield protecting families from cyber threats."
+                src={config.site.heroImage}
+                alt={config.site.heroAlt}
                 className="rounded-2xl shadow-2xl border border-white/10 w-full h-auto"
               />
             </div>
@@ -393,13 +394,13 @@ function LandingPage({ setCurrentPage }) {
           </div>
 
           <div className="text-center mt-12">
-            <a 
-              href="https://www.etsy.com"
+            <a
+              href={config.store.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl text-lg"
             >
-              Get Your Kit on Etsy <ExternalLink className="w-5 h-5" />
+              Get Your Kit on {config.store.name} <ExternalLink className="w-5 h-5" />
             </a>
           </div>
         </div>
@@ -415,13 +416,13 @@ function LandingPage({ setCurrentPage }) {
             Every 39 seconds, someone becomes a victim of cybercrime. Protect your parents today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="https://www.etsy.com"
+            <a
+              href={config.store.url}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-white text-blue-700 font-bold rounded-xl hover:bg-slate-100 transition-all shadow-lg flex items-center justify-center gap-2"
             >
-              Purchase on Etsy <ExternalLink className="w-5 h-5" />
+              Purchase on {config.store.name} <ExternalLink className="w-5 h-5" />
             </a>
             <button 
               onClick={() => setCurrentPage('emergency')}
@@ -592,8 +593,8 @@ function LoginPage({ handleLogin, setCurrentPage }) {
           <div className="mt-6 pt-6 border-t border-slate-200">
             <p className="text-center text-slate-600 text-sm">
               Don't have the kit yet?{' '}
-              <a href="https://www.etsy.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">
-                Purchase on Etsy →
+              <a href={config.store.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">
+                Purchase on {config.store.name} →
               </a>
             </p>
           </div>
@@ -685,7 +686,7 @@ function MemberDashboard({ setCurrentPage }) {
             <QuickLink icon={<Phone />} label="Emergency Hotline" onClick={() => setCurrentPage('emergency')} />
             <QuickLink icon={<Settings />} label="Privacy Settings" onClick={() => setCurrentPage('resources')} />
             <QuickLink icon={<ShoppingBag />} label="Security Tools" onClick={() => setCurrentPage('marketplace')} />
-            <QuickLink icon={<CreditCard />} label="Free Credit Report" href="https://www.annualcreditreport.com" />
+            <QuickLink icon={<CreditCard />} label="Free Credit Report" href={config.emergency.credit[0].url} />
           </div>
         </div>
       </div>
@@ -1149,56 +1150,14 @@ function ResourceCenter() {
 
 // ==================== AFFILIATE MARKETPLACE ====================
 function AffiliateMarketplace() {
-  const products = [
-    {
-      category: 'Antivirus',
-      tagline: 'Your Digital Bodyguard',
-      description: 'Scans your computer for "germs" (viruses and malware) and blocks dangerous websites before they can harm you.',
-      icon: <Shield className="w-8 h-8" />,
-      color: 'blue',
-      items: [
-        { name: 'Norton 360', price: '$49.99/year', url: 'https://norton.com', rating: 4.5 },
-        { name: 'Bitdefender', price: '$39.99/year', url: 'https://bitdefender.com', rating: 4.7 },
-        { name: 'Malwarebytes', price: '$44.99/year', url: 'https://malwarebytes.com', rating: 4.4 }
-      ]
-    },
-    {
-      category: 'VPN',
-      tagline: 'The Privacy Tunnel',
-      description: 'Hides your location and encrypts your internet connection from prying eyes, especially important on public WiFi.',
-      icon: <Eye className="w-8 h-8" />,
-      color: 'purple',
-      items: [
-        { name: 'NordVPN', price: '$3.99/month', url: 'https://nordvpn.com', rating: 4.6 },
-        { name: 'ExpressVPN', price: '$6.67/month', url: 'https://expressvpn.com', rating: 4.5 },
-        { name: 'Surfshark', price: '$2.49/month', url: 'https://surfshark.com', rating: 4.4 }
-      ]
-    },
-    {
-      category: 'Password Manager',
-      tagline: 'The Secure Digital Keychain',
-      description: 'Remembers all your long, complex passwords so you don\'t have to. One master password unlocks them all securely.',
-      icon: <Key className="w-8 h-8" />,
-      color: 'green',
-      items: [
-        { name: '1Password', price: '$2.99/month', url: 'https://1password.com', rating: 4.8 },
-        { name: 'Dashlane', price: '$4.99/month', url: 'https://dashlane.com', rating: 4.5 },
-        { name: 'Bitwarden', price: 'Free / $10/year', url: 'https://bitwarden.com', rating: 4.6 }
-      ]
-    },
-    {
-      category: 'Data Removal',
-      tagline: 'The Digital Janitor',
-      description: 'Scrubs your personal information from "People Search" websites that sell your data to scammers.',
-      icon: <Trash2 className="w-8 h-8" />,
-      color: 'orange',
-      items: [
-        { name: 'DeleteMe', price: '$129/year', url: 'https://joindeleteme.com', rating: 4.5 },
-        { name: 'Incogni', price: '$77.88/year', url: 'https://incogni.com', rating: 4.3 },
-        { name: 'Kanary', price: '$89/year', url: 'https://kanary.com', rating: 4.2 }
-      ]
-    }
-  ];
+  const productIcons = {
+    shield: <Shield className="w-8 h-8" />,
+    eye: <Eye className="w-8 h-8" />,
+    key: <Key className="w-8 h-8" />,
+    trash2: <Trash2 className="w-8 h-8" />
+  };
+
+  const products = config.products;
 
   const colors = {
     blue: 'from-blue-500 to-blue-600',
@@ -1228,7 +1187,7 @@ function AffiliateMarketplace() {
               <div className={`bg-gradient-to-r ${colors[category.color]} p-6 text-white`}>
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
-                    {category.icon}
+                    {productIcons[category.iconKey]}
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold">{category.category}</h2>
@@ -1280,94 +1239,9 @@ function AffiliateMarketplace() {
 
 // ==================== EMERGENCY DIRECTORY ====================
 function EmergencyDirectory() {
-  const reportingResources = [
-    {
-      name: 'FBI Internet Crime Complaint Center (IC3)',
-      description: 'Report internet-related crime and fraud',
-      phone: null,
-      url: 'https://www.ic3.gov',
-      urgent: true
-    },
-    {
-      name: 'FTC Fraud Reporting',
-      description: 'Federal Trade Commission fraud reports',
-      phone: '1-877-382-4357',
-      url: 'https://reportfraud.ftc.gov',
-      urgent: true
-    },
-    {
-      name: 'AARP Fraud Watch Helpline',
-      description: 'Free support for scam victims and questions',
-      phone: '1-877-908-3360',
-      url: 'https://www.aarp.org/money/scams-fraud/helpline/',
-      urgent: false
-    },
-    {
-      name: 'National Elder Fraud Hotline',
-      description: 'DOJ-funded support for elder fraud victims',
-      phone: '1-833-372-8311',
-      url: null,
-      urgent: false
-    }
-  ];
-
-  const creditResources = [
-    {
-      name: 'AnnualCreditReport.com',
-      description: 'FREE credit reports from all 3 bureaus (federally mandated)',
-      phone: '1-877-322-8228',
-      url: 'https://www.annualcreditreport.com',
-      badge: 'FREE'
-    },
-    {
-      name: 'Equifax Fraud Alert',
-      description: 'Place a fraud alert (they notify the other bureaus)',
-      phone: '1-800-525-6285',
-      url: 'https://www.equifax.com/personal/credit-report-services/credit-fraud-alerts/',
-      badge: null
-    },
-    {
-      name: 'Experian Fraud Alert',
-      description: 'Place a fraud alert or credit freeze',
-      phone: '1-888-397-3742',
-      url: 'https://www.experian.com/fraud/center.html',
-      badge: null
-    },
-    {
-      name: 'TransUnion Fraud Alert',
-      description: 'Place a fraud alert or credit freeze',
-      phone: '1-800-680-7289',
-      url: 'https://www.transunion.com/fraud-alerts',
-      badge: null
-    }
-  ];
-
-  const governmentResources = [
-    {
-      name: 'Social Security Administration',
-      description: 'Report Social Security scams or fraud',
-      phone: '1-800-772-1213',
-      url: 'https://www.ssa.gov'
-    },
-    {
-      name: 'Internal Revenue Service (IRS)',
-      description: 'Report tax-related scams',
-      phone: '1-800-829-1040',
-      url: 'https://www.irs.gov/identity-theft-fraud-scams'
-    },
-    {
-      name: 'Medicare',
-      description: 'Report Medicare fraud or scams',
-      phone: '1-800-633-4227',
-      url: 'https://www.medicare.gov/basics/reporting-medicare-fraud'
-    },
-    {
-      name: 'Identity Theft Resource Center',
-      description: 'Free assistance for identity theft victims',
-      phone: '1-888-400-5530',
-      url: 'https://www.idtheftcenter.org'
-    }
-  ];
+  const reportingResources = config.emergency.reporting;
+  const creditResources = config.emergency.credit;
+  const governmentResources = config.emergency.government;
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4">
@@ -1518,13 +1392,13 @@ function Footer({ setCurrentPage }) {
             <p className="text-slate-400 text-sm mb-4 max-w-sm">
               Empowering seniors and their families with the knowledge and tools to stay safe from online scams and fraud.
             </p>
-            <a 
-              href="https://www.etsy.com"
+            <a
+              href={config.store.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium"
             >
-              Get the Kit on Etsy <ExternalLink className="w-4 h-4" />
+              Get the Kit on {config.store.name} <ExternalLink className="w-4 h-4" />
             </a>
           </div>
 
@@ -1544,10 +1418,10 @@ function Footer({ setCurrentPage }) {
           <div>
             <h4 className="font-bold mb-4">Emergency Resources</h4>
             <ul className="space-y-2 text-slate-400 text-sm">
-              <li><a href="https://www.ic3.gov" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">FBI IC3 <ExternalLink className="w-3 h-3" /></a></li>
-              <li><a href="https://reportfraud.ftc.gov" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">FTC Fraud Report <ExternalLink className="w-3 h-3" /></a></li>
-              <li><span className="text-white">AARP Helpline:</span> 1-877-908-3360</li>
-              <li><a href="https://www.annualcreditreport.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">Free Credit Report <ExternalLink className="w-3 h-3" /></a></li>
+              <li><a href={config.emergency.reporting[0].url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">FBI IC3 <ExternalLink className="w-3 h-3" /></a></li>
+              <li><a href={config.emergency.reporting[1].url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">FTC Fraud Report <ExternalLink className="w-3 h-3" /></a></li>
+              <li><span className="text-white">AARP Helpline:</span> {config.emergency.reporting[2].phone}</li>
+              <li><a href={config.emergency.credit[0].url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">Free Credit Report <ExternalLink className="w-3 h-3" /></a></li>
             </ul>
           </div>
         </div>
@@ -1556,7 +1430,7 @@ function Footer({ setCurrentPage }) {
         <div className="pt-8 border-t border-slate-800">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">
-              © 2026 Senior Cyber Secure Education & Safety. All rights reserved.
+              {config.site.copyright}
             </p>
             <div className="flex gap-6 text-slate-500 text-sm">
               <button className="hover:text-white transition-colors">Privacy Policy</button>
