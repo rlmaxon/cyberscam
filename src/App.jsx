@@ -363,7 +363,7 @@ function LandingPage({ setCurrentPage }) {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard
               icon={<BookOpen className="w-8 h-8" />}
-              title="6 Training Modules"
+              title="Training Modules"
               description="Comprehensive lessons covering phishing, smishing, vishing, social media scams, marketplace fraud, and creating your personal safety plan."
             />
             <FeatureCard
