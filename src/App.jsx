@@ -35,7 +35,7 @@ export default function SeniorCyberSecure() {
         {currentPage === 'landing' && <LandingPage setCurrentPage={setCurrentPage} />}
         {currentPage === 'login' && <LoginPage handleLogin={handleLogin} setCurrentPage={setCurrentPage} />}
         {currentPage === 'dashboard' && isLoggedIn && <MemberDashboard setCurrentPage={setCurrentPage} />}
-        {currentPage === 'training' && isLoggedIn && <TrainingLab setCurrentPage={setCurrentPage} />}
+        {currentPage === 'training' && <TrainingLab setCurrentPage={setCurrentPage} />}
         {currentPage === 'resources' && <ResourceCenter />}
         {currentPage === 'marketplace' && <AffiliateMarketplace />}
         {currentPage === 'emergency' && <EmergencyDirectory />}
@@ -78,7 +78,10 @@ function Navigation({ currentPage, setCurrentPage, isLoggedIn, handleLogout, mob
             <NavButton active={currentPage === 'emergency'} onClick={() => setCurrentPage('emergency')}>
               <Phone className="w-4 h-4" /> Emergency Hotline
             </NavButton>
-            
+            <NavButton active={currentPage === 'training'} onClick={() => setCurrentPage('training')}>
+              <BookOpen className="w-4 h-4" /> Training Lab
+            </NavButton>
+
             {isLoggedIn ? (
               <>
                 <NavButton active={currentPage === 'dashboard' || currentPage === 'training'} onClick={() => setCurrentPage('dashboard')} highlight>
@@ -114,6 +117,7 @@ function Navigation({ currentPage, setCurrentPage, isLoggedIn, handleLogout, mob
             <MobileNavButton onClick={() => { setCurrentPage('resources'); setMobileMenuOpen(false); }}>Lock It Down</MobileNavButton>
             <MobileNavButton onClick={() => { setCurrentPage('marketplace'); setMobileMenuOpen(false); }}>Security Toolbox</MobileNavButton>
             <MobileNavButton onClick={() => { setCurrentPage('emergency'); setMobileMenuOpen(false); }}>Emergency Hotline</MobileNavButton>
+            <MobileNavButton onClick={() => { setCurrentPage('training'); setMobileMenuOpen(false); }}>Training Lab</MobileNavButton>
             {isLoggedIn ? (
               <>
                 <MobileNavButton onClick={() => { setCurrentPage('dashboard'); setMobileMenuOpen(false); }} highlight>Member Area</MobileNavButton>
