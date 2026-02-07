@@ -1,0 +1,158 @@
+[
+  {
+    "id": "q-001",
+    "category": "email",
+    "question": "You receive an email from 'security@bankofamer1ca-alerts.net' saying your account has been locked. What should you do FIRST?",
+    "options": [
+      "Click the link in the email to verify your identity",
+      "Reply to the email asking for more information",
+      "Call the number on the back of your bank card to verify",
+      "Forward the email to your friends to warn them"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Always call your bank using the phone number on the back of your debit or credit card — never use contact information provided in a suspicious email. The email domain 'bankofamer1ca-alerts.net' uses a '1' instead of 'i' and is not the real Bank of America domain."
+  },
+  {
+    "id": "q-002",
+    "category": "email",
+    "question": "Which of the following is the BIGGEST red flag in a suspicious email?",
+    "options": [
+      "The email includes the company's logo",
+      "The sender's email domain doesn't match the real company",
+      "The email was sent during business hours",
+      "The email includes a customer service phone number"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sender's domain is the most reliable indicator. Scammers can easily copy logos, write during business hours, and include fake phone numbers — but they cannot send from a real company's domain. Always check the full email address, not just the display name."
+  },
+  {
+    "id": "q-003",
+    "category": "text",
+    "question": "You receive a text saying: 'IRS: You have a pending refund of $1,847. Claim now.' What makes this definitely a scam?",
+    "options": [
+      "The refund amount seems too high",
+      "The IRS never contacts people by text message",
+      "It was sent on a weekend",
+      "The text doesn't include your name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The IRS NEVER initiates contact via text message, email, or social media. All legitimate IRS communications begin with a letter sent through the U.S. Postal Service. Any text claiming to be from the IRS is automatically a scam, regardless of the amount or other details."
+  },
+  {
+    "id": "q-004",
+    "category": "text",
+    "question": "Your 'grandchild' texts asking for $5,000 in bail money via gift cards and begging you not to tell their parents. What should you do?",
+    "options": [
+      "Send the gift cards quickly since they're in trouble",
+      "Ask them security questions only your real grandchild would know",
+      "Hang up and call your grandchild directly at their known phone number",
+      "Go to the police station to pay the bail in person"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Always hang up and contact your grandchild directly using a phone number you already have saved. The 'grandparent scam' works by creating panic so you act before thinking. Key facts: legitimate bail is NEVER paid with gift cards, and the request for secrecy is designed to prevent you from verifying the story."
+  },
+  {
+    "id": "q-005",
+    "category": "popup",
+    "question": "A pop-up appears in your browser saying 'Microsoft has detected 3 viruses on your computer! Call 1-800-555-0199.' What should you do?",
+    "options": [
+      "Call the number immediately to get help",
+      "Write down the error code and search for it online",
+      "Close the browser completely — it's a scam",
+      "Run your antivirus software by clicking the pop-up button"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Close the browser immediately. Microsoft NEVER displays phone numbers in virus warnings, and real antivirus alerts don't appear as browser pop-ups. If the browser won't close, use Ctrl+Alt+Delete (Windows) or Force Quit (Mac) to close it. These pop-ups want you to call so scammers can get remote access to your computer."
+  },
+  {
+    "id": "q-006",
+    "category": "popup",
+    "question": "A website pop-up says it has scanned your computer and found 13 viruses. This is:",
+    "options": [
+      "Probably real if it shows specific virus names",
+      "Real only if you have antivirus software installed",
+      "Always fake — websites cannot scan your computer",
+      "Real if it asks you to pay for removal"
+    ],
+    "correctAnswer": 2,
+    "explanation": "A website CANNOT scan your computer for viruses — this is technically impossible due to browser security restrictions. Any pop-up claiming to have scanned your computer and found threats is 100% fake, every single time, no exceptions. Only antivirus software you have installed on your computer can perform real scans."
+  },
+  {
+    "id": "q-007",
+    "category": "marketplace",
+    "question": "Someone on Facebook Marketplace wants to buy your item for $500 but sends you a check for $2,000, saying the extra is for 'shipping.' What is happening?",
+    "options": [
+      "They made an honest mistake with the check amount",
+      "It's an overpayment scam — the check is fake",
+      "They want to make sure shipping is covered",
+      "It's a sign they're a generous buyer"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This is the classic 'overpayment scam.' The check is counterfeit. Your bank may initially make the funds available, but when the check bounces days later, the bank will take back the full amount. Meanwhile, any money you wired for 'shipping' is gone forever. Legitimate buyers NEVER overpay and ask for change back."
+  },
+  {
+    "id": "q-008",
+    "category": "marketplace",
+    "question": "What is the SAFEST way to pay for an item on a local marketplace like Facebook Marketplace or Craigslist?",
+    "options": [
+      "Wire transfer — it's fast and reliable",
+      "Gift cards — they're easy to use",
+      "Cash, in person, at a public location",
+      "Zelle or Venmo sent before seeing the item"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Cash in person at a public place (like a police station lobby) is the safest for local marketplace transactions. Wire transfers and gift cards are untraceable and non-refundable — scammers' preferred payment methods. Zelle and Venmo offer no buyer protection for goods. Never send money before seeing and inspecting the item in person."
+  },
+  {
+    "id": "q-009",
+    "category": "email",
+    "question": "An email from 'geeksquad-renewal@outlook.com' says you've been charged $349.99 for auto-renewal. The email wants you to call a phone number to cancel. Why is the email address suspicious?",
+    "options": [
+      "Geek Squad doesn't offer renewals",
+      "The price is too high for Geek Squad",
+      "Geek Squad / Best Buy would use @bestbuy.com, not @outlook.com",
+      "Outlook.com emails are always scams"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Legitimate businesses send emails from their own domain (like @bestbuy.com), not from free email services like Outlook.com, Gmail.com, or Yahoo.com. A free email domain is one of the easiest red flags to spot. The scammers want you to call their fake number where they'll try to get remote access to your computer."
+  },
+  {
+    "id": "q-010",
+    "category": "text",
+    "question": "You receive a text about an unpaid toll of $4.15 with a link to pay. How should you handle this?",
+    "options": [
+      "Pay the small amount to avoid the penalty — it's only $4.15",
+      "Click the link to check if you really owe money",
+      "Ignore the text and check your toll account directly through the official website or app",
+      "Reply STOP to unsubscribe from the messages"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Never click links in unexpected texts. The small $4.15 amount is designed to seem harmless, but the link captures your credit card and personal information. If you use toll roads, check your account directly through the official toll agency's website or app. Toll agencies send bills through postal mail, not text messages."
+  },
+  {
+    "id": "q-011",
+    "category": "popup",
+    "question": "You see a pop-up saying your Chrome browser needs an urgent security update and you should download it now. What should you know?",
+    "options": [
+      "You should always update when prompted for security",
+      "Chrome updates automatically — pop-up update prompts are fake and may install malware",
+      "You need to verify the update version number before downloading",
+      "Only download the update if it shows the Google logo"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Chrome and most modern browsers update automatically in the background. A pop-up asking you to download an update is actually trying to trick you into downloading malware. To manually check for Chrome updates, go to Menu (three dots) > Help > About Google Chrome. Never download software from a pop-up."
+  },
+  {
+    "id": "q-012",
+    "category": "marketplace",
+    "question": "A Facebook Marketplace seller is offering purebred puppies for $200 (normally $1,500) and wants payment via Zelle before shipping the puppy to you. What are the warning signs?",
+    "options": [
+      "The price is reasonable for online puppy sales",
+      "Price far below market value, can't meet in person, payment via Zelle with no buyer protection, and shipping live animals",
+      "Zelle is a safe payment method for online purchases",
+      "Shipping puppies is a normal practice for breeders"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This has every hallmark of a pet scam: a price that's too good to be true, inability to meet in person, payment via a method with no buyer protection (Zelle), and offering to 'ship' an animal. After payment, they'll request more fees for 'shipping insurance' or a 'temperature-controlled crate.' The puppy doesn't exist. Always meet pets in person before any payment."
+  }
+]

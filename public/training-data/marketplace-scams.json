@@ -1,0 +1,115 @@
+[
+  {
+    "id": "market-001",
+    "title": "Facebook Marketplace Puppy Scam",
+    "type": "marketplace",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Facebook Marketplace Listing",
+    "subject": "Adorable Golden Retriever Puppies - $200 (Must Go Today!)",
+    "body": "ADORABLE GOLDEN RETRIEVER PUPPIES\nPrice: $200 (normally $1,500!)\n\nWe're relocating overseas and MUST find homes for our 8-week-old puppies TODAY. They come with AKC papers, shots, and microchip.\n\nWe can't meet in person because we're already at our new location, but we'll ship the puppy to you via a pet transport service for an additional $150.\n\nPayment accepted: Zelle, CashApp, or gift cards. Serious inquiries only!\n\n*Photos show adorable stock photos of Golden Retriever puppies*",
+    "redFlags": [
+      "Price far below market value ($200 vs $1,500 typical price)",
+      "Seller can't meet in person — classic scam excuse",
+      "Requests payment via Zelle, CashApp, or gift cards (no buyer protection)",
+      "Urgency — 'MUST find homes TODAY'",
+      "Offers to 'ship' a live animal — legitimate breeders don't do this through Marketplace",
+      "Stock photos instead of real photos of specific puppies"
+    ],
+    "explanation": "Pet scams are one of the most common marketplace frauds. The scammer uses adorable stock photos to lure victims, then creates urgency with a 'relocating' story. After you pay the $200, they'll request additional fees: 'shipping insurance,' 'temperature-controlled crate,' 'veterinary clearance,' etc. The puppy doesn't exist. Never buy a pet you can't see in person, and never pay via methods that offer no buyer protection.",
+    "howToSpot": "If a pet price seems too good to be true, it is. Always meet animals in person. Never send money to someone who can't meet face-to-face. Use reverse image search on pet photos."
+  },
+  {
+    "id": "market-002",
+    "title": "Fake Concert Tickets on Facebook",
+    "type": "marketplace",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Facebook Marketplace Listing",
+    "subject": "2 Taylor Swift Eras Tour Tickets - Section 101 - $150 each (Face Value!)",
+    "body": "Selling 2 Taylor Swift Eras Tour tickets for Saturday's show. Section 101, Row F.\n\nFace value $150 each. My daughter can't go anymore so just trying to get our money back.\n\nI'll transfer through Ticketmaster once payment is received. Need to sell fast before the show!\n\nPayment: Venmo or Zelle only. Can text screenshots of the tickets for proof.\n\n*Includes screenshot of what appears to be a Ticketmaster confirmation*",
+    "redFlags": [
+      "High-demand tickets at face value (too good to be true)",
+      "Screenshots of tickets can be easily faked or already used",
+      "Requests Venmo or Zelle with no buyer protection",
+      "Won't transfer tickets BEFORE payment",
+      "Urgency — 'need to sell fast before the show'",
+      "No option to meet at the venue or transfer through official platform first"
+    ],
+    "explanation": "Ticket scams spike around popular events. The seller shows fake or already-sold ticket screenshots, collects your money via Venmo/Zelle (which have no buyer protection for goods), and then either blocks you or sends fake tickets. The ONLY safe way to buy resale tickets is through official platforms like Ticketmaster Resale, StubHub, or SeatGeek — which verify the tickets are real and protect your purchase.",
+    "howToSpot": "Only buy event tickets through official resale platforms that guarantee authenticity. Never pay via Venmo/Zelle for tickets. If the price seems too good for a sold-out event, it's likely a scam."
+  },
+  {
+    "id": "market-003",
+    "title": "Craigslist Rental Scam",
+    "type": "marketplace",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Craigslist Listing",
+    "subject": "Beautiful 3BR House for Rent - $800/mo (Normally $1,600!)",
+    "body": "Spacious 3-bedroom, 2-bath home in a great neighborhood.\n\nRent: $800/month (50% below market!)\n\nI'm a missionary currently serving overseas and can't show the property in person, but I can send you the keys via FedEx once I receive the security deposit and first month's rent ($1,600 total via wire transfer).\n\nThe property is vacant and you can drive by to see the exterior. I have references from my church available.\n\nPlease email me for the rental application. The property will go fast at this price!",
+    "redFlags": [
+      "Rent is 50% below market rate — unrealistically cheap",
+      "Owner is 'overseas' and can't show the property — classic excuse",
+      "Wants security deposit and rent BEFORE you see inside",
+      "Requests wire transfer — untraceable and non-refundable",
+      "Emotional backstory (missionary) to build trust",
+      "Pressure tactic — 'will go fast at this price'"
+    ],
+    "explanation": "Rental scams cost victims thousands of dollars. Scammers list properties they don't own (often copying real listings with lowered prices). The 'overseas' story prevents in-person meetings. Once you wire money for the deposit, it's gone forever. Sometimes multiple victims show up on 'move-in day' only to find the real owner has no idea their property was listed. NEVER send money for a rental you haven't toured in person with the actual landlord or their verified property manager.",
+    "howToSpot": "Never rent without touring the inside in person. Research whether the rent matches the area's market rate. Never wire money for a rental deposit. Verify the landlord actually owns the property through public records."
+  },
+  {
+    "id": "market-004",
+    "title": "Legitimate OfferUp Furniture Sale",
+    "type": "marketplace",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "OfferUp Listing",
+    "subject": "Solid Oak Dining Table + 6 Chairs - $350 OBO",
+    "body": "Selling our dining room set — we're downsizing to a smaller home.\n\nSolid oak table with 6 matching chairs. Table is 72 inches long with a leaf extension. Some minor scratches on the legs but otherwise in great shape.\n\nPrice: $350 or best offer\nPickup only — we're in the Maple Ridge area.\n\nHappy to send more photos or answer questions. Available for viewing evenings and weekends.\n\nSeller has 47 reviews, 4.8 star rating, member since 2021.",
+    "redFlags": [],
+    "explanation": "This appears to be a legitimate marketplace listing. Signs it's real: reasonable pricing for used furniture, offers in-person viewing, pickup only (no shipping scam), willing to show more photos, flexible scheduling for viewing, established seller account with a long history and positive reviews, and an honest description that mentions imperfections (scratches).",
+    "howToSpot": "Legitimate marketplace sellers: allow in-person viewing, have established accounts with reviews, describe items honestly including flaws, price items reasonably, and prefer local pickup."
+  },
+  {
+    "id": "market-005",
+    "title": "Overpayment Check Scam",
+    "type": "marketplace",
+    "difficulty": "advanced",
+    "isScam": true,
+    "sender": "Craigslist Buyer Message",
+    "subject": "RE: Your Antique Dresser Listing - $500",
+    "body": "Hi there!\n\nI'm very interested in your antique dresser listed for $500. I'm buying it as a surprise anniversary gift for my wife.\n\nI'm out of state but I'll send you a certified check for $2,000. The extra $1,500 is to cover the shipping company I've arranged to pick it up. Just deposit the check, keep your $500, and wire the $1,500 to the shipping company using the details I'll send.\n\nI trust you completely. God bless!\n\nLooking forward to completing this deal.",
+    "redFlags": [
+      "Offers to pay MORE than the asking price — no legitimate buyer does this",
+      "Sends a check for $2,000 when the item costs $500",
+      "Asks you to wire the 'extra' money to a third party",
+      "Out-of-state buyer for a local pickup item",
+      "Overly trusting language designed to lower your guard",
+      "The 'certified check' will be fake but your wired money will be real and gone"
+    ],
+    "explanation": "This is the classic 'overpayment scam.' The check looks real and your bank may even make the funds available initially, but it's counterfeit. When the check bounces days later, the bank will take back the full $2,000 from your account — but the $1,500 you wired is gone forever. You'll be out $1,500 plus any bank fees. NEVER accept a check for more than the selling price, and never wire money to a third party as part of a sale.",
+    "howToSpot": "If a buyer offers more than your asking price and asks you to forward the excess, it's always a scam. Legitimate buyers negotiate DOWN, not up. Never wire money to a 'shipping company' arranged by a buyer."
+  },
+  {
+    "id": "market-006",
+    "title": "Fake Online Store (Social Media Ad)",
+    "type": "marketplace",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Facebook/Instagram Sponsored Ad",
+    "subject": "CLEARANCE SALE: Brand Name Shoes 80% OFF!",
+    "body": "MEGA CLEARANCE EVENT\nNike, Adidas, New Balance — Up to 80% Off!\n\nNike Air Max 90 — Was $130, NOW $26.99\nAdidas Ultraboost — Was $180, NOW $35.99\nNew Balance 990 — Was $175, NOW $34.99\n\nFree Shipping on All Orders!\n\nShop Now at: brandshoes-outlet-sale.com\n\n*Ad shows professional-looking product photos*\n\n\"Over 50,000 happy customers!\" ⭐⭐⭐⭐⭐\n\nSale Ends Tonight!",
+    "redFlags": [
+      "Prices are 80% below retail — unrealistic discounts",
+      "Unknown website 'brandshoes-outlet-sale.com' instead of official brand stores",
+      "Fake urgency — 'Sale Ends Tonight!'",
+      "Unverifiable '50,000 happy customers' claim",
+      "Paid social media ad — scammers can buy ads just like legitimate businesses",
+      "Product photos are stolen from legitimate retailers"
+    ],
+    "explanation": "Fake online stores advertised through social media are extremely common. They use stolen product photos and impossibly low prices to lure shoppers. After you enter your credit card, you'll either receive nothing, a cheap knockoff, or a completely different item. Meanwhile, your credit card details have been stolen. Always research unknown online stores before buying: check for reviews on independent sites, look up the domain registration date, and be wary of prices that seem too good to be true.",
+    "howToSpot": "Discounts of 70-90% on brand-name items are almost always scams. Buy directly from official brand websites or well-known retailers. Research unfamiliar stores before purchasing."
+  }
+]

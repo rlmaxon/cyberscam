@@ -1,0 +1,143 @@
+[
+  {
+    "id": "email-001",
+    "title": "Fake Amazon Order Confirmation",
+    "type": "email",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "orders@amaz0n-ship.com",
+    "subject": "Your Order #A7392-XK Has Shipped - $847.99",
+    "body": "Dear Valued Customer,\n\nYour order #A7392-XK for $847.99 (Apple MacBook Air) has been confirmed and shipped.\n\nIf you did not place this order, you must cancel immediately to avoid being charged:\n\n>> CLICK HERE TO CANCEL YOUR ORDER <<\n\nYou have 24 hours before the charge becomes permanent.\n\nThank you,\nAmazon Customer Service",
+    "redFlags": [
+      "Sender domain is 'amaz0n-ship.com' — uses a zero instead of the letter 'o' and is not amazon.com",
+      "Generic greeting 'Dear Valued Customer' instead of your actual name",
+      "Creates panic with a large dollar amount you didn't spend",
+      "Urgency pressure — '24 hours before charge becomes permanent'",
+      "Asks you to click a link instead of directing you to check your Amazon account directly"
+    ],
+    "explanation": "This is a classic phishing email. Scammers send fake order confirmations for expensive items hoping you'll panic and click the 'cancel' link. That link leads to a fake website designed to steal your Amazon login credentials and credit card information. Amazon will NEVER send emails from domains other than @amazon.com. If you're worried about an order, go directly to Amazon.com and check your order history.",
+    "howToSpot": "Always check the sender's email domain carefully. Go directly to the company's website by typing the address in your browser — never click links in unexpected emails."
+  },
+  {
+    "id": "email-002",
+    "title": "Fake Bank Security Alert",
+    "type": "email",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "security@bankofamer1ca-alerts.net",
+    "subject": "URGENT: Suspicious Activity Detected on Your Account",
+    "body": "IMPORTANT SECURITY ALERT\n\nDear Account Holder,\n\nWe detected unusual login activity on your Bank of America account from an unrecognized device in Lagos, Nigeria (IP: 197.210.XX.XX).\n\nYour account has been TEMPORARILY LOCKED for your protection.\n\nTo restore access, you must verify your identity within 24 hours:\n\n[VERIFY MY IDENTITY NOW]\n\nFailure to verify will result in permanent account suspension.\n\nBank of America Security Team\nRef: #SEC-2024-889271",
+    "redFlags": [
+      "Sender domain 'bankofamer1ca-alerts.net' is fake — uses '1' instead of 'i' and wrong domain",
+      "Generic 'Dear Account Holder' — your real bank knows your name",
+      "Threatening language — 'permanent account suspension'",
+      "Creates extreme urgency with a 24-hour deadline",
+      "The 'verify' link would lead to a credential-stealing website"
+    ],
+    "explanation": "This phishing email impersonates Bank of America to steal your banking login credentials. The fake domain uses a '1' instead of 'i' in 'America' and uses '.net' instead of the real bankofamerica.com. Real banks will NEVER threaten to permanently close your account via email or ask you to click a link to verify your identity. If you're concerned, call the number on the back of your debit card.",
+    "howToSpot": "Look closely at the sender domain for subtle misspellings. Banks never threaten account closure via email. Call your bank directly using the phone number on your card."
+  },
+  {
+    "id": "email-003",
+    "title": "Legitimate Costco Renewal Reminder",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": false,
+    "sender": "noreply@costco.com",
+    "subject": "Your Costco Gold Star Membership Renewal Reminder",
+    "body": "Dear Margaret Johnson,\n\nThis is a friendly reminder that your Costco Gold Star Membership (ending in 4521) expires on April 30, 2025.\n\nYou can renew your membership:\n- Online at Costco.com/membership\n- At any Costco warehouse\n- By calling Member Services at 1-800-774-2678\n\nYour annual membership fee is $65.00.\n\nThank you for being a valued Costco member since 2018.\n\nCostco Wholesale\nMember Services",
+    "redFlags": [],
+    "explanation": "This email appears to be legitimate. It comes from the real @costco.com domain, uses your actual name, references specific membership details (ending digits, membership level), provides multiple ways to renew including a phone number you can verify independently, doesn't create artificial urgency, and matches Costco's actual membership pricing. However, it's still best practice to go directly to Costco.com rather than clicking any links.",
+    "howToSpot": "Legitimate emails typically: use your real name, come from the correct domain, provide multiple contact methods, don't create artificial urgency, and reference specific account details."
+  },
+  {
+    "id": "email-004",
+    "title": "Fake Geek Squad Auto-Renewal",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "geeksquad-renewal@outlook.com",
+    "subject": "Auto-Renewal Confirmation - $349.99 Has Been Charged",
+    "body": "GEEK SQUAD - BEST BUY\nInvoice #GS-2024-997842\n\nYour Geek Squad Total Tech Support plan has been successfully auto-renewed.\n\nSubscription: Geek Squad Total Tech Support\nAmount Charged: $349.99\nDate: Today\nPayment Method: Card ending in ****\n\nThis charge will appear on your next statement.\n\nIf you did not authorize this renewal or wish to request a FULL REFUND, please call our billing department immediately:\n\nCall: 1-888-555-0199\n(Available 24/7)\n\nGeek Squad Support Team\nBest Buy Co., Inc.",
+    "redFlags": [
+      "Sent from an @outlook.com address — real Geek Squad uses @bestbuy.com",
+      "Vague payment info — 'Card ending in ****' doesn't show actual digits",
+      "Wants you to CALL a phone number — scammers use this to get remote access to your computer",
+      "High dollar amount designed to cause panic",
+      "No links to BestBuy.com account management"
+    ],
+    "explanation": "This is the extremely common 'tech support refund' scam. The scammer wants you to call their fake phone number. When you do, they'll claim they need to 'process a refund' and ask you to install remote access software on your computer. They then pretend to transfer too much money and pressure you to 'return' the excess via gift cards or wire transfer. Best Buy and Geek Squad NEVER use Outlook.com email addresses.",
+    "howToSpot": "Check if the email comes from the company's official domain. Be suspicious when an email wants you to call a phone number rather than log into your account online."
+  },
+  {
+    "id": "email-005",
+    "title": "Fake Medicare Benefits Update",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "benefits@medicare-update-center.org",
+    "subject": "Action Required: Your New Medicare Card & Benefits",
+    "body": "CENTERS FOR MEDICARE & MEDICAID SERVICES\n\nDear Medicare Beneficiary,\n\nCongress has approved expanded Medicare benefits for 2025, and you may be eligible for:\n\n- New dental and vision coverage (FREE)\n- Reduced prescription drug costs\n- Monthly grocery allowance of $150\n- Free medical equipment and supplies\n\nTo receive your new Medicare card with these upgraded benefits, we need to verify your information:\n\n[CLAIM YOUR NEW BENEFITS]\n\nPlease have your current Medicare number, Social Security number, and date of birth ready.\n\nMedicare Benefits Enrollment Center\nRef: MCR-2025-NEW",
+    "redFlags": [
+      "Fake domain 'medicare-update-center.org' — real Medicare uses medicare.gov",
+      "Too-good-to-be-true benefits like '$150 monthly grocery allowance'",
+      "Asks for Medicare number, Social Security number, and date of birth — identity theft goldmine",
+      "Generic 'Dear Medicare Beneficiary' instead of your name",
+      "Medicare never emails asking you to click links to claim benefits"
+    ],
+    "explanation": "This targets seniors specifically by impersonating Medicare. The scammer wants your Medicare number, Social Security number, and personal details to commit medical identity theft and financial fraud. Real Medicare changes come in official mail, not email. Medicare will NEVER email you to ask for personal information or direct you to click a link to enroll in benefits. Always call 1-800-MEDICARE (1-800-633-4227) if you have questions.",
+    "howToSpot": "Government agencies like Medicare communicate important benefit changes through postal mail, not email. Never provide your Social Security or Medicare number in response to an unsolicited email."
+  },
+  {
+    "id": "email-006",
+    "title": "Legitimate Doctor's Office Appointment",
+    "type": "email",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "appointments@myhealthclinic.com",
+    "subject": "Appointment Reminder - Dr. Sarah Chen, March 15",
+    "body": "Dear Robert,\n\nThis is a reminder of your upcoming appointment:\n\nProvider: Dr. Sarah Chen, Internal Medicine\nDate: Saturday, March 15, 2025\nTime: 10:30 AM\nLocation: Maple Street Health Clinic, 425 Maple St, Suite 200\n\nPlease arrive 15 minutes early. Bring your insurance card and photo ID.\n\nTo reschedule or cancel, call us at (555) 234-5678 or log into MyChart.\n\nMaple Street Health Clinic",
+    "redFlags": [],
+    "explanation": "This is a legitimate appointment reminder. It uses your first name, references a specific doctor and location, provides a specific date/time, doesn't ask for sensitive information via email, offers phone-based rescheduling, and doesn't include any suspicious links or urgency tactics. This matches the pattern of real medical appointment reminders.",
+    "howToSpot": "Legitimate reminders reference specific details you'd recognize (doctor's name, location), don't ask for sensitive info, and provide a phone number for follow-up."
+  },
+  {
+    "id": "email-007",
+    "title": "Fake PayPal Unauthorized Transaction",
+    "type": "email",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "service@paypa1-secure.com",
+    "subject": "Unauthorized Transaction Alert - $629.00",
+    "body": "PayPal\n\nUnauthorized Transaction Detected\n\nDear PayPal User,\n\nA payment of $629.00 was sent from your account to:\nRecipient: CryptoExchange Ltd.\nTransaction ID: PP-7821934\n\nIf you did NOT authorize this transaction, you must dispute it immediately or the funds cannot be recovered:\n\n[DISPUTE THIS TRANSACTION]\n\nYou have 12 hours to take action.\n\nPayPal Security Team\nThis is an automated message - do not reply",
+    "redFlags": [
+      "Domain 'paypa1-secure.com' uses '1' instead of 'l' in PayPal",
+      "Generic 'Dear PayPal User' — PayPal knows your name",
+      "Extreme urgency — '12 hours to take action'",
+      "Threatening that 'funds cannot be recovered' to create panic",
+      "The dispute link leads to a phishing site"
+    ],
+    "explanation": "This impersonates PayPal to steal your login credentials. The domain uses a common trick — replacing the letter 'l' with the number '1'. Real PayPal always addresses you by name, sends from @paypal.com, and would never give you only 12 hours to dispute a transaction. To check your PayPal account, always type paypal.com directly into your browser.",
+    "howToSpot": "Look for letter/number substitutions in domains (l vs 1, O vs 0). Real payment services use your name and never impose extreme time limits for disputes."
+  },
+  {
+    "id": "email-008",
+    "title": "Fake Social Security Suspension",
+    "type": "email",
+    "difficulty": "advanced",
+    "isScam": true,
+    "sender": "ssa-notifications@social-security-admin.com",
+    "subject": "Notice: Your Social Security Number Has Been Suspended",
+    "body": "SOCIAL SECURITY ADMINISTRATION\nOffice of the Inspector General\n\nIMPORTANT NOTICE\n\nDear Citizen,\n\nWe regret to inform you that your Social Security Number (SSN) has been SUSPENDED due to suspicious and illegal activity linked to your account.\n\nCase Number: SSA-OIG-2025-44829\n\nCharges include:\n- Identity theft in multiple states\n- Money laundering activity\n- Outstanding federal tax liens\n\nTo avoid immediate arrest and legal action, you must contact our Legal Compliance Department:\n\nCall: 1-877-555-0132 (Press 1 for English)\n\nFailure to respond within 24 hours will result in a federal warrant being issued in your name.\n\nSSA Office of Inspector General",
+    "redFlags": [
+      "Social Security numbers CANNOT be 'suspended' — this is not a real thing",
+      "Fake domain 'social-security-admin.com' — real SSA uses ssa.gov",
+      "Threatening arrest and legal action — government agencies don't operate this way via email",
+      "Extreme pressure tactics with 24-hour deadline",
+      "Generic 'Dear Citizen' instead of your name",
+      "Lists multiple serious criminal charges to create panic"
+    ],
+    "explanation": "This is a government impersonation scam targeting seniors. The SSA will NEVER: (1) suspend your Social Security number, (2) threaten you with arrest via email, (3) demand immediate action under threat of a warrant, or (4) use a .com domain instead of .gov. If you receive anything like this, call the real SSA at 1-800-772-1213. Report these scams to the SSA Inspector General at oig.ssa.gov.",
+    "howToSpot": "No government agency will threaten arrest via email or phone. Social Security numbers cannot be suspended. All real government emails come from .gov domains."
+  }
+]
