@@ -42,3 +42,59 @@ body {
     font-size: 16px;
   }
 }
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Print styles for Training Lab */
+@media print {
+  /* Hide navigation, footer, and non-printable elements */
+  nav, footer, .no-print {
+    display: none !important;
+  }
+
+  /* Show elements that should always appear in print */
+  .print-always-show {
+    display: block !important;
+  }
+
+  /* Show print header */
+  .print-header {
+    display: block !important;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  /* Clean up card for printing */
+  .print-card {
+    box-shadow: none !important;
+    border: 2px solid #333 !important;
+    border-radius: 8px !important;
+  }
+
+  /* Make backgrounds print-friendly */
+  body {
+    background: white !important;
+    font-size: 14px;
+  }
+
+  /* Ensure colored backgrounds print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 0.75in;
+  }
+}

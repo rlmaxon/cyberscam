@@ -1,0 +1,130 @@
+[
+  {
+    "id": "text-001",
+    "title": "Fake IRS Tax Refund",
+    "type": "text",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "+1 (555) 123-4567",
+    "subject": "Text Message",
+    "body": "IRS NOTICE: You have an unclaimed tax refund of $1,847.00 for tax year 2024. Claim before it expires on March 31. Verify your identity here: https://irs-refund.claim-now.info/verify",
+    "redFlags": [
+      "The IRS NEVER sends text messages — they communicate by postal mail",
+      "Suspicious URL 'irs-refund.claim-now.info' is not irs.gov",
+      "Creates urgency with an expiration date",
+      "Asks you to 'verify identity' — wants personal information",
+      "Unsolicited text from unknown number"
+    ],
+    "explanation": "The IRS will NEVER contact you by text message, email, or social media to request personal or financial information. All legitimate IRS communications start with a letter sent through the U.S. Postal Service. The fake URL leads to a phishing site designed to steal your Social Security number, bank account, and personal details. If you think you're owed a refund, check directly at irs.gov or call 1-800-829-1040.",
+    "howToSpot": "The IRS only communicates through postal mail. Any text, email, or call claiming to be the IRS is a scam. Always go directly to irs.gov."
+  },
+  {
+    "id": "text-002",
+    "title": "Fake USPS Delivery Failure",
+    "type": "text",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "+1 (555) 987-6543",
+    "subject": "Text Message",
+    "body": "USPS: Your package (tracking #9400128205) could not be delivered due to incomplete address. A $2.99 redelivery fee is required. Pay here to reschedule: usps-redelivery.com/pay",
+    "redFlags": [
+      "USPS never charges redelivery fees",
+      "Fake URL 'usps-redelivery.com' is not usps.com",
+      "USPS texts only come from 28777 (2USPS) if you enrolled",
+      "Unsolicited delivery notification you didn't sign up for",
+      "Small fee ($2.99) makes it seem harmless but captures your credit card"
+    ],
+    "explanation": "This is a 'smishing' (SMS phishing) scam. USPS does NOT charge redelivery fees, and they would never ask for payment via text message. The small $2.99 charge is designed to seem insignificant so you'll enter your credit card without thinking twice. Once the scammers have your card number, they'll make much larger charges. Real USPS tracking can be checked at usps.com or by calling 1-800-275-8777.",
+    "howToSpot": "USPS doesn't charge redelivery fees and only texts from 28777 if you signed up. Any text asking for payment for a delivery is a scam."
+  },
+  {
+    "id": "text-003",
+    "title": "Fake Bank Fraud Alert",
+    "type": "text",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "+1 (555) 246-8135",
+    "subject": "Text Message",
+    "body": "Wells Fargo Alert: A $2,450.00 wire transfer was initiated from your checking account. If you did NOT authorize this, reply STOP or call immediately: 1-888-555-0177",
+    "redFlags": [
+      "The phone number is not Wells Fargo's real number (1-800-869-3557)",
+      "Real bank fraud alerts come from a short code (like 93557), not a regular phone number",
+      "Asking you to call a number in the text rather than the number on your card",
+      "Creating urgency with a large dollar amount",
+      "Reply 'STOP' trick — confirms your number is active for more scams"
+    ],
+    "explanation": "This scam impersonates your bank's fraud alert system. While real banks do send fraud alerts, they come from official short codes (5-6 digit numbers), not regular phone numbers. The phone number in this text connects to scammers who will impersonate bank representatives and try to get your account number, PIN, or Social Security number. ALWAYS call the number on the back of your bank card instead of any number in a text message.",
+    "howToSpot": "Real bank alerts come from short code numbers (5-6 digits). Never call a number from a text — always use the number on the back of your debit/credit card."
+  },
+  {
+    "id": "text-004",
+    "title": "Grandparent Emergency Scam",
+    "type": "text",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "+1 (555) 246-8013",
+    "subject": "Text Message",
+    "body": "Grandma its me!! Im in trouble and need help. I got arrested and need $5,000 for bail. Please dont tell mom and dad they will be so mad. Can you send gift cards? I promise ill pay you back. The lawyer said you can send Apple gift cards to this number. Please hurry!!",
+    "redFlags": [
+      "Doesn't use your grandchild's actual name",
+      "Requests gift cards as payment — legitimate bail is NEVER paid with gift cards",
+      "Asks you to keep it secret from other family members",
+      "Creates extreme emotional urgency",
+      "Poor grammar and excessive exclamation marks",
+      "Claims a 'lawyer' accepts Apple gift cards — no real lawyer would"
+    ],
+    "explanation": "This is the 'Grandparent Scam' — one of the most heartless scams targeting seniors. Scammers prey on grandparents' love and willingness to help. Key facts: (1) Bail is NEVER paid with gift cards, (2) legitimate lawyers don't accept gift cards, (3) the secrecy request is designed to prevent you from verifying the story. ALWAYS call your grandchild directly at their known phone number, or call another family member to verify before sending anything.",
+    "howToSpot": "If someone claims to be a relative in trouble: hang up and call them directly at their known number. No legitimate legal process involves gift cards. The secrecy request is always a red flag."
+  },
+  {
+    "id": "text-005",
+    "title": "Legitimate Pharmacy Refill Reminder",
+    "type": "text",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "CVS Pharmacy (short code 287396)",
+    "subject": "Text Message",
+    "body": "CVS Pharmacy: Your prescription for Lisinopril 10mg is ready for pickup at CVS #4521, 200 Main St. Questions? Call (555) 234-5678. Reply STOP to opt out.",
+    "redFlags": [],
+    "explanation": "This appears to be a legitimate pharmacy notification. Signs it's real: sent from a short code (not a regular phone number), references a specific medication and store location you'd recognize, provides the store's direct phone number, includes a STOP opt-out option (required by law for commercial texts), and doesn't ask for any personal information or payment.",
+    "howToSpot": "Legitimate business texts come from short codes, reference details you'd recognize, don't ask for personal info, and include opt-out instructions."
+  },
+  {
+    "id": "text-006",
+    "title": "Fake Toll Road Unpaid Bill",
+    "type": "text",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "+1 (555) 778-9123",
+    "subject": "Text Message",
+    "body": "EZPass: You have an unpaid toll of $4.15. To avoid a $50 late penalty, pay now at: ezpass-payment.online/settle. Your account will be sent to collections if not paid within 48 hours.",
+    "redFlags": [
+      "Fake URL 'ezpass-payment.online' is not a real EZPass domain",
+      "Comes from a regular phone number, not an official short code",
+      "Small amount ($4.15) designed to seem like a real toll",
+      "Threatens collections to create urgency",
+      "EZPass doesn't send unsolicited payment texts like this"
+    ],
+    "explanation": "The toll road text scam became extremely common in 2024-2025. Scammers send millions of these texts hoping some recipients actually use toll roads. The small amount seems believable, and the threat of a $50 penalty motivates quick action. The fake website captures your credit card and personal information. Real toll agencies send bills through postal mail or through their official app if you have an account.",
+    "howToSpot": "Toll agencies send bills by mail. If you get a text about an unpaid toll, log into your actual toll account directly through their official website or app."
+  },
+  {
+    "id": "text-007",
+    "title": "Fake Package Delivery Notification",
+    "type": "text",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "+1 (555) 333-7891",
+    "subject": "Text Message",
+    "body": "FedEx: We attempted delivery of your package but no one was home. Schedule a new delivery time here: fedx-delivery.com/reschedule or your package will be returned to sender in 3 days.",
+    "redFlags": [
+      "Misspelled URL 'fedx-delivery.com' instead of fedex.com",
+      "Sent from a regular phone number, not FedEx's official system",
+      "You didn't request delivery notifications from FedEx",
+      "Creates urgency with a 3-day return deadline",
+      "FedEx leaves door tags for missed deliveries — they don't text unknown numbers"
+    ],
+    "explanation": "Fake delivery notification texts are among the most common smishing attacks. Scammers know that many people regularly receive packages and might not think twice about a delivery notice. The link leads to a phishing site that may steal your personal information or install malware on your phone. Real FedEx delivery notifications only go to customers who signed up at fedex.com, and FedEx leaves physical door tags for missed deliveries.",
+    "howToSpot": "Check the URL carefully for misspellings. Legitimate delivery companies leave door tags. Only expect texts from carriers you've signed up with. Track packages directly on the carrier's official website."
+  }
+]

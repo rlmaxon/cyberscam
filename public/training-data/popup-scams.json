@@ -1,0 +1,101 @@
+[
+  {
+    "id": "popup-001",
+    "title": "Fake Microsoft Virus Warning",
+    "type": "popup",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Browser Pop-up",
+    "subject": "Windows Defender - CRITICAL ALERT",
+    "body": "🔴 CRITICAL SECURITY WARNING 🔴\n\nWindows Defender has detected (3) viruses on your computer!\n\nThreat: Trojan.Malware.300983.susgen\nStatus: ACTIVE — Your personal data is AT RISK\n\n⚠️ DO NOT TURN OFF YOUR COMPUTER ⚠️\n\nYour bank passwords, credit card numbers, and personal photos may be compromised.\n\nCall Microsoft Certified Technicians IMMEDIATELY:\n📞 1-800-555-0199\n(Toll Free — Available 24/7)\n\nError Code: DW6VB36",
+    "redFlags": [
+      "Microsoft NEVER displays phone numbers in security warnings",
+      "Real antivirus alerts don't appear as browser pop-ups with phone numbers",
+      "Designed to look like Windows but appears in a web browser",
+      "Scare tactics — 'bank passwords and photos compromised'",
+      "Tells you not to turn off your computer (to keep you on the scam page)",
+      "Fake error code makes it seem technical and legitimate"
+    ],
+    "explanation": "This is the 'tech support scam' — one of the most profitable scams targeting seniors. The pop-up appears while browsing and cannot be closed easily, making it seem like a real system alert. If you call the number, scammers will convince you to install remote access software (like AnyDesk or TeamViewer), then 'show' you fake problems on your computer. They'll charge $200-$500 for 'repairs' and may also steal personal files and banking info. Real Windows alerts never show phone numbers. Close the browser (Ctrl+Alt+Delete if needed) and ignore it.",
+    "howToSpot": "Real antivirus alerts never include phone numbers. Security warnings that appear in your web browser are always fake. Close the browser if you see one. Microsoft will never ask you to call a phone number."
+  },
+  {
+    "id": "popup-002",
+    "title": "Fake Apple Security Warning",
+    "type": "popup",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Browser Pop-up",
+    "subject": "Apple Security Alert",
+    "body": "⚠️ YOUR APPLE ID HAS BEEN COMPROMISED ⚠️\n\nSomeone in Russia is trying to access your Apple ID!\n\nYour iCloud photos, messages, and Apple Pay are at risk.\n\nDo NOT close this window — your device is currently being protected.\n\nContact Apple Support immediately to secure your account:\n📞 1-855-555-0134\n\nApple Support\nCase ID: APL-2025-88743",
+    "redFlags": [
+      "Apple NEVER shows security alerts as browser pop-ups",
+      "Real Apple security notifications appear in your Settings app or via email from @apple.com",
+      "Phone number is fake — Apple's real support is at support.apple.com",
+      "Telling you not to close the window is a manipulation tactic",
+      "Fake case ID to seem legitimate",
+      "Foreign location (Russia) mentioned to create fear"
+    ],
+    "explanation": "This mimics Apple's visual style to trick Mac and iPhone users. Like the Microsoft version, it wants you to call a fake support number where scammers will try to get remote access to your device or trick you into paying for unnecessary 'security services.' Apple handles security through your Apple ID settings at appleid.apple.com and through their official Support app — never through browser pop-ups with phone numbers.",
+    "howToSpot": "Apple never shows security alerts in your browser. Real Apple security issues are handled through your Apple ID settings or the official Apple Support app. Close the browser window."
+  },
+  {
+    "id": "popup-003",
+    "title": "Fake 'You've Won' Prize Pop-up",
+    "type": "popup",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Browser Pop-up",
+    "subject": "Congratulations! You've Been Selected!",
+    "body": "🎉 CONGRATULATIONS! 🎉\n\nYou are today's lucky visitor!\n\nYou have been selected to receive:\n🎁 A Brand New iPhone 16 Pro (Value: $1,199)\n\nOR\n💵 A $1,000 Walmart Gift Card\n\nThis offer expires in: 3:47 (countdown timer)\n\nTo claim your prize, answer 3 simple questions:\n\n[CLAIM MY PRIZE NOW]\n\n⭐ \"I can't believe I actually won!\" — Karen M.\n⭐ \"Got my gift card in 2 days!\" — Bob T.\n\nOnly 3 prizes remaining today!",
+    "redFlags": [
+      "You can't 'win' a prize from a random website visit",
+      "Countdown timer creates artificial urgency",
+      "Fake testimonials from 'Karen M.' and 'Bob T.'",
+      "'3 prizes remaining' is a pressure tactic — this is shown to everyone",
+      "Will ask for personal info and credit card for 'shipping'",
+      "No legitimate company gives away $1,199 phones to random visitors"
+    ],
+    "explanation": "Prize/reward pop-ups are designed to exploit excitement and urgency. After clicking 'Claim My Prize,' you'll be asked to answer fake survey questions, then provide your personal information and credit card for a small 'shipping fee' (usually $4.99-$9.99). The prize never arrives, but your credit card will be charged recurring monthly fees buried in the fine print. You'll also receive a flood of spam because your info is sold to other scammers.",
+    "howToSpot": "You cannot win prizes from random website visits. Legitimate sweepstakes never ask for credit card information to claim prizes. If you didn't enter a contest, you can't have won one."
+  },
+  {
+    "id": "popup-004",
+    "title": "Fake Browser Update Notice",
+    "type": "popup",
+    "difficulty": "advanced",
+    "isScam": true,
+    "sender": "Browser Pop-up",
+    "subject": "Chrome Update Required",
+    "body": "Google Chrome — Critical Update Required\n\nYour version of Chrome is out of date and vulnerable to security threats.\n\nCurrent Version: 98.0.4758.102\nLatest Version: 122.0.6261.95\n\nSecurity vulnerabilities detected:\n- CVE-2024-1234 (Critical)\n- CVE-2024-5678 (High)\n\n[UPDATE CHROME NOW]\n\nSkipping this update may leave your computer vulnerable to hackers.\n\nGoogle Chrome Security Team",
+    "redFlags": [
+      "Real Chrome updates happen automatically within the browser, not via pop-ups",
+      "Clicking 'Update' will download malware disguised as an update file",
+      "Real CVE numbers are used to seem legitimate but have nothing to do with the pop-up",
+      "Chrome never shows update prompts as webpage pop-ups",
+      "The download is malware, not a real update"
+    ],
+    "explanation": "Fake browser update pop-ups are a common way to distribute malware. The 'update' you download is actually malicious software that can steal passwords, install ransomware, or give hackers remote access to your computer. Real browser updates: (1) happen automatically in the background, (2) can be triggered from Chrome's menu (three dots > Help > About Chrome), and (3) NEVER ask you to download a file from a pop-up window.",
+    "howToSpot": "Browsers update themselves automatically. Never download an 'update' from a pop-up. To update Chrome, go to Menu > Help > About Google Chrome. To update any software, go directly to the official website."
+  },
+  {
+    "id": "popup-005",
+    "title": "Fake Antivirus Scan Results",
+    "type": "popup",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Browser Pop-up",
+    "subject": "System Scan Complete — Threats Found!",
+    "body": "🛡️ SYSTEM SECURITY SCAN COMPLETE\n\nThreats Detected: 13\n- Trojan.GenericKD.46542891 (SEVERE)\n- Spyware.KeyLogger.Win32 (HIGH)\n- Adware.BrowseFox.389 (MEDIUM)\n- 10 additional threats found...\n\nYour antivirus subscription has EXPIRED!\n\nRenew now to remove all threats and protect your computer:\n\n[REMOVE THREATS - $39.99/year]\n\nSpecial offer: 60% OFF if you act within the next 10 minutes!\n\nPowered by TotalSecure Pro™",
+    "redFlags": [
+      "Websites CANNOT scan your computer — this is technically impossible",
+      "Fake threat names designed to sound scary and technical",
+      "'TotalSecure Pro' is not a real antivirus product",
+      "Claims your antivirus 'expired' without knowing what you have",
+      "Time-limited discount creates urgency",
+      "Payment will capture your credit card for recurring charges"
+    ],
+    "explanation": "A website cannot scan your computer for viruses — this is a fundamental limitation of web browsers for security reasons. Any pop-up claiming to have found viruses on your computer is 100% fake, every time, no exceptions. These scam pop-ups either try to sell you fake antivirus software (stealing your credit card info) or trick you into downloading actual malware disguised as 'antivirus.' Use only legitimate antivirus software like Norton, Bitdefender, or Malwarebytes — downloaded directly from their official websites.",
+    "howToSpot": "Websites cannot scan your computer. Any browser pop-up claiming to have found viruses is always fake. Only trust antivirus software you installed yourself from a legitimate source."
+  }
+]

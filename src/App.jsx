@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, AlertTriangle, Lock, Eye, EyeOff, Phone, Mail, MessageSquare, Globe, ChevronRight, ChevronDown, ExternalLink, CheckCircle, XCircle, Users, DollarSign, TrendingUp, AlertCircle, FileText, CreditCard, Search, Menu, X, Home, BookOpen, ShoppingBag, Headphones, Settings, LogOut, Play, ArrowRight, Star, Zap, Database, Key, Trash2, Monitor, Smartphone, Chrome, Apple, Bot } from 'lucide-react';
+import { Shield, AlertTriangle, Lock, Eye, EyeOff, Phone, Mail, MessageSquare, Globe, ChevronRight, ChevronDown, ExternalLink, CheckCircle, XCircle, Users, DollarSign, TrendingUp, AlertCircle, FileText, CreditCard, Search, Menu, X, Home, BookOpen, ShoppingBag, Headphones, Settings, LogOut, Play, ArrowRight, Star, Zap, Database, Key, Trash2, Monitor, Smartphone, Chrome, Apple, Bot, Printer, ArrowLeft, ShoppingCart, Tag, Award, RotateCcw, ChevronUp } from 'lucide-react';
 import config from './config.json';
 
 // ==================== MAIN APP ====================
@@ -35,7 +35,7 @@ export default function SeniorCyberSecure() {
         {currentPage === 'landing' && <LandingPage setCurrentPage={setCurrentPage} />}
         {currentPage === 'login' && <LoginPage handleLogin={handleLogin} setCurrentPage={setCurrentPage} />}
         {currentPage === 'dashboard' && isLoggedIn && <MemberDashboard setCurrentPage={setCurrentPage} />}
-        {currentPage === 'training' && isLoggedIn && <TrainingLab />}
+        {currentPage === 'training' && isLoggedIn && <TrainingLab setCurrentPage={setCurrentPage} />}
         {currentPage === 'resources' && <ResourceCenter />}
         {currentPage === 'marketplace' && <AffiliateMarketplace />}
         {currentPage === 'emergency' && <EmergencyDirectory />}
@@ -777,226 +777,908 @@ function QuickLink({ icon, label, onClick, href }) {
 }
 
 // ==================== TRAINING LAB ====================
-function TrainingLab() {
-  const [selectedLab, setSelectedLab] = useState('email');
+function TrainingLab({ setCurrentPage }) {
+  const [view, setView] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedExample, setSelectedExample] = useState(null);
+  const [examples, setExamples] = useState({ email: [], text: [], marketplace: [], popup: [] });
+  const [quizQuestions, setQuizQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [difficultyFilter, setDifficultyFilter] = useState('all');
+
+  const categories = [
+    { key: 'email', label: 'Email Scams', icon: <Mail className="w-8 h-8" />, color: 'from-blue-500 to-blue-600', description: 'Phishing emails that try to steal your personal information', file: 'email-scams.json' },
+    { key: 'text', label: 'Text Message Scams', icon: <MessageSquare className="w-8 h-8" />, color: 'from-green-500 to-emerald-600', description: 'Smishing attacks that arrive as text messages on your phone', file: 'text-scams.json' },
+    { key: 'marketplace', label: 'Marketplace Scams', icon: <ShoppingCart className="w-8 h-8" />, color: 'from-purple-500 to-violet-600', description: 'Fraud on Facebook Marketplace, Craigslist, and online stores', file: 'marketplace-scams.json' },
+    { key: 'popup', label: 'Pop-up Scams', icon: <Monitor className="w-8 h-8" />, color: 'from-red-500 to-rose-600', description: 'Fake warnings and alerts that appear in your browser', file: 'popup-scams.json' }
+  ];
+
+  useEffect(() => {
+    async function loadContent() {
+      setLoading(true);
+      try {
+        const [emailRes, textRes, marketRes, popupRes, quizRes] = await Promise.all([
+          fetch('/training-data/email-scams.json').then(r => r.json()).catch(() => []),
+          fetch('/training-data/text-scams.json').then(r => r.json()).catch(() => []),
+          fetch('/training-data/marketplace-scams.json').then(r => r.json()).catch(() => []),
+          fetch('/training-data/popup-scams.json').then(r => r.json()).catch(() => []),
+          fetch('/training-data/quiz.json').then(r => r.json()).catch(() => [])
+        ]);
+        setExamples({ email: emailRes, text: textRes, marketplace: marketRes, popup: popupRes });
+        setQuizQuestions(quizRes);
+      } catch (err) {
+        console.error('Failed to load training data:', err);
+      }
+      setLoading(false);
+    }
+    loadContent();
+  }, []);
+
+  const navigateTo = (newView, category = null, example = null) => {
+    setView(newView);
+    if (category !== undefined) setSelectedCategory(category);
+    if (example !== undefined) setSelectedExample(example);
+    window.scrollTo(0, 0);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 font-medium">Loading Training Lab...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        {view === 'home' && (
+          <TrainingLabHome
+            categories={categories}
+            examples={examples}
+            quizQuestions={quizQuestions}
+            navigateTo={navigateTo}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        {view === 'category' && selectedCategory && (
+          <TrainingLabCategory
+            category={categories.find(c => c.key === selectedCategory)}
+            examples={examples[selectedCategory] || []}
+            navigateTo={navigateTo}
+            difficultyFilter={difficultyFilter}
+            setDifficultyFilter={setDifficultyFilter}
+          />
+        )}
+        {view === 'detail' && selectedExample && (
+          <TrainingLabDetail
+            example={selectedExample}
+            navigateTo={navigateTo}
+            categoryKey={selectedCategory}
+          />
+        )}
+        {view === 'quiz' && (
+          <TrainingLabQuiz
+            questions={quizQuestions}
+            navigateTo={navigateTo}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ---- Training Lab Home ----
+function TrainingLabHome({ categories, examples, quizQuestions, navigateTo, setCurrentPage }) {
+  const totalExamples = Object.values(examples).reduce((sum, arr) => sum + arr.length, 0);
+
+  return (
+    <>
+      {/* Header */}
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center gap-2 bg-blue-100 border border-blue-200 rounded-full px-4 py-2 mb-4">
+          <BookOpen className="w-4 h-4 text-blue-600" />
+          <span className="text-blue-700 text-sm font-medium">Members-Only Training</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">Scam Spotter Training Lab</h1>
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          Study real-world scam examples, learn how to spot the red flags, and test your knowledge with interactive quizzes.
+        </p>
+      </div>
+
+      {/* Stats Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
+          <p className="text-2xl font-bold text-blue-600">{totalExamples}</p>
+          <p className="text-sm text-slate-600">Real Examples</p>
+        </div>
+        <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
+          <p className="text-2xl font-bold text-green-600">4</p>
+          <p className="text-sm text-slate-600">Scam Categories</p>
+        </div>
+        <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
+          <p className="text-2xl font-bold text-purple-600">{quizQuestions.length}</p>
+          <p className="text-sm text-slate-600">Quiz Questions</p>
+        </div>
+        <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
+          <p className="text-2xl font-bold text-orange-600"><Printer className="w-6 h-6 inline" /></p>
+          <p className="text-sm text-slate-600">Print-Friendly</p>
+        </div>
+      </div>
+
+      {/* Take the Test CTA */}
+      <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-6 sm:p-8 text-white mb-10 shadow-lg">
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <Award className="w-8 h-8" />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h2 className="text-2xl font-bold mb-2">Test Your Scam-Spotting Skills</h2>
+            <p className="text-orange-100">
+              Think you can spot a scam? Take our interactive quiz with {quizQuestions.length} real-world questions across all categories.
+            </p>
+          </div>
+          <button
+            onClick={() => navigateTo('quiz')}
+            className="px-8 py-4 bg-white text-orange-600 font-bold rounded-xl hover:bg-orange-50 transition-all shadow-lg flex items-center gap-2 flex-shrink-0"
+          >
+            <Play className="w-5 h-5" /> Start Quiz
+          </button>
+        </div>
+      </div>
+
+      {/* Category Cards */}
+      <h2 className="text-2xl font-bold text-slate-800 mb-6">Browse by Category</h2>
+      <div className="grid sm:grid-cols-2 gap-6 mb-10">
+        {categories.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => navigateTo('category', cat.key)}
+            className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden hover:shadow-xl transition-all text-left group"
+          >
+            <div className={`bg-gradient-to-r ${cat.color} p-5 text-white`}>
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                  {cat.icon}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">{cat.label}</h3>
+                  <p className="text-white/80 text-sm">{examples[cat.key]?.length || 0} examples</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-5">
+              <p className="text-slate-600 mb-3">{cat.description}</p>
+              <span className="text-blue-600 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                Explore Examples <ArrowRight className="w-4 h-4" />
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Quick Access - Recent Examples */}
+      <h2 className="text-2xl font-bold text-slate-800 mb-6">Recent Examples</h2>
+      <div className="grid md:grid-cols-3 gap-4 mb-6">
+        {Object.entries(examples).flatMap(([catKey, items]) =>
+          items.slice(0, 2).map(item => ({ ...item, catKey }))
+        ).slice(0, 6).map((item) => (
+          <ExampleCard
+            key={item.id}
+            example={item}
+            onClick={() => navigateTo('detail', item.catKey, item)}
+          />
+        ))}
+      </div>
+
+      <div className="text-center">
+        <button
+          onClick={() => setCurrentPage('dashboard')}
+          className="text-slate-500 hover:text-slate-700 flex items-center justify-center gap-2 mx-auto"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+        </button>
+      </div>
+    </>
+  );
+}
+
+// ---- Example Card (compact) ----
+function ExampleCard({ example, onClick }) {
+  const typeConfig = {
+    email: { icon: <Mail className="w-4 h-4" />, bg: 'bg-blue-100 text-blue-700' },
+    text: { icon: <MessageSquare className="w-4 h-4" />, bg: 'bg-green-100 text-green-700' },
+    marketplace: { icon: <ShoppingCart className="w-4 h-4" />, bg: 'bg-purple-100 text-purple-700' },
+    popup: { icon: <Monitor className="w-4 h-4" />, bg: 'bg-red-100 text-red-700' }
+  };
+  const tc = typeConfig[example.type] || typeConfig.email;
+  const diffColors = {
+    beginner: 'bg-green-100 text-green-700',
+    intermediate: 'bg-yellow-100 text-yellow-700',
+    advanced: 'bg-red-100 text-red-700'
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className="bg-white rounded-xl shadow border border-slate-200 p-4 hover:shadow-lg hover:border-blue-300 transition-all text-left w-full"
+    >
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <span className={`px-2 py-1 rounded-full text-xs font-medium ${tc.bg} flex items-center gap-1`}>
+          {tc.icon} {example.type}
+        </span>
+        <span className={`px-2 py-1 rounded-full text-xs font-medium ${diffColors[example.difficulty] || ''}`}>
+          {example.difficulty}
+        </span>
+        {example.isScam ? (
+          <span className="px-2 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">SCAM</span>
+        ) : (
+          <span className="px-2 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">LEGIT</span>
+        )}
+      </div>
+      <h3 className="font-bold text-slate-800 mb-1 text-sm">{example.title}</h3>
+      <p className="text-xs text-slate-500 font-mono truncate">From: {example.sender}</p>
+    </button>
+  );
+}
+
+// ---- Category Browse View ----
+function TrainingLabCategory({ category, examples, navigateTo, difficultyFilter, setDifficultyFilter }) {
+  const filtered = difficultyFilter === 'all'
+    ? examples
+    : examples.filter(e => e.difficulty === difficultyFilter);
+
+  return (
+    <>
+      {/* Back Navigation */}
+      <button
+        onClick={() => navigateTo('home')}
+        className="flex items-center gap-2 text-slate-600 hover:text-blue-600 mb-6 font-medium transition-colors"
+      >
+        <ArrowLeft className="w-5 h-5" /> Back to Training Lab
+      </button>
+
+      {/* Category Header */}
+      <div className={`bg-gradient-to-r ${category.color} rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-lg`}>
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+            {category.icon}
+          </div>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold">{category.label}</h1>
+            <p className="text-white/80">{examples.length} real-world examples to study</p>
+          </div>
+        </div>
+        <p className="text-white/90">{category.description}</p>
+      </div>
+
+      {/* Filters */}
+      <div className="flex gap-3 mb-6 flex-wrap">
+        <span className="text-slate-600 font-medium py-2">Difficulty:</span>
+        {['all', 'beginner', 'intermediate', 'advanced'].map((level) => (
+          <button
+            key={level}
+            onClick={() => setDifficultyFilter(level)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              difficultyFilter === level
+                ? 'bg-blue-600 text-white shadow'
+                : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-300'
+            }`}
+          >
+            {level === 'all' ? 'All Levels' : level.charAt(0).toUpperCase() + level.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Examples Grid */}
+      {filtered.length > 0 ? (
+        <div className="grid md:grid-cols-2 gap-6">
+          {filtered.map((example) => (
+            <ExampleListCard
+              key={example.id}
+              example={example}
+              onClick={() => navigateTo('detail', category.key, example)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-white rounded-xl border border-slate-200 p-8 text-center">
+          <p className="text-slate-500">No examples found for this difficulty level.</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ---- Example List Card (larger for browse) ----
+function ExampleListCard({ example, onClick }) {
+  const typeConfig = {
+    email: { icon: <Mail className="w-5 h-5" />, label: 'EMAIL', bg: 'bg-blue-100 text-blue-700' },
+    text: { icon: <MessageSquare className="w-5 h-5" />, label: 'TEXT', bg: 'bg-green-100 text-green-700' },
+    marketplace: { icon: <ShoppingCart className="w-5 h-5" />, label: 'MARKETPLACE', bg: 'bg-purple-100 text-purple-700' },
+    popup: { icon: <Monitor className="w-5 h-5" />, label: 'POP-UP', bg: 'bg-red-100 text-red-700' }
+  };
+  const tc = typeConfig[example.type] || typeConfig.email;
+
+  return (
+    <button
+      onClick={onClick}
+      className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all text-left w-full"
+    >
+      <div className={`px-5 py-3 border-b flex items-center justify-between ${example.isScam ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'}`}>
+        <div className="flex items-center gap-2">
+          <span className={`px-3 py-1 rounded-full text-xs font-medium ${tc.bg} flex items-center gap-1`}>
+            {tc.icon} {tc.label}
+          </span>
+          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+            example.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
+            example.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
+            'bg-red-100 text-red-700'
+          }`}>
+            {example.difficulty}
+          </span>
+        </div>
+        <span className={`text-xs font-bold ${example.isScam ? 'text-red-600' : 'text-green-600'}`}>
+          {example.isScam ? 'SCAM' : 'LEGITIMATE'}
+        </span>
+      </div>
+      <div className="p-5">
+        <h3 className="font-bold text-slate-800 text-lg mb-2">{example.title}</h3>
+        <p className="text-sm text-slate-500 font-mono mb-3 truncate">From: {example.sender}</p>
+        <p className="text-sm text-slate-600 line-clamp-2 mb-3">{example.body.substring(0, 120)}...</p>
+        {example.redFlags && example.redFlags.length > 0 && (
+          <div className="flex items-center gap-2 text-sm text-red-600">
+            <AlertTriangle className="w-4 h-4" />
+            <span>{example.redFlags.length} red flags identified</span>
+          </div>
+        )}
+        <span className="text-blue-600 font-medium flex items-center gap-1 mt-3 text-sm">
+          View Full Example <ChevronRight className="w-4 h-4" />
+        </span>
+      </div>
+    </button>
+  );
+}
+
+// ---- Example Detail View ----
+function TrainingLabDetail({ example, navigateTo, categoryKey }) {
+  const [showRedFlags, setShowRedFlags] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
+
+  const typeConfig = {
+    email: { icon: <Mail className="w-5 h-5" />, label: 'EMAIL', bg: 'bg-blue-100 text-blue-700', headerBg: 'bg-blue-50' },
+    text: { icon: <MessageSquare className="w-5 h-5" />, label: 'TEXT MESSAGE', bg: 'bg-green-100 text-green-700', headerBg: 'bg-green-50' },
+    marketplace: { icon: <ShoppingCart className="w-5 h-5" />, label: 'MARKETPLACE', bg: 'bg-purple-100 text-purple-700', headerBg: 'bg-purple-50' },
+    popup: { icon: <Monitor className="w-5 h-5" />, label: 'POP-UP', bg: 'bg-red-100 text-red-700', headerBg: 'bg-red-50' }
+  };
+  const tc = typeConfig[example.type] || typeConfig.email;
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  return (
+    <>
+      {/* Back Navigation */}
+      <div className="flex items-center justify-between mb-6 no-print">
+        <button
+          onClick={() => navigateTo('category', categoryKey)}
+          className="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" /> Back to {categoryKey ? categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1) + ' Examples' : 'Category'}
+        </button>
+        <button
+          onClick={handlePrint}
+          className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-700 font-medium transition-colors"
+        >
+          <Printer className="w-4 h-4" /> Print This Example
+        </button>
+      </div>
+
+      {/* Example Card (print-friendly) */}
+      <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 overflow-hidden print-card">
+        {/* Status Banner */}
+        <div className={`px-6 py-4 border-b-2 flex items-center justify-between ${example.isScam ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'}`}>
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className={`px-3 py-1 rounded-full text-sm font-medium ${tc.bg} flex items-center gap-1`}>
+              {tc.icon} {tc.label}
+            </span>
+            <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+              example.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
+              example.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
+              'bg-red-100 text-red-700'
+            }`}>
+              {example.difficulty}
+            </span>
+          </div>
+          <span className={`text-lg font-bold ${example.isScam ? 'text-red-600' : 'text-green-600'}`}>
+            {example.isScam ? 'THIS IS A SCAM' : 'LEGITIMATE'}
+          </span>
+        </div>
+
+        {/* Title */}
+        <div className="px-6 py-5 border-b border-slate-100">
+          <h1 className="text-2xl font-bold text-slate-800">{example.title}</h1>
+        </div>
+
+        {/* Simulated Message */}
+        <div className="p-6">
+          <div className={`rounded-xl border-2 overflow-hidden mb-6 ${example.isScam ? 'border-red-200' : 'border-slate-200'}`}>
+            <div className={`px-5 py-3 border-b ${example.isScam ? 'bg-red-50 border-red-200' : 'bg-slate-100 border-slate-200'}`}>
+              <p className="text-sm text-slate-600 mb-1"><strong>From:</strong> <span className="font-mono text-slate-800">{example.sender}</span></p>
+              {example.subject && example.subject !== 'Text Message' && (
+                <p className="text-sm text-slate-600"><strong>Subject:</strong> <span className="text-slate-800">{example.subject}</span></p>
+              )}
+            </div>
+            <div className="p-5 bg-white">
+              <pre className="whitespace-pre-wrap text-slate-700 font-sans text-base leading-relaxed">
+                {example.body}
+              </pre>
+            </div>
+          </div>
+
+          {/* Red Flags Section (expandable on screen, always shown in print) */}
+          {example.redFlags && example.redFlags.length > 0 && (
+            <div className="mb-6">
+              <button
+                onClick={() => setShowRedFlags(!showRedFlags)}
+                className="w-full flex items-center justify-between p-4 bg-red-50 border-2 border-red-200 rounded-xl hover:bg-red-100 transition-colors no-print"
+              >
+                <div className="flex items-center gap-3">
+                  <AlertTriangle className="w-6 h-6 text-red-600" />
+                  <span className="font-bold text-red-800 text-lg">Red Flags ({example.redFlags.length})</span>
+                </div>
+                {showRedFlags ? <ChevronUp className="w-5 h-5 text-red-600" /> : <ChevronDown className="w-5 h-5 text-red-600" />}
+              </button>
+              <div className={`${showRedFlags ? 'block' : 'hidden'} print-always-show mt-3 space-y-3`}>
+                {example.redFlags.map((flag, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                    <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-red-800">{flag}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Explanation Section (expandable on screen, always shown in print) */}
+          <div className="mb-6">
+            <button
+              onClick={() => setShowExplanation(!showExplanation)}
+              className="w-full flex items-center justify-between p-4 bg-blue-50 border-2 border-blue-200 rounded-xl hover:bg-blue-100 transition-colors no-print"
+            >
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-6 h-6 text-blue-600" />
+                <span className="font-bold text-blue-800 text-lg">Why This Is {example.isScam ? 'a Scam' : 'Legitimate'}</span>
+              </div>
+              {showExplanation ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-blue-600" />}
+            </button>
+            <div className={`${showExplanation ? 'block' : 'hidden'} print-always-show mt-3`}>
+              <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <p className="text-blue-900 leading-relaxed">{example.explanation}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* How to Spot Section */}
+          {example.howToSpot && (
+            <div className="p-5 bg-green-50 border-2 border-green-200 rounded-xl">
+              <div className="flex items-center gap-3 mb-3">
+                <Shield className="w-6 h-6 text-green-600" />
+                <span className="font-bold text-green-800 text-lg">How to Protect Yourself</span>
+              </div>
+              <p className="text-green-800 leading-relaxed">{example.howToSpot}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Print Header (only visible when printing) */}
+      <div className="print-header hidden">
+        <p>Senior Cyber Secure — Scam Spotter Training Lab</p>
+      </div>
+    </>
+  );
+}
+
+// ---- Quiz / Test View ----
+function TrainingLabQuiz({ questions, navigateTo }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answered, setAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [reviewMode, setReviewMode] = useState(false);
+  const [reviewIndex, setReviewIndex] = useState(0);
 
-  const emailQuestions = [
-    {
-      type: 'email',
-      from: 'security-alert@paypa1-verify.net',
-      subject: '⚠️ URGENT: Unauthorized Login Detected',
-      content: 'Dear PayPal User,\n\nWe detected suspicious activity on your account from IP 192.168.1.1 in Nigeria.\n\nYour account has been temporarily limited. Click here immediately to verify your identity and restore access.\n\nThis link expires in 24 hours.\n\nPayPal Security Team',
-      isScam: true,
-      explanation: 'This is a SCAM. The domain "paypa1-verify.net" uses a "1" instead of "l" in PayPal. Real PayPal emails come from @paypal.com. The urgency and threats are classic scam tactics.'
-    },
-    {
-      type: 'email',
-      from: 'noreply@costco.com',
-      subject: 'Your Costco membership renewal reminder',
-      content: 'Dear Margaret Johnson,\n\nYour Costco Gold Star Membership (ending in 1234) expires on April 30, 2025.\n\nYou can renew online at Costco.com, at any warehouse, or by phone at 1-800-774-2678.\n\nThank you for being a valued member.\n\nCostco Wholesale',
-      isScam: false,
-      explanation: 'This appears LEGITIMATE. The email comes from @costco.com, uses your name, provides multiple official contact methods, and doesn\'t pressure you to click links. However, always go directly to Costco.com to renew.'
-    },
-    {
-      type: 'email',
-      from: 'geeksquad-renewal@outlook.com',
-      subject: 'Auto-Renewal Confirmation - $349.99 Charged',
-      content: 'Your Geek Squad Total Tech Support subscription has been auto-renewed.\n\nAmount: $349.99\nDate: Today\n\nIf you did not authorize this charge, call immediately to cancel: 1-888-555-0199\n\nGeek Squad by Best Buy',
-      isScam: true,
-      explanation: 'This is a SCAM. Geek Squad/Best Buy would never use an Outlook.com email address. They want you to call the fake number where scammers will try to get remote access to your computer.'
-    }
-  ];
+  const filteredQuestions = categoryFilter === 'all'
+    ? questions
+    : questions.filter(q => q.category === categoryFilter);
 
-  const questions = selectedLab === 'email' ? emailQuestions : emailQuestions;
+  const activeQuestions = filteredQuestions;
 
-  const handleAnswer = (answer) => {
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowResult(false);
+    setSelectedAnswer(null);
+    setAnswered(false);
+    setAnswers([]);
+    setReviewMode(false);
+  };
+
+  const handleAnswer = (answerIndex) => {
     if (answered) return;
-    
-    const correct = answer === questions[currentQuestion].isScam;
-    setIsCorrect(correct);
+    setSelectedAnswer(answerIndex);
     setAnswered(true);
-    if (correct) setScore(score + 1);
+    const isCorrect = answerIndex === activeQuestions[currentQuestion].correctAnswer;
+    if (isCorrect) setScore(score + 1);
+    setAnswers([...answers, { questionIndex: currentQuestion, selected: answerIndex, correct: isCorrect }]);
   };
 
   const nextQuestion = () => {
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < activeQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
       setAnswered(false);
-      setIsCorrect(null);
     } else {
       setShowResult(true);
     }
   };
 
   const resetQuiz = () => {
+    setQuizStarted(false);
     setCurrentQuestion(0);
     setScore(0);
     setShowResult(false);
+    setSelectedAnswer(null);
     setAnswered(false);
-    setIsCorrect(null);
+    setAnswers([]);
+    setReviewMode(false);
   };
 
-  return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Interactive Training Lab</h1>
-          <p className="text-slate-600">Practice identifying scams in a safe environment</p>
-        </div>
+  const handlePrintResults = () => {
+    window.print();
+  };
 
-        {/* Lab Selector */}
-        <div className="flex gap-4 mb-8 justify-center flex-wrap">
-          <LabButton 
-            active={selectedLab === 'email'} 
-            onClick={() => { setSelectedLab('email'); resetQuiz(); }}
-            icon={<Mail className="w-5 h-5" />}
-            label="Email Lab"
-          />
-          <LabButton 
-            active={selectedLab === 'text'} 
-            onClick={() => { setSelectedLab('text'); resetQuiz(); }}
-            icon={<MessageSquare className="w-5 h-5" />}
-            label="Text Lab"
-          />
-          <LabButton 
-            active={selectedLab === 'hover'} 
-            onClick={() => { setSelectedLab('hover'); resetQuiz(); }}
-            icon={<Search className="w-5 h-5" />}
-            label="Hover Simulator"
-          />
-        </div>
+  // Quiz Start / Category Selection
+  if (!quizStarted) {
+    return (
+      <>
+        <button
+          onClick={() => navigateTo('home')}
+          className="flex items-center gap-2 text-slate-600 hover:text-blue-600 mb-6 font-medium transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" /> Back to Training Lab
+        </button>
 
-        {/* Quiz Content */}
-        {!showResult ? (
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
-            {/* Progress */}
-            <div className="bg-slate-100 px-6 py-4 border-b">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-medium text-slate-700">Question {currentQuestion + 1} of {questions.length}</span>
-                <span className="text-blue-600 font-bold">Score: {score}/{questions.length}</span>
-              </div>
-              <div className="w-full bg-slate-200 rounded-full h-2">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all"
-                  style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                />
-              </div>
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+          <div className="bg-gradient-to-r from-orange-500 to-amber-500 p-8 text-white text-center">
+            <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Award className="w-10 h-10" />
             </div>
+            <h1 className="text-3xl font-bold mb-2">Scam Spotter Quiz</h1>
+            <p className="text-orange-100">Test your knowledge with real-world multiple choice questions</p>
+          </div>
 
-            {/* Email Display */}
-            <div className="p-6">
-              <div className="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden mb-6">
-                <div className="bg-slate-200 px-4 py-3 border-b border-slate-300">
-                  <p className="text-sm text-slate-600"><strong>From:</strong> <span className="font-mono">{questions[currentQuestion].from}</span></p>
-                  <p className="text-sm text-slate-600"><strong>Subject:</strong> {questions[currentQuestion].subject}</p>
-                </div>
-                <div className="p-4">
-                  <pre className="whitespace-pre-wrap text-slate-700 font-sans text-sm leading-relaxed">
-                    {questions[currentQuestion].content}
-                  </pre>
-                </div>
-              </div>
-
-              {/* Question */}
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-slate-800 mb-4">Is this a SCAM or LEGITIMATE?</h3>
-                <div className="flex gap-4 justify-center">
-                  <button
-                    onClick={() => handleAnswer(true)}
-                    disabled={answered}
-                    className={`px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center gap-2 ${
-                      answered 
-                        ? questions[currentQuestion].isScam 
-                          ? 'bg-green-500 text-white' 
-                          : 'bg-slate-200 text-slate-500'
-                        : 'bg-red-100 text-red-700 hover:bg-red-200'
-                    }`}
-                  >
-                    <XCircle className="w-6 h-6" /> SCAM
-                  </button>
-                  <button
-                    onClick={() => handleAnswer(false)}
-                    disabled={answered}
-                    className={`px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center gap-2 ${
-                      answered 
-                        ? !questions[currentQuestion].isScam 
-                          ? 'bg-green-500 text-white' 
-                          : 'bg-slate-200 text-slate-500'
-                        : 'bg-green-100 text-green-700 hover:bg-green-200'
-                    }`}
-                  >
-                    <CheckCircle className="w-6 h-6" /> LEGITIMATE
-                  </button>
-                </div>
-              </div>
-
-              {/* Feedback */}
-              {answered && (
-                <div className={`p-6 rounded-xl ${isCorrect ? 'bg-green-50 border-2 border-green-200' : 'bg-red-50 border-2 border-red-200'}`}>
-                  <div className="flex items-start gap-3">
-                    {isCorrect ? (
-                      <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
-                    ) : (
-                      <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
-                    )}
+          <div className="p-8">
+            <h2 className="text-xl font-bold text-slate-800 mb-4">Choose Your Quiz</h2>
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              {[
+                { key: 'all', label: 'All Categories', count: questions.length, icon: <BookOpen className="w-5 h-5" />, color: 'border-blue-300 bg-blue-50' },
+                { key: 'email', label: 'Email Scams', count: questions.filter(q => q.category === 'email').length, icon: <Mail className="w-5 h-5" />, color: 'border-blue-300 bg-blue-50' },
+                { key: 'text', label: 'Text Scams', count: questions.filter(q => q.category === 'text').length, icon: <MessageSquare className="w-5 h-5" />, color: 'border-green-300 bg-green-50' },
+                { key: 'popup', label: 'Pop-up Scams', count: questions.filter(q => q.category === 'popup').length, icon: <Monitor className="w-5 h-5" />, color: 'border-red-300 bg-red-50' },
+                { key: 'marketplace', label: 'Marketplace Scams', count: questions.filter(q => q.category === 'marketplace').length, icon: <ShoppingCart className="w-5 h-5" />, color: 'border-purple-300 bg-purple-50' }
+              ].map((opt) => (
+                <button
+                  key={opt.key}
+                  onClick={() => setCategoryFilter(opt.key)}
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                    categoryFilter === opt.key
+                      ? 'border-blue-500 bg-blue-50 shadow-md'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-slate-600">{opt.icon}</span>
                     <div>
-                      <h4 className={`font-bold mb-2 ${isCorrect ? 'text-green-800' : 'text-red-800'}`}>
-                        {isCorrect ? '✓ Correct!' : '✗ Incorrect'}
-                      </h4>
-                      <p className={isCorrect ? 'text-green-700' : 'text-red-700'}>
-                        {questions[currentQuestion].explanation}
-                      </p>
+                      <p className="font-bold text-slate-800">{opt.label}</p>
+                      <p className="text-sm text-slate-500">{opt.count} questions</p>
                     </div>
                   </div>
+                </button>
+              ))}
+            </div>
+
+            {filteredQuestions.length > 0 ? (
+              <button
+                onClick={handleStartQuiz}
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg text-lg flex items-center justify-center gap-2"
+              >
+                <Play className="w-5 h-5" /> Start Quiz ({filteredQuestions.length} Questions)
+              </button>
+            ) : (
+              <p className="text-center text-slate-500 py-4">No questions available for this category yet.</p>
+            )}
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Review Mode
+  if (reviewMode) {
+    const reviewQ = activeQuestions[reviewIndex];
+    const reviewA = answers[reviewIndex];
+
+    return (
+      <>
+        <button
+          onClick={() => setReviewMode(false)}
+          className="flex items-center gap-2 text-slate-600 hover:text-blue-600 mb-6 font-medium transition-colors no-print"
+        >
+          <ArrowLeft className="w-5 h-5" /> Back to Results
+        </button>
+
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+          <div className="bg-slate-100 px-6 py-4 border-b flex justify-between items-center">
+            <span className="font-medium text-slate-700">Review: Question {reviewIndex + 1} of {activeQuestions.length}</span>
+            <span className={`font-bold ${reviewA.correct ? 'text-green-600' : 'text-red-600'}`}>
+              {reviewA.correct ? 'Correct' : 'Incorrect'}
+            </span>
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-xl font-bold text-slate-800 mb-6">{reviewQ.question}</h3>
+
+            <div className="space-y-3 mb-6">
+              {reviewQ.options.map((option, idx) => {
+                const isCorrect = idx === reviewQ.correctAnswer;
+                const wasSelected = idx === reviewA.selected;
+                let style = 'border-slate-200 bg-white';
+                if (isCorrect) style = 'border-green-500 bg-green-50';
+                else if (wasSelected && !isCorrect) style = 'border-red-500 bg-red-50';
+
+                return (
+                  <div key={idx} className={`p-4 rounded-xl border-2 ${style} flex items-start gap-3`}>
+                    <span className="w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center text-sm font-bold text-slate-600 flex-shrink-0">
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="text-slate-800 pt-1">{option}</span>
+                    {isCorrect && <CheckCircle className="w-5 h-5 text-green-600 ml-auto flex-shrink-0 mt-1" />}
+                    {wasSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-600 ml-auto flex-shrink-0 mt-1" />}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+              <p className="font-bold text-blue-800 mb-1">Explanation:</p>
+              <p className="text-blue-700">{reviewQ.explanation}</p>
+            </div>
+
+            <div className="flex gap-3 mt-6 no-print">
+              <button
+                onClick={() => setReviewIndex(Math.max(0, reviewIndex - 1))}
+                disabled={reviewIndex === 0}
+                className="flex-1 py-3 bg-slate-100 text-slate-700 font-medium rounded-xl hover:bg-slate-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => setReviewIndex(Math.min(activeQuestions.length - 1, reviewIndex + 1))}
+                disabled={reviewIndex === activeQuestions.length - 1}
+                className="flex-1 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Results View
+  if (showResult) {
+    const percentage = Math.round((score / activeQuestions.length) * 100);
+    const passed = percentage >= 70;
+
+    return (
+      <div className="print-card">
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center">
+          <div className={`w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center ${passed ? 'bg-green-100' : 'bg-orange-100'}`}>
+            {passed ? (
+              <Award className="w-12 h-12 text-green-600" />
+            ) : (
+              <AlertTriangle className="w-12 h-12 text-orange-600" />
+            )}
+          </div>
+          <h2 className="text-3xl font-bold text-slate-800 mb-2">
+            {passed ? 'Great Job!' : 'Keep Practicing!'}
+          </h2>
+          <p className="text-5xl font-bold mb-2">
+            <span className={passed ? 'text-green-600' : 'text-orange-600'}>{percentage}%</span>
+          </p>
+          <p className="text-slate-600 mb-2">
+            You scored <strong className="text-blue-600">{score}</strong> out of <strong>{activeQuestions.length}</strong>
+          </p>
+          <p className="text-sm text-slate-500 mb-8">
+            {passed
+              ? "You have strong scam-detection skills. Stay vigilant and keep learning!"
+              : "Don't worry — recognizing scams is a skill that improves with practice. Review the answers below and try again!"}
+          </p>
+
+          {/* Answer Summary */}
+          <div className="text-left mb-8">
+            <h3 className="font-bold text-slate-800 mb-4 text-lg">Answer Summary</h3>
+            <div className="space-y-2">
+              {answers.map((a, idx) => (
+                <div key={idx} className={`flex items-center gap-3 p-3 rounded-lg ${a.correct ? 'bg-green-50' : 'bg-red-50'}`}>
+                  {a.correct ? (
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  ) : (
+                    <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                  )}
+                  <span className="text-sm text-slate-700 flex-1">
+                    Q{idx + 1}: {activeQuestions[idx].question.substring(0, 80)}...
+                  </span>
                   <button
-                    onClick={nextQuestion}
-                    className="mt-4 w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors"
+                    onClick={() => { setReviewMode(true); setReviewIndex(idx); }}
+                    className="text-blue-600 text-sm font-medium hover:underline no-print"
                   >
-                    {currentQuestion < questions.length - 1 ? 'Next Question →' : 'See Results'}
+                    Review
                   </button>
                 </div>
-              )}
+              ))}
             </div>
           </div>
-        ) : (
-          /* Results */
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center">
-            <div className={`w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center ${
-              score >= questions.length * 0.7 ? 'bg-green-100' : 'bg-orange-100'
-            }`}>
-              {score >= questions.length * 0.7 ? (
-                <CheckCircle className="w-12 h-12 text-green-600" />
-              ) : (
-                <AlertTriangle className="w-12 h-12 text-orange-600" />
-              )}
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">
-              {score >= questions.length * 0.7 ? 'Great Job!' : 'Keep Practicing!'}
-            </h2>
-            <p className="text-slate-600 mb-4">
-              You scored <strong className="text-blue-600">{score}</strong> out of <strong>{questions.length}</strong>
-            </p>
-            <p className="text-sm text-slate-500 mb-6">
-              {score >= questions.length * 0.7 
-                ? "You're getting good at spotting scams! Keep up the vigilance."
-                : "Don't worry - spotting scams takes practice. Try again to improve!"
-              }
-            </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 no-print">
             <button
               onClick={resetQuiz}
-              className="px-8 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors"
+              className="flex-1 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
             >
-              Try Again
+              <RotateCcw className="w-5 h-5" /> Try Again
+            </button>
+            <button
+              onClick={handlePrintResults}
+              className="flex-1 py-3 bg-white text-slate-700 font-medium rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+            >
+              <Printer className="w-5 h-5" /> Print Results
+            </button>
+            <button
+              onClick={() => navigateTo('home')}
+              className="flex-1 py-3 bg-white text-slate-700 font-medium rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+            >
+              <ArrowLeft className="w-5 h-5" /> Training Lab
             </button>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  // Active Quiz Question
+  const q = activeQuestions[currentQuestion];
+
+  return (
+    <>
+      <button
+        onClick={() => { if (confirm('Are you sure? Your progress will be lost.')) resetQuiz(); }}
+        className="flex items-center gap-2 text-slate-600 hover:text-blue-600 mb-6 font-medium transition-colors no-print"
+      >
+        <ArrowLeft className="w-5 h-5" /> Exit Quiz
+      </button>
+
+      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+        {/* Progress Header */}
+        <div className="bg-slate-100 px-6 py-4 border-b">
+          <div className="flex justify-between items-center mb-2">
+            <span className="font-medium text-slate-700">Question {currentQuestion + 1} of {activeQuestions.length}</span>
+            <span className="text-blue-600 font-bold">Score: {score}/{activeQuestions.length}</span>
+          </div>
+          <div className="w-full bg-slate-200 rounded-full h-3">
+            <div
+              className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all"
+              style={{ width: `${((currentQuestion + 1) / activeQuestions.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="p-6">
+          {/* Category Badge */}
+          <div className="mb-4">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+              q.category === 'email' ? 'bg-blue-100 text-blue-700' :
+              q.category === 'text' ? 'bg-green-100 text-green-700' :
+              q.category === 'popup' ? 'bg-red-100 text-red-700' :
+              'bg-purple-100 text-purple-700'
+            }`}>
+              {q.category.toUpperCase()}
+            </span>
+          </div>
+
+          {/* Question */}
+          <h3 className="text-xl font-bold text-slate-800 mb-8 leading-relaxed">{q.question}</h3>
+
+          {/* Options */}
+          <div className="space-y-3 mb-6">
+            {q.options.map((option, idx) => {
+              let style = 'border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50 cursor-pointer';
+              if (answered) {
+                const isCorrect = idx === q.correctAnswer;
+                const wasSelected = idx === selectedAnswer;
+                if (isCorrect) style = 'border-green-500 bg-green-50';
+                else if (wasSelected && !isCorrect) style = 'border-red-500 bg-red-50';
+                else style = 'border-slate-200 bg-slate-50 opacity-60';
+              } else if (selectedAnswer === idx) {
+                style = 'border-blue-500 bg-blue-50';
+              }
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => handleAnswer(idx)}
+                  disabled={answered}
+                  className={`w-full p-4 rounded-xl border-2 ${style} flex items-start gap-3 text-left transition-all`}
+                >
+                  <span className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-bold flex-shrink-0 ${
+                    answered && idx === q.correctAnswer ? 'border-green-500 text-green-600 bg-green-100' :
+                    answered && idx === selectedAnswer ? 'border-red-500 text-red-600 bg-red-100' :
+                    'border-slate-300 text-slate-600'
+                  }`}>
+                    {answered && idx === q.correctAnswer ? <CheckCircle className="w-5 h-5" /> :
+                     answered && idx === selectedAnswer && idx !== q.correctAnswer ? <XCircle className="w-5 h-5" /> :
+                     String.fromCharCode(65 + idx)}
+                  </span>
+                  <span className="text-slate-800 pt-1">{option}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Explanation */}
+          {answered && (
+            <div className={`p-5 rounded-xl mb-4 ${selectedAnswer === q.correctAnswer ? 'bg-green-50 border-2 border-green-200' : 'bg-red-50 border-2 border-red-200'}`}>
+              <div className="flex items-start gap-3">
+                {selectedAnswer === q.correctAnswer ? (
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                ) : (
+                  <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                )}
+                <div>
+                  <h4 className={`font-bold mb-2 ${selectedAnswer === q.correctAnswer ? 'text-green-800' : 'text-red-800'}`}>
+                    {selectedAnswer === q.correctAnswer ? 'Correct!' : 'Not quite right'}
+                  </h4>
+                  <p className={selectedAnswer === q.correctAnswer ? 'text-green-700' : 'text-red-700'}>
+                    {q.explanation}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Next Button */}
+          {answered && (
+            <button
+              onClick={nextQuestion}
+              className="w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors text-lg"
+            >
+              {currentQuestion < activeQuestions.length - 1 ? 'Next Question' : 'See My Results'}
+            </button>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -1005,8 +1687,8 @@ function LabButton({ active, onClick, icon, label }) {
     <button
       onClick={onClick}
       className={`px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all ${
-        active 
-          ? 'bg-blue-600 text-white shadow-lg' 
+        active
+          ? 'bg-blue-600 text-white shadow-lg'
           : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-300'
       }`}
     >
