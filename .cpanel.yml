@@ -2,6 +2,11 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/your-cpanel-username/public_html/
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp -R dist/. $DEPLOYPATH
     - /bin/cp -R public/. $DEPLOYPATH
+    # Build on server (requires Node.js on your GoDaddy plan)
+    # Uncomment the next 2 lines if Node.js is available:
+    # - /usr/local/bin/node /usr/local/bin/npm install --production=false
+    # - /usr/local/bin/node /usr/local/bin/npm run build
+    # If building locally instead, remove dist/ from .gitignore
+    # and commit the dist/ folder before pushing.
+    - /bin/cp -R dist/. $DEPLOYPATH
