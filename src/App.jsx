@@ -1,29 +1,112 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, AlertTriangle, Lock, Eye, EyeOff, Phone, Mail, MessageSquare, Globe, ChevronRight, ChevronDown, ExternalLink, CheckCircle, XCircle, Users, DollarSign, TrendingUp, AlertCircle, FileText, CreditCard, Search, Menu, X, Home, BookOpen, ShoppingBag, Headphones, Settings, LogOut, Play, ArrowRight, Star, Zap, Database, Key, Trash2, Monitor, Smartphone, Chrome, Apple, Bot, Printer, ArrowLeft, ShoppingCart, Tag, Award, RotateCcw, ChevronUp } from 'lucide-react';
+import { Shield, AlertTriangle, Lock, Eye, EyeOff, Phone, Mail, MessageSquare, Globe, ChevronRight, ChevronDown, ExternalLink, CheckCircle, XCircle, Users, DollarSign, TrendingUp, AlertCircle, FileText, CreditCard, Search, Menu, X, Home, BookOpen, ShoppingBag, Headphones, Settings, LogOut, Play, ArrowRight, Star, Zap, Database, Key, Trash2, Monitor, Smartphone, Chrome, Apple, Bot, Printer, ArrowLeft, ShoppingCart, Tag, Award, RotateCcw, ChevronUp, RefreshCw } from 'lucide-react';
+import { signIn, signOut, getCurrentUser, confirmSignIn, resetPassword, confirmResetPassword } from 'aws-amplify/auth';
 import config from './config.json';
 
 // ==================== MAIN APP ====================
+// authState: 'loading' | 'authenticated' | 'unauthenticated' | 'newPasswordRequired'
+const PROTECTED_PAGES = ['resources', 'marketplace', 'emergency', 'training', 'dashboard'];
+
 export default function SeniorCyberSecure() {
   const [currentPage, setCurrentPage] = useState('landing');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authState, setAuthState] = useState('loading');
+  const [resetEmail, setResetEmail] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setCurrentPage('dashboard');
+  const isLoggedIn = authState === 'authenticated';
+
+  // Restore session from Cognito tokens on page load
+  useEffect(() => {
+    getCurrentUser()
+      .then(() => setAuthState('authenticated'))
+      .catch(() => setAuthState('unauthenticated'));
+  }, []);
+
+  // Redirect unauthenticated users away from protected pages
+  useEffect(() => {
+    if (authState === 'unauthenticated' && PROTECTED_PAGES.includes(currentPage)) {
+      setCurrentPage('login');
+    }
+  }, [authState, currentPage]);
+
+  const handleLogin = async (email, password, setLoading, setError) => {
+    setLoading(true);
+    setError('');
+    try {
+      const result = await signIn({ username: email, password });
+      if (result.nextStep?.signInStep === 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED') {
+        setAuthState('newPasswordRequired');
+      } else if (result.isSignedIn) {
+        setAuthState('authenticated');
+        setCurrentPage('dashboard');
+      }
+    } catch (err) {
+      setError('Invalid email or password. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentPage('landing');
+  const handleForceNewPassword = async (newPassword, setLoading, setError) => {
+    setLoading(true);
+    setError('');
+    try {
+      const result = await confirmSignIn({ challengeResponse: newPassword });
+      if (result.isSignedIn) {
+        setAuthState('authenticated');
+        setCurrentPage('dashboard');
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to set new password. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleLogout = async () => {
+    try { await signOut(); } catch (_) {}
+    setAuthState('unauthenticated');
+    setCurrentPage('landing');
+    setMobileMenuOpen(false);
+  };
+
+  const handleForgotPassword = async (email, setLoading, setError) => {
+    setLoading(true);
+    setError('');
+    try {
+      await resetPassword({ username: email });
+      setResetEmail(email);
+      setCurrentPage('resetPassword');
+    } catch (err) {
+      setError('Could not send reset code. Please verify your email and try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (code, newPassword, setLoading, setError) => {
+    setLoading(true);
+    setError('');
+    try {
+      await confirmResetPassword({ username: resetEmail, confirmationCode: code, newPassword });
+      setCurrentPage('login');
+    } catch (err) {
+      setError(err.message || 'Invalid code or password. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (authState === 'loading') {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-50" style={{ fontFamily: "'Source Sans 3', 'Segoe UI', sans-serif" }}>
       {/* Navigation */}
-      <Navigation 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
+      <Navigation
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
         mobileMenuOpen={mobileMenuOpen}
@@ -32,17 +115,59 @@ export default function SeniorCyberSecure() {
 
       {/* Page Content */}
       <main>
-        {currentPage === 'landing' && <LandingPage setCurrentPage={setCurrentPage} />}
-        {currentPage === 'login' && <LoginPage handleLogin={handleLogin} setCurrentPage={setCurrentPage} />}
-        {currentPage === 'dashboard' && isLoggedIn && <MemberDashboard setCurrentPage={setCurrentPage} />}
-        {currentPage === 'training' && <TrainingLab setCurrentPage={setCurrentPage} />}
-        {currentPage === 'resources' && <ResourceCenter />}
-        {currentPage === 'marketplace' && <AffiliateMarketplace />}
-        {currentPage === 'emergency' && <EmergencyDirectory />}
+        {/* First-login forced password change — shown instead of any page */}
+        {authState === 'newPasswordRequired' && (
+          <ForcePasswordChange onConfirm={handleForceNewPassword} />
+        )}
+
+        {authState !== 'newPasswordRequired' && (
+          <>
+            {currentPage === 'landing' && <LandingPage setCurrentPage={setCurrentPage} />}
+            {currentPage === 'login' && (
+              <LoginPage
+                handleLogin={handleLogin}
+                handleForgotPassword={handleForgotPassword}
+                setCurrentPage={setCurrentPage}
+              />
+            )}
+            {currentPage === 'forgotPassword' && (
+              <ForgotPasswordPage
+                handleForgotPassword={handleForgotPassword}
+                setCurrentPage={setCurrentPage}
+              />
+            )}
+            {currentPage === 'resetPassword' && (
+              <ResetPasswordPage
+                handleResetPassword={handleResetPassword}
+                email={resetEmail}
+                setCurrentPage={setCurrentPage}
+              />
+            )}
+            {currentPage === 'dashboard' && isLoggedIn && <MemberDashboard setCurrentPage={setCurrentPage} />}
+            {currentPage === 'training' && isLoggedIn && <TrainingLab setCurrentPage={setCurrentPage} />}
+            {currentPage === 'resources' && isLoggedIn && <ResourceCenter />}
+            {currentPage === 'marketplace' && isLoggedIn && <AffiliateMarketplace />}
+            {currentPage === 'emergency' && isLoggedIn && <EmergencyDirectory />}
+          </>
+        )}
       </main>
 
       {/* Footer */}
       <Footer setCurrentPage={setCurrentPage} />
+    </div>
+  );
+}
+
+// ==================== LOADING SCREEN ====================
+function LoadingScreen() {
+  return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse">
+          <Shield className="w-10 h-10 text-white" />
+        </div>
+        <p className="text-slate-600 text-lg font-medium">Securing your connection…</p>
+      </div>
     </div>
   );
 }
@@ -516,19 +641,20 @@ function FeatureCard({ icon, title, description }) {
 }
 
 // ==================== LOGIN PAGE ====================
-function LoginPage({ handleLogin, setCurrentPage }) {
+function LoginPage({ handleLogin, handleForgotPassword, setCurrentPage }) {
   const [email, setEmail] = useState('');
-  const [orderNumber, setOrderNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && orderNumber) {
-      handleLogin();
-    } else {
-      setError('Please enter your email and Etsy order number');
+    if (!email || !password) {
+      setError('Please enter your email address and password.');
+      return;
     }
+    await handleLogin(email, password, setLoading, setError);
   };
 
   return (
@@ -539,7 +665,7 @@ function LoginPage({ handleLogin, setCurrentPage }) {
             <Lock className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-800 mb-2">Member Login</h1>
-          <p className="text-slate-600">Access your Kit Companion training materials</p>
+          <p className="text-slate-600">Access your exclusive member resources</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
@@ -553,44 +679,68 @@ function LoginPage({ handleLogin, setCurrentPage }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your.email@example.com"
+                autoComplete="email"
                 className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
-                Etsy Order Number
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-slate-700">
+                  Password
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage('forgotPassword')}
+                  className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-medium"
+                >
+                  Forgot password?
+                </button>
+              </div>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  value={orderNumber}
-                  onChange={(e) => setOrderNumber(e.target.value)}
-                  placeholder="Enter your Etsy order #"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
                   className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg pr-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mt-2">Find this in your Etsy purchase confirmation email</p>
+              <p className="text-xs text-slate-500 mt-2">
+                New member? Use the temporary password from your welcome email.
+              </p>
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
-                {error}
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>{error}</span>
               </div>
             )}
 
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg text-lg"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Access Member Area
+              {loading ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" /> Signing in…
+                </>
+              ) : (
+                <>
+                  <Lock className="w-5 h-5" /> Access Member Area
+                </>
+              )}
             </button>
           </form>
 
@@ -609,6 +759,333 @@ function LoginPage({ handleLogin, setCurrentPage }) {
           className="mt-6 text-slate-500 hover:text-slate-700 flex items-center justify-center gap-2 mx-auto"
         >
           ← Back to Home
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ==================== FORCE PASSWORD CHANGE (first-time login) ====================
+function ForcePasswordChange({ onConfirm }) {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match. Please try again.');
+      return;
+    }
+    await onConfirm(newPassword, setLoading, setError);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-12 px-4">
+      <div className="max-w-md mx-auto">
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <Key className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">Create Your Password</h1>
+          <p className="text-slate-600">Welcome! Please set a personal password to secure your account.</p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <p className="text-blue-800 text-sm font-medium flex items-start gap-2">
+              <Shield className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              This is a one-time step. Your new password will replace the temporary one sent to you.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                New Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Create a strong password"
+                  autoComplete="new-password"
+                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-lg pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+              <p className="text-xs text-slate-500 mt-2">
+                At least 8 characters, including uppercase, lowercase, and a number.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Confirm New Password
+              </label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Re-enter your password"
+                autoComplete="new-password"
+                className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-lg"
+              />
+            </div>
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" /> Setting Password…
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="w-5 h-5" /> Set My Password & Continue
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==================== FORGOT PASSWORD PAGE ====================
+function ForgotPasswordPage({ handleForgotPassword, setCurrentPage }) {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      setError('Please enter your email address.');
+      return;
+    }
+    await handleForgotPassword(email, setLoading, setError);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-12 px-4">
+      <div className="max-w-md mx-auto">
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <Mail className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">Forgot Password?</h1>
+          <p className="text-slate-600">Enter your email and we'll send you a reset code.</p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                autoComplete="email"
+                className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg"
+              />
+            </div>
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" /> Sending Code…
+                </>
+              ) : (
+                <>
+                  <Mail className="w-5 h-5" /> Send Reset Code
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('login')}
+          className="mt-6 text-slate-500 hover:text-slate-700 flex items-center justify-center gap-2 mx-auto"
+        >
+          ← Back to Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ==================== RESET PASSWORD PAGE ====================
+function ResetPasswordPage({ handleResetPassword, email, setCurrentPage }) {
+  const [code, setCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!code) {
+      setError('Please enter the verification code from your email.');
+      return;
+    }
+    if (newPassword.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match. Please try again.');
+      return;
+    }
+    await handleResetPassword(code, newPassword, setLoading, setError);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-12 px-4">
+      <div className="max-w-md mx-auto">
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <Key className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">Reset Your Password</h1>
+          <p className="text-slate-600">
+            Enter the code we sent to <span className="font-semibold text-slate-800">{email}</span>
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <p className="text-blue-800 text-sm">
+              <strong>Check your email</strong> for a 6-digit verification code. It may take a minute to arrive. Check your spam folder if you don't see it.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Verification Code
+              </label>
+              <input
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                placeholder="Enter 6-digit code"
+                autoComplete="one-time-code"
+                inputMode="numeric"
+                maxLength={6}
+                className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg text-center tracking-widest font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                New Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Create a new password"
+                  autoComplete="new-password"
+                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+              <p className="text-xs text-slate-500 mt-2">At least 8 characters.</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Confirm New Password
+              </label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Re-enter your new password"
+                autoComplete="new-password"
+                className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-lg"
+              />
+            </div>
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" /> Resetting Password…
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="w-5 h-5" /> Reset Password
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('login')}
+          className="mt-6 text-slate-500 hover:text-slate-700 flex items-center justify-center gap-2 mx-auto"
+        >
+          ← Back to Login
         </button>
       </div>
     </div>
