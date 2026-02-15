@@ -17,8 +17,8 @@ const awsExports = {
   Auth: {
     Cognito: {
       // ⚠️ REPLACE these placeholder values after creating your Cognito User Pool
-      userPoolId: 'us-east-1_XXXXXXXXX',           // e.g., us-east-1_AbCdEfGhI
-      userPoolClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX', // e.g., 1a2b3c4d5e6f7g8h9i0j1k2l
+      userPoolId: 'us-east-1_If1TM2kBR',           // e.g., us-east-1_AbCdEfGhI
+      userPoolClientId: '2aqndqrqooa1qmikcku1im4t32', // e.g., 1a2b3c4d5e6f7g8h9i0j1k2l
       region: 'us-east-1',                           // e.g., us-east-1, us-west-2
       loginWith: {
         email: true,
