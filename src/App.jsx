@@ -2574,6 +2574,12 @@ function Footer({ setCurrentPage }) {
               <li><button onClick={() => setCurrentPage('marketplace')} className="hover:text-white transition-colors">Security Tools</button></li>
               <li><button onClick={() => setCurrentPage('emergency')} className="hover:text-white transition-colors">Emergency Hotline</button></li>
               <li><button onClick={() => setCurrentPage('login')} className="hover:text-white transition-colors">Member Login</button></li>
+              <li className="pt-2">
+                <a href={`mailto:${config.contact.email}`} className="hover:text-white transition-colors flex items-center gap-1">
+                  <Mail className="w-3 h-3" /> Contact Us
+                </a>
+                <span className="text-slate-500 text-xs break-all">{config.contact.email}</span>
+              </li>
             </ul>
           </div>
 
