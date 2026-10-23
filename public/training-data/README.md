@@ -4,7 +4,7 @@ This folder contains all the scam examples and quiz content for the Training Lab
 
 ## How to Update Content
 
-Each JSON file can be edited directly on the server. Changes take effect immediately — no rebuild needed.
+Edit the JSON files here, commit, and push. AWS Amplify redeploys the site automatically, and the changes go live once that build finishes (usually a few minutes). The site reads these files at runtime, so no code changes are needed to add or edit examples.
 
 ### Files
 
