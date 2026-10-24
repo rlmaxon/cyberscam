@@ -1,21 +1,15 @@
 {
   "site": {
     "name": "Senior Cyber Secure",
-    "tagline": "Parent Protection Kit",
-    "heroImage": "./hero-banner.jpg",
-    "heroAlt": "Senior Cyber Secure - Your Shield. Your Community. Your Peace of Mind. A shield protecting families from cyber threats.",
-    "copyright": "\u00a9 2026 Senior Cyber Secure Education & Safety. All rights reserved."
+    "tagline": "Free scam-safety training for seniors and the families who love them",
+    "shortTagline": "Free Scam-Safety Training",
+    "heroImage": "/hero-banner.jpg",
+    "heroAlt": "Senior Cyber Secure: a family learning together to spot online scams, protected by a shield.",
+    "copyright": "© 2026 Senior Cyber Secure Education & Safety. All rights reserved."
   },
-
-  "store": {
-    "url": "https://www.etsy.com/listing/4456590112/senior-citizen-cyber-scam-eduation-kit",
-    "name": "Etsy"
-  },
-
   "contact": {
     "email": "questions@seniorcybersecurityedu.awsapps.com"
   },
-
   "products": [
     {
       "category": "Antivirus",
@@ -24,9 +18,24 @@
       "iconKey": "shield",
       "color": "blue",
       "items": [
-        { "name": "Norton 360", "price": "$49.99/year", "url": "https://norton.com", "rating": 4.5 },
-        { "name": "Bitdefender", "price": "$39.99/year", "url": "https://bitdefender.com", "rating": 4.7 },
-        { "name": "Malwarebytes", "price": "$44.99/year", "url": "https://malwarebytes.com", "rating": 4.4 }
+        {
+          "name": "Norton 360",
+          "price": "$49.99/year",
+          "url": "https://norton.com",
+          "rating": 4.5
+        },
+        {
+          "name": "Bitdefender",
+          "price": "$39.99/year",
+          "url": "https://bitdefender.com",
+          "rating": 4.7
+        },
+        {
+          "name": "Malwarebytes",
+          "price": "$44.99/year",
+          "url": "https://malwarebytes.com",
+          "rating": 4.4
+        }
       ]
     },
     {
@@ -36,9 +45,24 @@
       "iconKey": "eye",
       "color": "purple",
       "items": [
-        { "name": "NordVPN", "price": "$3.99/month", "url": "https://nordvpn.com", "rating": 4.6 },
-        { "name": "ExpressVPN", "price": "$6.67/month", "url": "https://expressvpn.com", "rating": 4.5 },
-        { "name": "Surfshark", "price": "$2.49/month", "url": "https://surfshark.com", "rating": 4.4 }
+        {
+          "name": "NordVPN",
+          "price": "$3.99/month",
+          "url": "https://nordvpn.com",
+          "rating": 4.6
+        },
+        {
+          "name": "ExpressVPN",
+          "price": "$6.67/month",
+          "url": "https://expressvpn.com",
+          "rating": 4.5
+        },
+        {
+          "name": "Surfshark",
+          "price": "$2.49/month",
+          "url": "https://surfshark.com",
+          "rating": 4.4
+        }
       ]
     },
     {
@@ -48,9 +72,24 @@
       "iconKey": "key",
       "color": "green",
       "items": [
-        { "name": "1Password", "price": "$2.99/month", "url": "https://1password.com", "rating": 4.8 },
-        { "name": "Dashlane", "price": "$4.99/month", "url": "https://dashlane.com", "rating": 4.5 },
-        { "name": "Bitwarden", "price": "Free / $10/year", "url": "https://bitwarden.com", "rating": 4.6 }
+        {
+          "name": "1Password",
+          "price": "$2.99/month",
+          "url": "https://1password.com",
+          "rating": 4.8
+        },
+        {
+          "name": "Dashlane",
+          "price": "$4.99/month",
+          "url": "https://dashlane.com",
+          "rating": 4.5
+        },
+        {
+          "name": "Bitwarden",
+          "price": "Free / $10/year",
+          "url": "https://bitwarden.com",
+          "rating": 4.6
+        }
       ]
     },
     {
@@ -60,13 +99,190 @@
       "iconKey": "trash2",
       "color": "orange",
       "items": [
-        { "name": "DeleteMe", "price": "$129/year", "url": "https://joindeleteme.com", "rating": 4.5 },
-        { "name": "Incogni", "price": "$77.88/year", "url": "https://incogni.com", "rating": 4.3 },
-        { "name": "Kanary", "price": "$89/year", "url": "https://kanary.com", "rating": 4.2 }
+        {
+          "name": "DeleteMe",
+          "price": "$129/year",
+          "url": "https://joindeleteme.com",
+          "rating": 4.5
+        },
+        {
+          "name": "Incogni",
+          "price": "$77.88/year",
+          "url": "https://incogni.com",
+          "rating": 4.3
+        },
+        {
+          "name": "Kanary",
+          "price": "$89/year",
+          "url": "https://kanary.com",
+          "rating": 4.2
+        }
       ]
     }
   ],
-
+  "privacyGuides": [
+    {
+      "key": "windows",
+      "title": "Windows PC",
+      "iconKey": "monitor",
+      "items": [
+        {
+          "label": "Enable Automatic Updates",
+          "url": "https://support.microsoft.com/en-us/windows/keep-your-pc-up-to-date"
+        },
+        {
+          "label": "Windows Security Settings",
+          "url": "https://support.microsoft.com/en-us/windows/stay-protected-with-windows-security"
+        },
+        {
+          "label": "Privacy Dashboard",
+          "url": "https://account.microsoft.com/privacy"
+        },
+        {
+          "label": "Set Up Two-Factor Auth",
+          "url": "https://support.microsoft.com/en-us/account-billing/how-to-use-two-step-verification"
+        }
+      ]
+    },
+    {
+      "key": "mac",
+      "title": "Mac",
+      "iconKey": "apple",
+      "items": [
+        {
+          "label": "Enable Automatic Updates",
+          "url": "https://support.apple.com/en-us/HT201541"
+        },
+        {
+          "label": "Mac Security & Privacy",
+          "url": "https://support.apple.com/en-us/HT201220"
+        },
+        {
+          "label": "iCloud Privacy",
+          "url": "https://support.apple.com/en-us/HT208650"
+        },
+        {
+          "label": "Set Up Two-Factor Auth",
+          "url": "https://support.apple.com/en-us/HT204915"
+        }
+      ]
+    },
+    {
+      "key": "iphone",
+      "title": "iPhone / iPad",
+      "iconKey": "smartphone",
+      "items": [
+        {
+          "label": "iOS Security Settings",
+          "url": "https://support.apple.com/en-us/HT201303"
+        },
+        {
+          "label": "Privacy Controls",
+          "url": "https://support.apple.com/en-us/HT210393"
+        },
+        {
+          "label": "App Tracking Controls",
+          "url": "https://support.apple.com/en-us/HT212025"
+        },
+        {
+          "label": "Face ID & Passcode",
+          "url": "https://support.apple.com/en-us/HT208108"
+        }
+      ]
+    },
+    {
+      "key": "android",
+      "title": "Android Phone",
+      "iconKey": "smartphone",
+      "items": [
+        {
+          "label": "Android Security Settings",
+          "url": "https://support.google.com/android/answer/9079631"
+        },
+        {
+          "label": "Privacy Dashboard",
+          "url": "https://support.google.com/accounts/answer/7028918"
+        },
+        {
+          "label": "App Permissions",
+          "url": "https://support.google.com/googleplay/answer/6270602"
+        },
+        {
+          "label": "Google Account Security",
+          "url": "https://myaccount.google.com/security"
+        }
+      ]
+    },
+    {
+      "key": "chrome",
+      "title": "Chrome Browser",
+      "iconKey": "chrome",
+      "items": [
+        {
+          "label": "Privacy & Security Settings",
+          "url": "https://support.google.com/chrome/answer/114836"
+        },
+        {
+          "label": "Clear Browsing Data",
+          "url": "https://support.google.com/chrome/answer/2392709"
+        },
+        {
+          "label": "Manage Passwords",
+          "url": "https://support.google.com/chrome/answer/95606"
+        },
+        {
+          "label": "Block Pop-ups",
+          "url": "https://support.google.com/chrome/answer/95472"
+        }
+      ]
+    },
+    {
+      "key": "safari",
+      "title": "Safari Browser",
+      "iconKey": "globe",
+      "items": [
+        {
+          "label": "Privacy Settings",
+          "url": "https://support.apple.com/guide/safari/privacy-sfri35610/mac"
+        },
+        {
+          "label": "Manage Cookies",
+          "url": "https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac"
+        },
+        {
+          "label": "Prevent Tracking",
+          "url": "https://support.apple.com/guide/safari/prevent-cross-site-tracking-sfri40732/mac"
+        },
+        {
+          "label": "Password Management",
+          "url": "https://support.apple.com/guide/safari/autofill-credit-card-info-ibrw1103/mac"
+        }
+      ]
+    },
+    {
+      "key": "firefox",
+      "title": "Firefox Browser",
+      "iconKey": "globe",
+      "items": [
+        {
+          "label": "Enhanced Tracking Protection",
+          "url": "https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop"
+        },
+        {
+          "label": "Privacy Settings",
+          "url": "https://support.mozilla.org/en-US/kb/privacy-settings"
+        },
+        {
+          "label": "Manage Passwords",
+          "url": "https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins"
+        },
+        {
+          "label": "Block Pop-ups",
+          "url": "https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting"
+        }
+      ]
+    }
+  ],
   "emergency": {
     "reporting": [
       {
