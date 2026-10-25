@@ -28,7 +28,7 @@ const awsExports = {
         requireLowercase: true,
         requireUppercase: true,
         requireNumbers: true,
-        requireSpecialCharacters: false,
+        requireSpecialCharacters: true,
       },
     },
   },

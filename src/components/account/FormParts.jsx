@@ -1,5 +1,6 @@
 import React, { useId, useState } from 'react';
 import { Eye, EyeOff, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
+import { passwordPolicy } from '../../amplifyConfig.js';
 
 // Shared building blocks for the account screens (sign up, verify, welcome, profile).
 // Large text, big tap targets, and every input tied to its label for screen readers.
@@ -69,13 +70,16 @@ export function PasswordField({ label, value, onChange, autoComplete = 'new-pass
   );
 }
 
-// Matches the Cognito password policy in src/aws-exports.js
+// Built from the password policy Cognito actually enforces (see amplifyConfig.js).
+// Cognito's special characters: ^ $ * . [ ] { } ( ) ? " ! @ # % & / \ , > < ' : ; | _ ~ ` = + - and space
+const SYMBOL = /[\^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+\- ]/;
 export const PASSWORD_RULES = [
-  { label: 'At least 8 characters', test: (p) => p.length >= 8 },
-  { label: 'An uppercase letter (A–Z)', test: (p) => /[A-Z]/.test(p) },
-  { label: 'A lowercase letter (a–z)', test: (p) => /[a-z]/.test(p) },
-  { label: 'A number (0–9)', test: (p) => /[0-9]/.test(p) },
-];
+  { label: `At least ${passwordPolicy.minLength} characters`, test: (p) => p.length >= passwordPolicy.minLength },
+  passwordPolicy.uppercase && { label: 'An uppercase letter (A–Z)', test: (p) => /[A-Z]/.test(p) },
+  passwordPolicy.lowercase && { label: 'A lowercase letter (a–z)', test: (p) => /[a-z]/.test(p) },
+  passwordPolicy.numbers && { label: 'A number (0–9)', test: (p) => /[0-9]/.test(p) },
+  passwordPolicy.symbols && { label: 'A special character, like ! @ # $ or ?', test: (p) => SYMBOL.test(p) },
+].filter(Boolean);
 
 export const passwordMeetsRules = (p) => PASSWORD_RULES.every((r) => r.test(p));
 
