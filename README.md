@@ -5,9 +5,10 @@ Live at https://www.seniorcybersecurityedu.com/.
 
 ## Stack
 
-React 18, Vite 5, Tailwind CSS 3, React Router 6, lucide-react icons, and AWS Amplify
-(Cognito sign-in). Hosted on AWS Amplify Hosting, which builds from `main` using
-`amplify.yml`.
+React 18, Vite 6, Tailwind CSS 3, React Router 7, lucide-react icons, and AWS Amplify:
+Cognito sign-in plus an Amplify Gen 2 backend (AppSync + DynamoDB) for member profiles.
+Hosted on AWS Amplify Hosting, which builds from `main` using `amplify.yml`. The build
+deploys the backend first (`ampx pipeline-deploy`), then the site.
 
 ## Run it locally
 
@@ -17,11 +18,18 @@ npm run dev      # http://localhost:5173
 npm run build    # production build into dist/ (not committed)
 ```
 
+Locally there's no `amplify_outputs.json`, so the site runs with sign-in only and profile
+features show "coming soon". See `docs/auth-design.md`. One-time AWS setup for the
+backend is in `docs/phase2-aws-setup.md`.
+
 ## Where things live
 
 | Path | What it is |
 |------|------------|
-| `src/App.jsx` | Routes and sign-in state |
+| `src/App.jsx` | Routes, sign-in state, and the signed-in member's profile |
+| `src/pages/account/` | Sign-up, email verification, welcome, and profile pages |
+| `src/member/` | Profile API calls, member context, plain-language sign-in errors |
+| `amplify/` | Amplify Gen 2 backend: reuses the existing sign-in (`auth/`) and defines member data (`data/`) |
 | `src/routes.js` | Page URLs (`PATHS`) and which pages need a login |
 | `src/pages/` | One file per page; the Training Lab is in `src/pages/training/` |
 | `src/components/` | Navigation, footer, and shared cards |
@@ -38,7 +46,10 @@ npm run build    # production build into dist/ (not committed)
 | `/emergency` | Emergency Directory | No |
 | `/lock-it-down` | Privacy and security settings guides | No |
 | `/security-toolbox` | Recommended security products | No |
+| `/signup`, `/verify-email` | Create a free account, confirm email | — |
 | `/login`, `/forgot-password`, `/reset-password` | Member sign-in | — |
+| `/welcome` | First-time setup (name, role, email alerts) | Yes |
+| `/profile` | Edit profile and email alerts | Yes |
 | `/dashboard` | Member dashboard | Yes |
 
 ## Hosting note: page URLs need a rewrite rule

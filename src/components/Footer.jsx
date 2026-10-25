@@ -40,6 +40,7 @@ export default function Footer() {
               <li><button onClick={() => go('resources')} className="hover:text-white transition-colors">Privacy Settings</button></li>
               <li><button onClick={() => go('marketplace')} className="hover:text-white transition-colors">Security Tools</button></li>
               <li><button onClick={() => go('emergency')} className="hover:text-white transition-colors">Emergency Hotline</button></li>
+              <li><button onClick={() => go('signup')} className="hover:text-white transition-colors">Create Free Account</button></li>
               <li><button onClick={() => go('login')} className="hover:text-white transition-colors">Member Sign In</button></li>
               <li className="pt-2">
                 <a href={`mailto:${config.contact.email}`} className="hover:text-white transition-colors flex items-center gap-1">
