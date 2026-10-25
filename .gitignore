@@ -22,3 +22,8 @@ Thumbs.db
 
 # debug logs
 npm-debug.log*
+
+# Amplify Gen 2 (generated during the Amplify build)
+.amplify/
+amplify_outputs*
+amplifyconfiguration*

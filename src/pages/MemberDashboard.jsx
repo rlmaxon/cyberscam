@@ -1,10 +1,12 @@
 import React from 'react';
-import { Shield, AlertTriangle, Lock, Phone, ChevronRight, ExternalLink, CheckCircle, FileText, CreditCard, BookOpen, ShoppingBag, Settings, Play, ArrowRight } from 'lucide-react';
+import { Shield, AlertTriangle, Lock, Phone, ChevronRight, ExternalLink, CheckCircle, FileText, CreditCard, BookOpen, ShoppingBag, Settings, Play, ArrowRight, UserCircle } from 'lucide-react';
 import config from '../config.json';
 import { useGo } from '../routes.js';
+import { useMember } from '../member/MemberContext.jsx';
 
 export default function MemberDashboard() {
   const go = useGo();
+  const { profile } = useMember();
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
@@ -15,7 +17,7 @@ export default function MemberDashboard() {
               <Shield className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Welcome Back</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">Welcome back{profile?.displayName ? `, ${profile.displayName}` : ''}!</h1>
               <p className="text-green-100">Your scam-safety home base</p>
             </div>
           </div>
@@ -74,7 +76,8 @@ export default function MemberDashboard() {
             <Settings className="w-6 h-6 text-blue-600" />
             Quick Resources
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <QuickLink icon={<UserCircle />} label="My Profile & Alerts" onClick={() => go('profile')} />
             <QuickLink icon={<Phone />} label="Emergency Hotline" onClick={() => go('emergency')} />
             <QuickLink icon={<Settings />} label="Privacy Settings" onClick={() => go('resources')} />
             <QuickLink icon={<ShoppingBag />} label="Security Tools" onClick={() => go('marketplace')} />

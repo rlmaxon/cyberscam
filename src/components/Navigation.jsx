@@ -16,13 +16,13 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
               <Shield className="w-7 h-7 text-white" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-slate-800 tracking-tight">Senior Cyber Secure</h1>
+              <h1 className="text-xl font-bold text-slate-800 tracking-tight whitespace-nowrap">Senior Cyber Secure</h1>
               <p className="text-xs text-blue-600 font-medium -mt-1">{config.site.shortTagline}</p>
             </div>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden xl:flex items-center gap-1">
             <NavButton active={currentPage === 'landing'} onClick={() => go('landing')}>
               <Home className="w-4 h-4" /> Home
             </NavButton>
@@ -44,7 +44,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
                 <NavButton active={currentPage === 'dashboard'} onClick={() => go('dashboard')} highlight>
                   <BookOpen className="w-4 h-4" /> Member Area
                 </NavButton>
-                <button onClick={handleLogout} className="ml-2 px-4 py-2 text-sm text-slate-600 hover:text-red-600 transition-colors flex items-center gap-1">
+                <button onClick={handleLogout} className="ml-1 px-3 py-2 text-sm whitespace-nowrap text-slate-600 hover:text-red-600 transition-colors flex items-center gap-1">
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
               </>
@@ -53,7 +53,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
                 onClick={() => go('login')}
                 className="ml-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
               >
-                <Lock className="w-4 h-4" /> Member Sign In
+                <Lock className="w-4 h-4" /> Sign In / Join
               </button>
             )}
           </div>
@@ -61,7 +61,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100"
+            className="xl:hidden p-2 rounded-lg hover:bg-slate-100"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -69,7 +69,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pb-4 space-y-2">
+          <div className="xl:hidden pb-4 space-y-2">
             <MobileNavButton onClick={() => { go('landing'); setMobileMenuOpen(false); }}>Home</MobileNavButton>
             <MobileNavButton onClick={() => { go('resources'); setMobileMenuOpen(false); }}>Lock It Down</MobileNavButton>
             <MobileNavButton onClick={() => { go('marketplace'); setMobileMenuOpen(false); }}>Security Toolbox</MobileNavButton>
@@ -81,7 +81,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
                 <MobileNavButton onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Logout</MobileNavButton>
               </>
             ) : (
-              <MobileNavButton onClick={() => { go('login'); setMobileMenuOpen(false); }} highlight>Member Sign In</MobileNavButton>
+              <MobileNavButton onClick={() => { go('login'); setMobileMenuOpen(false); }} highlight>Sign In / Join Free</MobileNavButton>
             )}
           </div>
         )}
@@ -94,7 +94,7 @@ function NavButton({ children, active, onClick, highlight }) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all ${
+      className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-2 transition-all ${
         highlight 
           ? 'bg-green-100 text-green-700 hover:bg-green-200' 
           : active 
