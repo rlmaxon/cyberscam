@@ -10,6 +10,27 @@ const outputs = Object.values(generated)[0];
 
 export const hasDataBackend = Boolean(outputs?.data?.url);
 
+// The password rules Cognito actually enforces. The Amplify build reads them from the
+// user pool into amplify_outputs.json, so the on-screen checklist always matches AWS.
+// The fallback (local development only) mirrors Cognito's defaults.
+const fromOutputs = outputs?.auth?.password_policy;
+const fromExports = awsExports.Auth.Cognito.passwordFormat;
+export const passwordPolicy = fromOutputs
+  ? {
+      minLength: fromOutputs.min_length ?? 8,
+      uppercase: !!fromOutputs.require_uppercase,
+      lowercase: !!fromOutputs.require_lowercase,
+      numbers: !!fromOutputs.require_numbers,
+      symbols: !!fromOutputs.require_symbols,
+    }
+  : {
+      minLength: fromExports.minLength,
+      uppercase: fromExports.requireUppercase,
+      lowercase: fromExports.requireLowercase,
+      numbers: fromExports.requireNumbers,
+      symbols: fromExports.requireSpecialCharacters,
+    };
+
 export function configureAmplify() {
   Amplify.configure(outputs ?? awsExports);
 }

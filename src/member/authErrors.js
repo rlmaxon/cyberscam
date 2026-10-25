@@ -4,7 +4,12 @@ export function friendlyAuthError(err) {
     case 'UsernameExistsException':
       return 'An account with this email already exists. Try signing in, or use "Forgot password?" to reset it.';
     case 'InvalidPasswordException':
-      return 'That password doesn\'t meet the requirements listed below. Please try another.';
+      if (/symbol/i.test(err.message)) return 'Your password needs a special character, like ! @ # $ or ?. Please add one and try again.';
+      if (/upper/i.test(err.message)) return 'Your password needs an uppercase letter (A–Z). Please add one and try again.';
+      if (/lower/i.test(err.message)) return 'Your password needs a lowercase letter (a–z). Please add one and try again.';
+      if (/numeric|number/i.test(err.message)) return 'Your password needs a number (0–9). Please add one and try again.';
+      if (/length|long/i.test(err.message)) return 'Your password is too short. Please make it longer and try again.';
+      return 'That password doesn\'t meet the requirements. Please try another.';
     case 'InvalidParameterException':
       return 'Please check the email address and try again.';
     case 'CodeMismatchException':

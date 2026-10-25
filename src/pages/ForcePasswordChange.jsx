@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Shield, Eye, EyeOff, CheckCircle, AlertCircle, Key, RefreshCw } from 'lucide-react';
+import { PasswordRules, passwordMeetsRules } from '../components/account/FormParts.jsx';
 
 export default function ForcePasswordChange({ onConfirm }) {
   const [newPassword, setNewPassword] = useState('');
@@ -10,8 +11,8 @@ export default function ForcePasswordChange({ onConfirm }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (newPassword.length < 8) {
-      setError('Password must be at least 8 characters.');
+    if (!passwordMeetsRules(newPassword)) {
+      setError('Your new password needs to meet all the requirements listed.');
       return;
     }
     if (newPassword !== confirmPassword) {
@@ -63,9 +64,7 @@ export default function ForcePasswordChange({ onConfirm }) {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mt-2">
-                At least 8 characters, including uppercase, lowercase, and a number.
-              </p>
+              <div className="mt-3"><PasswordRules password={newPassword} /></div>
             </div>
 
             <div>

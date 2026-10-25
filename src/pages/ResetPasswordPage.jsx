@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, CheckCircle, AlertCircle, Key, RefreshCw } from 'lucide-react';
+import { PasswordRules, passwordMeetsRules } from '../components/account/FormParts.jsx';
 import { useGo } from '../routes.js';
 
 export default function ResetPasswordPage({ handleResetPassword, email }) {
@@ -17,8 +18,8 @@ export default function ResetPasswordPage({ handleResetPassword, email }) {
       setError('Please enter the verification code from your email.');
       return;
     }
-    if (newPassword.length < 8) {
-      setError('Password must be at least 8 characters.');
+    if (!passwordMeetsRules(newPassword)) {
+      setError('Your new password needs to meet all the requirements listed.');
       return;
     }
     if (newPassword !== confirmPassword) {
@@ -87,7 +88,7 @@ export default function ResetPasswordPage({ handleResetPassword, email }) {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mt-2">At least 8 characters.</p>
+              <div className="mt-3"><PasswordRules password={newPassword} /></div>
             </div>
 
             <div>
