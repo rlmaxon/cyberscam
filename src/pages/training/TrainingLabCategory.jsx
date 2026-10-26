@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle, Mail, MessageSquare, ChevronRight, Monitor, ArrowLeft, ShoppingCart } from 'lucide-react';
+import { exampleType } from '../../training/exampleTypes.jsx';
 
 // ---- Category Browse View ----
 export default function TrainingLabCategory({ category, examples, navigateTo, difficultyFilter, setDifficultyFilter }) {
@@ -71,13 +72,8 @@ export default function TrainingLabCategory({ category, examples, navigateTo, di
 
 // ---- Example List Card (larger for browse) ----
 function ExampleListCard({ example, onClick }) {
-  const typeConfig = {
-    email: { icon: <Mail className="w-5 h-5" />, label: 'EMAIL', bg: 'bg-blue-100 text-blue-700' },
-    text: { icon: <MessageSquare className="w-5 h-5" />, label: 'TEXT', bg: 'bg-green-100 text-green-700' },
-    marketplace: { icon: <ShoppingCart className="w-5 h-5" />, label: 'MARKETPLACE', bg: 'bg-purple-100 text-purple-700' },
-    popup: { icon: <Monitor className="w-5 h-5" />, label: 'POP-UP', bg: 'bg-red-100 text-red-700' }
-  };
-  const tc = typeConfig[example.type] || typeConfig.email;
+  const t = exampleType(example.type);
+  const tc = { icon: <t.Icon className="w-5 h-5" />, label: t.label, bg: t.bg, headerBg: t.headerBg };
 
   return (
     <button

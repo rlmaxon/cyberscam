@@ -1,0 +1,105 @@
+[
+  {
+    "id": "invest-001",
+    "title": "\"Guaranteed\" Double Your Money",
+    "type": "email",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Wealth Builders Club <invest@wealthbuilders-elite.com>",
+    "subject": "Retirees: DOUBLE your savings in 90 days — guaranteed!",
+    "body": "Dear Valued Investor,\n\nOur exclusive AI trading program has delivered guaranteed returns of 100% in just 90 days for hundreds of retirees just like you. ZERO RISK.\n\nOnly 12 spots remain this month. Secure your spot today with a minimum investment of $5,000.\n\nACT NOW before this opportunity closes!",
+    "redFlags": [
+      "\"Guaranteed\" returns and \"zero risk\"",
+      "Doubling your money in 90 days",
+      "Limited spots and pressure to act now",
+      "Targets retirees by name"
+    ],
+    "explanation": "Every real investment carries risk, and nobody can guarantee you'll double your money. \"Act now\" pressure keeps you from checking the company out.",
+    "howToSpot": "Any guarantee of high returns means scam. Look up the company and the person at brokercheck.finra.org and investor.gov before investing anything."
+  },
+  {
+    "id": "invest-002",
+    "title": "Trading App Won't Let You Withdraw",
+    "type": "website",
+    "difficulty": "advanced",
+    "isScam": true,
+    "sender": "GoldenX Trading app",
+    "subject": "Withdrawal notice",
+    "body": "Your account balance: $48,200.00 (+382%)\n\nWithdrawal request: $48,200.00\nStatus: ON HOLD\n\nTo complete your withdrawal, a 20% capital gains tax ($9,640) must be paid in advance. Please deposit the tax amount in USDT cryptocurrency within 3 days. Accounts with unpaid tax will be frozen and funds forfeited.",
+    "redFlags": [
+      "Enormous gains in a short time",
+      "Must pay \"taxes\" or \"fees\" to get your own money",
+      "Payment demanded in cryptocurrency",
+      "Threat that your funds will be frozen"
+    ],
+    "explanation": "The balance is fake. It's just numbers on a website the scammers control. The money you deposited is already gone. Paying the \"tax\" only adds to the loss.",
+    "howToSpot": "Real platforms take any fees out of your balance. They never make you send more money to withdraw. Stop paying and report it at ic3.gov."
+  },
+  {
+    "id": "invest-003",
+    "title": "Told to Pay at a Bitcoin ATM",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Caller claiming to be your \"account protection advisor\"",
+    "subject": "Phone call",
+    "body": "\"Your bank account has been hacked and the hackers are draining it right now. You need to withdraw $12,000 in cash and take it to the Bitcoin ATM at the gas station on Route 9. I'll stay on the phone with you and give you a QR code to scan so your money goes into a secure wallet. Don't tell the bank teller why you're withdrawing it. They may be part of the hack.\"",
+    "redFlags": [
+      "Told to put cash into a Bitcoin ATM",
+      "Stays on the phone the whole time",
+      "Tells you to lie to the bank teller",
+      "Claims bank staff are part of the problem"
+    ],
+    "explanation": "No real bank, business, or government agency will ever tell you to put money into a Bitcoin ATM. Once the money goes into the scammer's QR code, it's almost impossible to get back.",
+    "howToSpot": "Hang up the moment anyone mentions a Bitcoin ATM. Tell the bank teller the truth. They're trained to spot these scams and want to help."
+  },
+  {
+    "id": "invest-004",
+    "title": "Social Media \"Mentor\" Group",
+    "type": "social",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "\"Professor Alan Grant – Wealth Mentor\" on WhatsApp",
+    "subject": "Group chat invitation",
+    "body": "Welcome to my private VIP investing group! 🎉 Members made an average of 35% profit last week following my stock signals. See screenshots below from happy members!\n\nToday's free tip will be posted at 2 PM. VIP members who join our new platform get my premium signals. Spaces are limited.",
+    "redFlags": [
+      "Invites you to a private chat group",
+      "Screenshots of profits (easy to fake)",
+      "\"Free tips\" that lead to a paid platform",
+      "Limited spaces create pressure"
+    ],
+    "explanation": "Many \"members\" in these groups are scammers or fake accounts cheering each other on. After a few free tips, they move you to a fake investing platform where your deposits disappear.",
+    "howToSpot": "Real advisors don't recruit through WhatsApp groups. Check anyone offering investment advice at brokercheck.finra.org."
+  },
+  {
+    "id": "invest-005",
+    "title": "Statement Notice from Your Own Brokerage",
+    "type": "email",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "Your brokerage <no-reply@yourbrokerage.com> (the company you already use)",
+    "subject": "Your quarterly statement is ready",
+    "body": "Hello Margaret,\n\nYour statement for July–September is now available. To view it, sign in to your account using our app or by typing our website address into your browser.\n\nFor your security, we will never ask for your password or a verification code by email or phone.\n\nQuestions? Call the number on the back of your statement.",
+    "redFlags": [],
+    "explanation": "This is a normal notice from a company you already do business with. It uses your name, doesn't rush you, doesn't ask for money or information, and tells you to sign in the way you normally do.",
+    "howToSpot": "Even with real emails, sign in through the app or a website address you type yourself, not through a link."
+  },
+  {
+    "id": "invest-006",
+    "title": "\"We Can Recover Your Lost Money\"",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Asset Recovery Legal Group <claims@fundrecovery-legal.com>",
+    "subject": "We located your lost crypto funds",
+    "body": "Dear Victim,\n\nOur investigators have traced the $36,000 you lost to an online trading scam. Working with international law enforcement, we can return 100% of your funds within 10 days.\n\nTo begin the recovery process, a refundable retainer of $2,500 is required. Please reply to begin.\n\nAsset Recovery Legal Group",
+    "redFlags": [
+      "Contacts you after you've lost money to a scam",
+      "Promises to get back 100% of your money",
+      "Upfront \"retainer\" fee",
+      "Claims to work with \"international law enforcement\""
+    ],
+    "explanation": "This is a recovery scam, often run by the same criminals who took your money the first time. Law enforcement never charges fees to recover stolen money.",
+    "howToSpot": "Report losses at ic3.gov and reportfraud.ftc.gov, which are free. Never pay anyone who promises to recover lost money."
+  }
+]

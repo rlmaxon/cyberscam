@@ -13,6 +13,10 @@ export const PATHS = {
   welcome: '/welcome',
   profile: '/profile',
   dashboard: '/dashboard',
+  learn: '/learn',
+  finalExam: '/learn/final-exam',
+  certificate: '/certificate',
+  verify: '/verify',
   training: '/training',
   resources: '/lock-it-down',
   marketplace: '/security-toolbox',
@@ -21,7 +25,7 @@ export const PATHS = {
 
 // Pages that need a signed-in member. Everything else is public —
 // emergency help and safety information must never sit behind a login.
-export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile'];
+export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile', 'certificate'];
 
 export function useGo() {
   const navigate = useNavigate();

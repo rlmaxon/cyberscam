@@ -35,7 +35,7 @@ export default function LandingPage() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
-                  onClick={() => go('training')}
+                  onClick={() => go('learn')}
                   className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-lg"
                 >
                   Start Free Training <ArrowRight className="w-5 h-5" />
@@ -208,7 +208,7 @@ export default function LandingPage() {
             <FeatureCard
               icon={<BookOpen className="w-8 h-8" />}
               title="Training Modules"
-              description="Lessons on email, text message, pop-up, and online marketplace scams, with more topics on the way."
+              description="Eight short lessons covering email, text, phone, pop-up, government, marketplace, romance, and investment scams, each with a quick check at the end."
             />
             <FeatureCard
               icon={<FileText className="w-8 h-8" />}
@@ -217,8 +217,8 @@ export default function LandingPage() {
             />
             <FeatureCard
               icon={<Play className="w-8 h-8" />}
-              title="Interactive Training Lab"
-              description="Practice identifying scam emails, texts, and pop-ups in a safe place, then test yourself with the quiz. Free for everyone."
+              title="Certificate of Completion"
+              description="Pass the final exam to earn a certificate you can download, print, and share with family. Free for everyone."
             />
             <FeatureCard
               icon={<Phone className="w-8 h-8" />}
@@ -239,7 +239,7 @@ export default function LandingPage() {
 
           <div className="text-center mt-12">
             <button
-              onClick={() => go('training')}
+              onClick={() => go('learn')}
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl text-lg"
             >
               Start Free Training <ArrowRight className="w-5 h-5" />
@@ -259,7 +259,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => go('training')}
+              onClick={() => go('learn')}
               className="px-8 py-4 bg-white text-blue-700 font-bold rounded-xl hover:bg-slate-100 transition-all shadow-lg flex items-center justify-center gap-2"
             >
               Start Free Training <ArrowRight className="w-5 h-5" />

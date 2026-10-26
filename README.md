@@ -6,7 +6,8 @@ Live at https://www.seniorcybersecurityedu.com/.
 ## Stack
 
 React 18, Vite 6, Tailwind CSS 3, React Router 7, lucide-react icons, and AWS Amplify:
-Cognito sign-in plus an Amplify Gen 2 backend (AppSync + DynamoDB) for member profiles.
+Cognito sign-in plus an Amplify Gen 2 backend (AppSync + DynamoDB) for member profiles,
+training progress, and certificates.
 Hosted on AWS Amplify Hosting, which builds from `main` using `amplify.yml`. The build
 deploys the backend first (`ampx pipeline-deploy`), then the site.
 
@@ -34,7 +35,9 @@ backend is in `docs/phase2-aws-setup.md`.
 | `src/pages/` | One file per page; the Training Lab is in `src/pages/training/` |
 | `src/components/` | Navigation, footer, and shared cards |
 | `src/config.json` | Site text, contact email, Security Toolbox products, Lock It Down links, emergency numbers |
-| `public/training-data/` | Scam examples and quiz questions (see its README) |
+| `public/training-data/` | Lessons (`modules.json`), scam examples, quiz and final exam questions (see its README) |
+| `src/pages/learn/` | Learning path, lesson steps, final exam, certificate |
+| `src/training/` | Content loading, progress rules, example labels, certificate PDF |
 | `docs/` | AWS setup guide, auth design, and the site rebuild plan |
 
 ## Pages
@@ -42,7 +45,12 @@ backend is in `docs/phase2-aws-setup.md`.
 | URL | Page | Login needed? |
 |-----|------|---------------|
 | `/` | Home | No |
-| `/training` | Training Lab (plus `/training/quiz`, `/training/:category`, `/training/:category/:exampleId`) | No |
+| `/learn` | The learning path: 8 lessons, progress, "continue" button | No (guests save on their device) |
+| `/learn/:lesson/:step` | One lesson: `learn` → `practice` → `actions` → `check` | No |
+| `/learn/final-exam` | Final exam (unlocks after all 8 lessons) | Yes |
+| `/certificate` | Create, download, print, and share the certificate | Yes |
+| `/verify/:id` | Public certificate check | No |
+| `/training` | Scam Example Library (plus `/training/quiz`, `/training/:topic`, `/training/:topic/:exampleId`) | No |
 | `/emergency` | Emergency Directory | No |
 | `/lock-it-down` | Privacy and security settings guides | No |
 | `/security-toolbox` | Recommended security products | No |

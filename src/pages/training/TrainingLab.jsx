@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../routes.js';
-import { Mail, MessageSquare, Monitor, ShoppingCart } from 'lucide-react';
+import { loadModules, loadExamples, loadQuiz } from '../../training/content.js';
+import { ModuleIcon, MODULE_COLORS } from '../../training/exampleTypes.jsx';
 import TrainingLabHome from './TrainingLabHome.jsx';
 import TrainingLabCategory from './TrainingLabCategory.jsx';
 import TrainingLabDetail from './TrainingLabDetail.jsx';
@@ -16,37 +17,36 @@ export default function TrainingLab({ view: forcedView }) {
   const navigate = useNavigate();
   const { categoryKey: selectedCategory = null, exampleId = null } = useParams();
   const view = forcedView || (exampleId ? 'detail' : selectedCategory ? 'category' : 'home');
-  const [examples, setExamples] = useState({ email: [], text: [], marketplace: [], popup: [] });
+  const [examples, setExamples] = useState({});
+  const [categories, setCategories] = useState([]);
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [difficultyFilter, setDifficultyFilter] = useState('all');
 
-  const categories = [
-    { key: 'email', label: 'Email Scams', icon: <Mail className="w-8 h-8" />, color: 'from-blue-500 to-blue-600', description: 'Phishing emails that try to steal your personal information', file: 'email-scams.json' },
-    { key: 'text', label: 'Text Message Scams', icon: <MessageSquare className="w-8 h-8" />, color: 'from-green-500 to-emerald-600', description: 'Smishing attacks that arrive as text messages on your phone', file: 'text-scams.json' },
-    { key: 'marketplace', label: 'Marketplace Scams', icon: <ShoppingCart className="w-8 h-8" />, color: 'from-purple-500 to-violet-600', description: 'Fraud on Facebook Marketplace, Craigslist, and online stores', file: 'marketplace-scams.json' },
-    { key: 'popup', label: 'Pop-up Scams', icon: <Monitor className="w-8 h-8" />, color: 'from-red-500 to-rose-600', description: 'Fake warnings and alerts that appear in your browser', file: 'popup-scams.json' }
-  ];
-
+  // Topics and examples come from public/training-data/modules.json, the same
+  // file that drives the lessons, so the library always matches the training.
   useEffect(() => {
-    async function loadContent() {
-      setLoading(true);
+    let cancelled = false;
+    (async () => {
       try {
-        const [emailRes, textRes, marketRes, popupRes, quizRes] = await Promise.all([
-          fetch('/training-data/email-scams.json').then(r => r.json()).catch(() => []),
-          fetch('/training-data/text-scams.json').then(r => r.json()).catch(() => []),
-          fetch('/training-data/marketplace-scams.json').then(r => r.json()).catch(() => []),
-          fetch('/training-data/popup-scams.json').then(r => r.json()).catch(() => []),
-          fetch('/training-data/quiz.json').then(r => r.json()).catch(() => [])
-        ]);
-        setExamples({ email: emailRes, text: textRes, marketplace: marketRes, popup: popupRes });
-        setQuizQuestions(quizRes);
+        const [mods, quiz] = await Promise.all([loadModules(), loadQuiz().catch(() => [])]);
+        const sets = await Promise.all(mods.map((m) => loadExamples(m.examplesFile).catch(() => [])));
+        if (cancelled) return;
+        setCategories(mods.map((m) => ({
+          key: m.key,
+          label: m.title,
+          description: m.summary,
+          icon: <ModuleIcon iconKey={m.iconKey} className="w-8 h-8" />,
+          color: MODULE_COLORS[m.key] ?? 'from-blue-500 to-blue-600',
+        })));
+        setExamples(Object.fromEntries(mods.map((m, i) => [m.key, sets[i]])));
+        setQuizQuestions(quiz);
       } catch (err) {
         console.error('Failed to load training data:', err);
       }
-      setLoading(false);
-    }
-    loadContent();
+      if (!cancelled) setLoading(false);
+    })();
+    return () => { cancelled = true; };
   }, []);
 
   // Kept the same signature the views already use; it now changes the URL.
@@ -106,6 +106,7 @@ export default function TrainingLab({ view: forcedView }) {
         )}
         {view === 'quiz' && (
           <TrainingLabQuiz
+            categories={categories}
             questions={quizQuestions}
             navigateTo={navigateTo}
           />

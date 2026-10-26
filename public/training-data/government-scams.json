@@ -1,0 +1,107 @@
+[
+  {
+    "id": "gov-001",
+    "title": "\"IRS Agent\" Threatens Arrest",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Caller ID: \"IRS\" (202) 555-0147",
+    "subject": "Phone call",
+    "body": "\"This is Officer James Miller, badge number 4471, with the Internal Revenue Service. Our records show you owe $3,872 in back taxes. A warrant has been issued for your arrest. To avoid having local police come to your home today, you must pay immediately using gift cards or a Bitcoin ATM. Do not hang up, and do not tell anyone about this call.\"",
+    "redFlags": [
+      "Threatens arrest by local police",
+      "Demands payment by gift card or Bitcoin ATM",
+      "Wants payment immediately",
+      "Tells you to keep it secret",
+      "Badge numbers and titles are used to sound official"
+    ],
+    "explanation": "The IRS does not call to demand immediate payment, threaten arrest, or ask for gift cards or cryptocurrency. If you truly owe taxes, the IRS normally contacts you by mail first, and you can call them back to check.",
+    "howToSpot": "Hang up. If you're worried, call the IRS at 1-800-829-1040, or check your account at irs.gov."
+  },
+  {
+    "id": "gov-002",
+    "title": "\"Your Social Security Number Is Suspended\"",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Robocall from (555) 016-4410",
+    "subject": "Voicemail",
+    "body": "\"This call is from the Social Security Administration. Your Social Security number has been suspended due to suspicious activity in Texas. Your benefits will be stopped and your bank accounts frozen. Press 1 now to speak to an officer and reactivate your number.\"",
+    "redFlags": [
+      "Social Security numbers can't be \"suspended\"",
+      "Threatens to stop your benefits and freeze your bank account",
+      "A robocall saying \"press 1\"",
+      "Vague \"suspicious activity\" somewhere far away"
+    ],
+    "explanation": "Social Security numbers are never suspended. If you press 1, the \"officer\" will ask for your Social Security number and bank details, or tell you to move money to \"keep it safe.\"",
+    "howToSpot": "Hang up. Social Security's real number is 1-800-772-1213. Report impostors at oig.ssa.gov."
+  },
+  {
+    "id": "gov-003",
+    "title": "Medicare \"New Card\" Call",
+    "type": "phone",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Caller ID: \"Medicare Services\"",
+    "subject": "Phone call",
+    "body": "\"Hello, I'm calling from Medicare. We're sending everyone new plastic Medicare cards with a chip for added security. Your old card will stop working at the end of the month. I just need to verify your Medicare number and the bank account where your benefits are deposited so we can mail your new card.\"",
+    "redFlags": [
+      "Medicare called you out of the blue",
+      "Asks for your Medicare number",
+      "Asks for your bank account",
+      "Says your current card will \"stop working\" soon"
+    ],
+    "explanation": "Medicare won't call you uninvited to ask for your Medicare number or bank information. There's no new \"chip\" card program. Scammers use your number to bill Medicare for services you never received.",
+    "howToSpot": "Hang up. Call 1-800-MEDICARE (1-800-633-4227) if you have questions. Treat your Medicare card like a credit card."
+  },
+  {
+    "id": "gov-004",
+    "title": "A Real IRS Letter in the Mail",
+    "type": "letter",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "Internal Revenue Service (letter by U.S. Mail)",
+    "subject": "Notice CP14: Balance Due",
+    "body": "Department of the Treasury, Internal Revenue Service\n\nNotice CP14 — Balance Due\nTax year: 2025\nAmount due: $318.40\nPay by: November 30\n\nWhat you need to do: Pay the amount due by the date above. You can pay online at irs.gov/payments, by check, or set up a payment plan.\n\nIf you disagree, call us at the number shown on this notice, or write to us at the address above. You have the right to appeal.",
+    "redFlags": [],
+    "explanation": "This is what real IRS contact looks like. It comes by mail, has a notice number, gives you time to pay, offers normal payment methods through irs.gov, and explains your right to disagree or appeal.",
+    "howToSpot": "Even with a real-looking letter, you can confirm by calling the IRS at 1-800-829-1040 or logging in to your account at irs.gov. Never pay by gift card."
+  },
+  {
+    "id": "gov-005",
+    "title": "Fake \"Government Grant\" Email",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Federal Grants Dept <grants-award@fedgov-assist.org>",
+    "subject": "Congratulations! You qualify for a $9,000 Senior Grant",
+    "body": "Dear Citizen,\n\nYou have been selected to receive a $9,000 Federal Senior Assistance Grant. This grant never needs to be repaid.\n\nTo release your funds, a one-time processing fee of $250 is required. Please pay using the secure link below within 48 hours, or your grant will be given to another applicant.\n\nCLAIM MY GRANT NOW\n\nFederal Grants Department",
+    "redFlags": [
+      "You never applied for a grant",
+      "Asks for a fee to receive free money",
+      "A \".org\" address pretending to be the government (real federal sites end in .gov)",
+      "\"Dear Citizen\" instead of your name",
+      "48-hour deadline"
+    ],
+    "explanation": "The government doesn't call or email to offer surprise grants, and it never charges a fee to give you money. The only thing you'd receive is a bill on your card.",
+    "howToSpot": "Real federal grants are listed at grants.gov and are usually for organizations, not individuals. Never pay a fee to collect money."
+  },
+  {
+    "id": "gov-006",
+    "title": "Text from \"Social Security\" About a Benefit Increase",
+    "type": "text",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "+1 (555) 013-7720",
+    "subject": "Text Message",
+    "body": "SSA Notice: You are eligible for a 2026 benefit increase of $312/month. To receive it, confirm your identity within 24 hrs at ssa-benefits-update.com or your payments may be delayed.",
+    "redFlags": [
+      "The link isn't on ssa.gov",
+      "24-hour deadline",
+      "Threat that payments may be delayed",
+      "Asks you to \"confirm your identity\" through a link"
+    ],
+    "explanation": "Cost-of-living increases happen automatically. You never have to click a link to get them. The fake website will ask for your Social Security number, bank account, and other details.",
+    "howToSpot": "The only real Social Security website ends in ssa.gov. Check your benefits by logging in to your account at ssa.gov or calling 1-800-772-1213."
+  }
+]

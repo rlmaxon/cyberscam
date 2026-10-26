@@ -1,0 +1,106 @@
+[
+  {
+    "id": "phone-001",
+    "title": "The \"Grandparent in Trouble\" Call",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Unknown number: (555) 014-2290",
+    "subject": "Phone call",
+    "body": "Caller (crying): \"Grandma? It's me... I'm in so much trouble. I was in a car accident and the police arrested me. My nose is broken, that's why I sound funny.\"\n\nA second voice: \"Ma'am, I'm Officer Davis, his public defender. Bail is $8,500. If you can get cash today, I'll send a courier to your house to pick it up. A judge has placed a gag order on this case, so you can't discuss it with anyone, including his parents.\"",
+    "redFlags": [
+      "Panic and crying make it hard to think clearly",
+      "\"That's why I sound funny\" explains away a voice that doesn't quite match",
+      "A courier coming to your house to collect cash",
+      "\"Gag order\" telling you not to talk to family",
+      "Pressure to pay today"
+    ],
+    "explanation": "This is the grandparent scam. Scammers find family names on social media, and some now use AI to copy a grandchild's real voice. Real lawyers and police never send couriers for cash bail, and no court order forbids you from calling your own family.",
+    "howToSpot": "Hang up and call your grandchild or their parents on numbers you already have. Use a family code word that only real family members know."
+  },
+  {
+    "id": "phone-002",
+    "title": "Fake Bank \"Fraud Department\"",
+    "type": "phone",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Caller ID: \"First National Bank\"",
+    "subject": "Phone call",
+    "body": "\"Hello, this is Mark from the First National Bank fraud department. We've detected suspicious charges on your account from someone in another state. To protect your money, I'm going to send you a verification code by text. Please read it back to me so I can confirm your identity.\n\nAlso, because your account is compromised, we need you to move your savings to a secure holding account today. I'll give you the account number.\"",
+    "redFlags": [
+      "Asks you to read back a code sent to your phone",
+      "Asks you to move money to a \"secure\" or \"safe\" account",
+      "Caller ID shows the bank's name, which can be faked",
+      "Urgency: \"today\" to \"protect your money\""
+    ],
+    "explanation": "The code is what the scammer needs to log in to your account or change your password. A real bank will never ask you to read back a code or move money to protect it. Your money is already protected where it is.",
+    "howToSpot": "Hang up and call the number on the back of your bank card. If there's a real problem, they'll tell you."
+  },
+  {
+    "id": "phone-003",
+    "title": "Voicemail from \"Amazon\" About an Order",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Voicemail from (555) 019-8734",
+    "subject": "Voicemail",
+    "body": "\"This is Amazon customer service. An order for an Apple iPhone 15 for $1,499 will be charged to your account today. If you did not authorize this purchase, press 1 or call us back at 555-019-8734 to speak with a representative and cancel the order.\"",
+    "redFlags": [
+      "A robocall or voicemail about a large purchase you didn't make",
+      "\"Press 1\" to talk to someone",
+      "A callback number that isn't Amazon's real customer service",
+      "Pushes you to act today"
+    ],
+    "explanation": "If you call back, a \"representative\" will ask for your account login or card number, or ask you to install software to \"cancel the order.\" Amazon doesn't call you about orders like this.",
+    "howToSpot": "Check your orders yourself in the Amazon app or at amazon.com. If there's no order, there's nothing to cancel."
+  },
+  {
+    "id": "phone-004",
+    "title": "\"Your Utility Will Be Shut Off\"",
+    "type": "phone",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Caller ID: \"Electric Co Billing\"",
+    "subject": "Phone call",
+    "body": "\"This is the billing department at your electric company. Your account is past due by $412. A technician is on his way to disconnect your power within the hour. To stop the disconnection, you must pay now. We accept payment by gift card. Go to the nearest store, buy $400 in Apple gift cards, and call me back with the numbers on the back.\"",
+    "redFlags": [
+      "Threatens to cut off your power within the hour",
+      "Demands payment by gift card",
+      "Asks you to read gift card numbers over the phone",
+      "You weren't sent any past-due notices"
+    ],
+    "explanation": "Utility companies send written notices before disconnecting service, and they never ask for payment with gift cards. Once you read the numbers off a gift card, the money is gone.",
+    "howToSpot": "Hang up and call the number printed on your utility bill. Any request for gift cards means it's a scam."
+  },
+  {
+    "id": "phone-005",
+    "title": "A Real Fraud Alert from Your Bank",
+    "type": "phone",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "Automated call, number matches the back of your card",
+    "subject": "Phone call",
+    "body": "Automated message: \"This is the fraud prevention department at First National Bank calling about your debit card ending in 4821. We noticed a charge of $86.12 at an online store today. If you made this purchase, press 1. If you did not, please hang up and call the number on the back of your card. We will never ask for your PIN, password, or a verification code.\"",
+    "redFlags": [],
+    "explanation": "This is how real fraud alerts work. They mention only the last four digits of your card, they ask only whether you made a purchase, they tell you to call the number on your card, and they remind you they'll never ask for codes or passwords.",
+    "howToSpot": "Even with a real alert, the safest move is the same: call the number on the back of your card."
+  },
+  {
+    "id": "phone-006",
+    "title": "\"Can You Hear Me?\" Robocall",
+    "type": "phone",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "Unknown number: (555) 017-3361",
+    "subject": "Phone call",
+    "body": "Recorded voice: \"Hi, this is Jessica from Senior Benefits Services. Can you hear me okay?\"\n\n(pause)\n\n\"Great! You've been selected for a free medical alert system and a free back brace covered by Medicare. I just need to verify your Medicare number and date of birth.\"",
+    "redFlags": [
+      "An unexpected robocall offering something \"free\"",
+      "Asks for your Medicare number and date of birth",
+      "Uses \"Medicare\" to sound official",
+      "Tries to get you to say \"yes\" right away"
+    ],
+    "explanation": "This is a Medicare equipment scam. With your Medicare number, scammers can bill Medicare for equipment you never get, and steal your identity. Medicare won't call you out of the blue to offer free equipment.",
+    "howToSpot": "Hang up on robocalls. Never give your Medicare number to someone who called you. Call 1-800-MEDICARE if you have questions."
+  }
+]

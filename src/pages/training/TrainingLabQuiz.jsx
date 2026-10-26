@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AlertTriangle, Mail, MessageSquare, CheckCircle, XCircle, BookOpen, Play, Monitor, Printer, ArrowLeft, ShoppingCart, Award, RotateCcw } from 'lucide-react';
 
 // ---- Quiz / Test View ----
-export default function TrainingLabQuiz({ questions, navigateTo }) {
+export default function TrainingLabQuiz({ categories = [], questions, navigateTo }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -90,10 +90,7 @@ export default function TrainingLabQuiz({ questions, navigateTo }) {
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
                 { key: 'all', label: 'All Categories', count: questions.length, icon: <BookOpen className="w-5 h-5" />, color: 'border-blue-300 bg-blue-50' },
-                { key: 'email', label: 'Email Scams', count: questions.filter(q => q.category === 'email').length, icon: <Mail className="w-5 h-5" />, color: 'border-blue-300 bg-blue-50' },
-                { key: 'text', label: 'Text Scams', count: questions.filter(q => q.category === 'text').length, icon: <MessageSquare className="w-5 h-5" />, color: 'border-green-300 bg-green-50' },
-                { key: 'popup', label: 'Pop-up Scams', count: questions.filter(q => q.category === 'popup').length, icon: <Monitor className="w-5 h-5" />, color: 'border-red-300 bg-red-50' },
-                { key: 'marketplace', label: 'Marketplace Scams', count: questions.filter(q => q.category === 'marketplace').length, icon: <ShoppingCart className="w-5 h-5" />, color: 'border-purple-300 bg-purple-50' }
+                ...categories.map((c) => ({ key: c.key, label: c.label, count: questions.filter(q => q.category === c.key).length, icon: c.icon, color: '' })),
               ].map((opt) => (
                 <button
                   key={opt.key}
@@ -315,12 +312,9 @@ export default function TrainingLabQuiz({ questions, navigateTo }) {
           {/* Category Badge */}
           <div className="mb-4">
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              q.category === 'email' ? 'bg-blue-100 text-blue-700' :
-              q.category === 'text' ? 'bg-green-100 text-green-700' :
-              q.category === 'popup' ? 'bg-red-100 text-red-700' :
-              'bg-purple-100 text-purple-700'
+              'bg-blue-100 text-blue-800'
             }`}>
-              {q.category.toUpperCase()}
+              {(categories.find((c) => c.key === q.category)?.label ?? q.category).toUpperCase()}
             </span>
           </div>
 

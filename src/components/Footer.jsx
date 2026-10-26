@@ -24,7 +24,7 @@ export default function Footer() {
               Empowering seniors and their families with the knowledge and tools to stay safe from online scams and fraud.
             </p>
             <button
-              onClick={() => go('training')}
+              onClick={() => go('learn')}
               className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium"
             >
               Start Free Training <ArrowRight className="w-4 h-4" />
@@ -36,7 +36,8 @@ export default function Footer() {
             <h4 className="font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-slate-400 text-sm">
               <li><button onClick={() => go('landing')} className="hover:text-white transition-colors">Home</button></li>
-              <li><button onClick={() => go('training')} className="hover:text-white transition-colors">Training Lab</button></li>
+              <li><button onClick={() => go('learn')} className="hover:text-white transition-colors">Training</button></li>
+              <li><button onClick={() => go('training')} className="hover:text-white transition-colors">Scam Example Library</button></li>
               <li><button onClick={() => go('resources')} className="hover:text-white transition-colors">Privacy Settings</button></li>
               <li><button onClick={() => go('marketplace')} className="hover:text-white transition-colors">Security Tools</button></li>
               <li><button onClick={() => go('emergency')} className="hover:text-white transition-colors">Emergency Hotline</button></li>

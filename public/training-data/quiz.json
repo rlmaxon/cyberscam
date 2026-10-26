@@ -154,5 +154,473 @@
     ],
     "correctAnswer": 1,
     "explanation": "This has every hallmark of a pet scam: a price that's too good to be true, inability to meet in person, payment via a method with no buyer protection (Zelle), and offering to 'ship' an animal. After payment, they'll request more fees for 'shipping insurance' or a 'temperature-controlled crate.' The puppy doesn't exist. Always meet pets in person before any payment."
+  },
+  {
+    "id": "q-013",
+    "category": "email",
+    "question": "An email that looks like it's from Amazon says your account is locked and asks you to \"click here to verify.\" What's the safest thing to do?",
+    "options": [
+      "Open the Amazon app or type amazon.com yourself to check your account",
+      "Click the link, but be careful what you type",
+      "Reply and ask if the email is real",
+      "Call the phone number in the email"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Go to the company yourself, using the app or a web address you type. Links, phone numbers, and replies in a suspicious email all lead back to the scammer."
+  },
+  {
+    "id": "q-014",
+    "category": "email",
+    "question": "Which sender address is MOST likely to be a scam?",
+    "options": [
+      "alerts@chase.com",
+      "support@paypa1-security.com",
+      "service@paypal.com",
+      "no-reply@amazon.com"
+    ],
+    "correctAnswer": 1,
+    "explanation": "\"paypa1\" uses the number 1 instead of the letter l, and adds extra words. Scammers make addresses that look right at a quick glance."
+  },
+  {
+    "id": "q-015",
+    "category": "email",
+    "question": "You clicked a link in a phishing email and typed in your email password. What should you do right away?",
+    "options": [
+      "Nothing, since you can't undo it",
+      "Delete the email so the scammer can't see it",
+      "Change that password, and any other account using the same password",
+      "Wait to see if anything strange happens"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Change the password right away, starting with your email account, and anywhere else you used the same password. If you shared bank details, call your bank too."
+  },
+  {
+    "id": "q-016",
+    "category": "text",
+    "question": "You get a text: \"Did you make a $750 purchase at Best Buy? Reply YES or NO.\" What should you do?",
+    "options": [
+      "Reply NO so the bank blocks it",
+      "Reply YES so they leave you alone",
+      "Call the number that texted you",
+      "Don't reply. Check your account in your bank's app, or call the number on your card"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Any reply tells the scammer your number works, and often leads to a call from a fake \"fraud department.\" Check with your bank yourself."
+  },
+  {
+    "id": "q-017",
+    "category": "text",
+    "question": "How can you report a scam text to your phone company?",
+    "options": [
+      "Forward it to 7726 (SPAM)",
+      "Reply STOP",
+      "Call 911",
+      "Text it to a friend"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Forwarding a scam text to 7726 reports it to most U.S. phone companies so they can block it. Then delete it and block the number."
+  },
+  {
+    "id": "q-018",
+    "category": "text",
+    "question": "A stranger texts \"Hi, is this Linda? Are we still on for lunch?\" You're not Linda. A friendly chat starts and later turns to investing. What's happening?",
+    "options": [
+      "A lucky new friendship",
+      "A common scam that starts with a fake wrong-number text",
+      "A marketing survey",
+      "A real mistake you should keep chatting about"
+    ],
+    "correctAnswer": 1,
+    "explanation": "\"Wrong number\" texts are often how romance and investment scams start. The best response is no response."
+  },
+  {
+    "id": "q-019",
+    "category": "popup",
+    "question": "A warning fills your screen with a loud alarm and won't close. What should you do?",
+    "options": [
+      "Call the number to get help",
+      "Click the warning to see what it says",
+      "Close the browser, or restart the computer if it won't close",
+      "Pay for the antivirus it offers"
+    ],
+    "correctAnswer": 2,
+    "explanation": "It's just a web page designed to scare you. Closing the browser or restarting ends it. Your computer is almost always fine."
+  },
+  {
+    "id": "q-020",
+    "category": "popup",
+    "question": "A \"technician\" on the phone asks you to install a program so he can fix your computer remotely. What should you do?",
+    "options": [
+      "Install it, since he's trying to help",
+      "Install it, but watch what he does",
+      "Ask him to email you the program instead",
+      "Hang up. Never let someone who contacted you connect to your computer"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Remote access gives scammers full control of your computer and possibly your bank accounts. Only let trusted people you contacted yourself, like a family member or a shop you chose, work on your computer."
+  },
+  {
+    "id": "q-021",
+    "category": "popup",
+    "question": "You let a fake tech-support caller into your computer. What should you do FIRST?",
+    "options": [
+      "Turn off the computer or disconnect it from the internet",
+      "Call them back to ask for a refund",
+      "Keep using the computer as normal",
+      "Pay what they ask so they leave you alone"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Cut off their access first. Then have a trusted person check the computer, change your passwords from a different device, and call your bank."
+  },
+  {
+    "id": "q-022",
+    "category": "marketplace",
+    "question": "A buyer asks you to read them a 6-digit code sent to your phone \"to prove you're a real seller.\" What should you do?",
+    "options": [
+      "Read it, since it shows you're honest",
+      "Never share it. It lets them take over your account",
+      "Share only the first 3 digits",
+      "Email it instead of reading it aloud"
+    ],
+    "correctAnswer": 1,
+    "explanation": "That code is meant only for you. Scammers use it to set up accounts in your name or break into yours. No real buyer needs it."
+  },
+  {
+    "id": "q-023",
+    "category": "marketplace",
+    "question": "When shopping on a website you don't know, which way of paying gives you the MOST protection?",
+    "options": [
+      "Gift card",
+      "Wire transfer",
+      "Credit card",
+      "Zelle to the seller"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Credit cards let you dispute charges if the item never arrives. Gift cards, wire transfers, and payment apps sent to strangers are very hard to get back."
+  },
+  {
+    "id": "q-024",
+    "category": "marketplace",
+    "question": "A seller has concert tickets for half price but can't meet and wants payment through Venmo first. This is:",
+    "options": [
+      "A great deal, so pay quickly",
+      "Normal for tickets",
+      "Safe if they send a photo of the tickets",
+      "A warning sign. Don't pay someone you can't meet for an item you can't see"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Too-good prices plus \"pay first, can't meet\" is a classic marketplace scam. Photos of tickets are easy to fake or sell to many people."
+  },
+  {
+    "id": "q-025",
+    "category": "phone",
+    "question": "A caller sounds exactly like your grandson. He says he's in jail and needs bail money, and begs you not to tell his parents. What should you do?",
+    "options": [
+      "Hang up and call your grandson or his parents on numbers you know",
+      "Send the money, since it's his voice",
+      "Ask the caller to prove it by telling you his birthday",
+      "Pay half now and half later"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Scammers can now copy a voice with AI, and birthdays are often on social media. Calling family back on known numbers, or using a family code word, is the reliable check."
+  },
+  {
+    "id": "q-026",
+    "category": "phone",
+    "question": "Your caller ID shows your bank's real name and number. Can you trust it?",
+    "options": [
+      "Yes, caller ID can't be faked",
+      "No, scammers can make any name or number appear",
+      "Only if it's a local number",
+      "Only if they know your name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This is called \"spoofing.\" Scammers can fake caller ID easily. Hang up and call the number on the back of your card."
+  },
+  {
+    "id": "q-027",
+    "category": "phone",
+    "question": "A caller from your bank's \"fraud team\" asks you to move your savings to a \"safe account\" to protect it. This is:",
+    "options": [
+      "A smart precaution",
+      "Normal during fraud investigations",
+      "Always a scam. Real banks never ask you to move money to protect it",
+      "Fine if they give you a case number"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Real banks protect your money where it is. A \"safe account\" belongs to the scammer."
+  },
+  {
+    "id": "q-028",
+    "category": "phone",
+    "question": "What's a family code word for?",
+    "options": [
+      "Logging in to your bank",
+      "Your email password",
+      "Getting discounts",
+      "A secret word real family members can say to prove an emergency call is really them"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Agree on a word ahead of time. If a \"grandchild\" or \"relative\" calls in a panic and can't say it, hang up and call them back."
+  },
+  {
+    "id": "q-029",
+    "category": "phone",
+    "question": "Which payment request should ALWAYS make you hang up?",
+    "options": [
+      "\"Pay with gift cards and read me the numbers\"",
+      "\"Pay with a check by mail\"",
+      "\"Pay through our official website\"",
+      "\"Mail us your bill\""
+    ],
+    "correctAnswer": 0,
+    "explanation": "No real business or government agency takes payment in gift cards. Asking for gift card numbers means it's a scam."
+  },
+  {
+    "id": "q-030",
+    "category": "phone",
+    "question": "You get a robocall offering a \"free\" back brace covered by Medicare if you confirm your Medicare number. What should you do?",
+    "options": [
+      "Give the number, since it's free",
+      "Hang up. Never give your Medicare number to someone who called you",
+      "Ask them to mail the brace first",
+      "Give only your date of birth"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Scammers use your Medicare number to bill for equipment you never receive. Treat it like a credit card number."
+  },
+  {
+    "id": "q-031",
+    "category": "government",
+    "question": "Someone says they're from the IRS and that police will arrest you today unless you pay with gift cards. What's true?",
+    "options": [
+      "You should pay quickly to avoid arrest",
+      "The IRS only takes gift cards for small amounts",
+      "The IRS doesn't threaten arrest or ask for gift cards, so it's a scam",
+      "You should ask for their badge number, then pay"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The IRS normally contacts you by mail first and never demands gift cards, wire transfers, or crypto. Hang up and call 1-800-829-1040 if you're worried."
+  },
+  {
+    "id": "q-032",
+    "category": "government",
+    "question": "A caller says your Social Security number has been \"suspended.\" What's true?",
+    "options": [
+      "You need to reactivate it right away",
+      "Only Medicare can fix it",
+      "You should give them your number to check",
+      "Social Security numbers can't be suspended, so it's a scam"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Social Security numbers are never suspended. This is a scare tactic to get your number and bank details."
+  },
+  {
+    "id": "q-033",
+    "category": "government",
+    "question": "What's the real phone number for Social Security?",
+    "options": [
+      "1-800-772-1213",
+      "The number in the text or voicemail you got",
+      "Any number with \"SSA\" on caller ID",
+      "There is no phone number"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Social Security's real number is 1-800-772-1213. Always call agencies on official numbers, which you can find on their .gov websites, never the number a caller gives you."
+  },
+  {
+    "id": "q-034",
+    "category": "government",
+    "question": "How do you know a government website is real?",
+    "options": [
+      "It has an official-looking eagle logo",
+      "Its address ends in .gov",
+      "It has a .org or .com address with \"gov\" in it",
+      "It loads quickly"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Real U.S. government websites end in .gov, like irs.gov and ssa.gov. Logos are easy to copy; the web address is what matters."
+  },
+  {
+    "id": "q-035",
+    "category": "government",
+    "question": "An email says you've won a $9,000 government grant but must pay a $250 processing fee. What should you do?",
+    "options": [
+      "Pay the fee to get the grant",
+      "Reply with your bank details",
+      "Ignore and delete it. The government doesn't charge fees to give you money",
+      "Pay with a gift card to be safe"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Paying a fee to receive free money is always a scam. The government doesn't hand out surprise grants by email."
+  },
+  {
+    "id": "q-036",
+    "category": "government",
+    "question": "Medicare calls to say they're sending you a new card and need your Medicare number and bank account. What's true?",
+    "options": [
+      "You should give it so you get the new card",
+      "Only give the bank account",
+      "Give it if they're polite",
+      "Medicare won't call you uninvited to ask for this, so it's a scam"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Medicare won't call you out of the blue for your Medicare number or bank account. Call 1-800-MEDICARE if you have questions."
+  },
+  {
+    "id": "q-037",
+    "category": "romance",
+    "question": "Someone you met online a few weeks ago says they love you, but they can never video chat. Now they need money for a medical emergency. What should you do?",
+    "options": [
+      "Don't send money. These are classic signs of a romance scam",
+      "Send a small amount to help",
+      "Send gift cards instead of cash",
+      "Ask them to pay you back first"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Quick love, no video calls, and a money emergency are the classic pattern. Never send money to someone you've only met online."
+  },
+  {
+    "id": "q-038",
+    "category": "romance",
+    "question": "Why do romance scammers ask you to move from the dating site to WhatsApp or texting?",
+    "options": [
+      "Because texting is easier",
+      "To get away from the dating site's safety checks",
+      "Because they're shy",
+      "To save you money"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Dating sites watch for and remove scam profiles. Moving you off the site lets scammers keep going without being caught."
+  },
+  {
+    "id": "q-039",
+    "category": "romance",
+    "question": "Your online partner says they're a deployed soldier who needs you to pay a \"leave fee\" so they can come home. What's true?",
+    "options": [
+      "Military leave fees are normal",
+      "You should pay through their agent",
+      "The U.S. military doesn't charge leave fees, so it's a scam",
+      "It's fine if they send a photo in uniform"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Scammers often pose as soldiers using stolen photos. The military doesn't charge fees for leave or travel."
+  },
+  {
+    "id": "q-040",
+    "category": "romance",
+    "question": "What's a good way to check whether an online sweetheart's photos are real?",
+    "options": [
+      "Ask them for more photos",
+      "Trust them because the photos look natural",
+      "Ask their friends",
+      "Do a reverse image search to see if the photos appear under other names"
+    ],
+    "correctAnswer": 3,
+    "explanation": "A reverse image search, such as Google Images or TinEye, often shows that scam photos were stolen from someone else. A family member can help you do it."
+  },
+  {
+    "id": "q-041",
+    "category": "romance",
+    "question": "An online sweetheart says they mailed you a gift, and now a \"customs company\" wants a fee to release it. What should you do?",
+    "options": [
+      "Don't pay. There is no package; it's part of the scam",
+      "Pay so you get the gift",
+      "Pay half the fee",
+      "Ask the customs company for a discount"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Fake customs and delivery fees are a common next step in romance scams. Each fee leads to another."
+  },
+  {
+    "id": "q-042",
+    "category": "romance",
+    "question": "Your online partner asks you to keep your relationship secret from your family. This is:",
+    "options": [
+      "Romantic",
+      "A warning sign. Scammers want to stop family from warning you",
+      "Normal for new relationships",
+      "A sign they're shy"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Secrecy keeps the people who love you from spotting the scam. Talking to someone you trust is one of the best protections."
+  },
+  {
+    "id": "q-043",
+    "category": "investment",
+    "question": "Which of these is the BIGGEST warning sign of an investment scam?",
+    "options": [
+      "The company has a website",
+      "They mention the stock market",
+      "\"Guaranteed\" high returns with no risk",
+      "They send you paperwork"
+    ],
+    "correctAnswer": 2,
+    "explanation": "All real investments carry risk. Anyone guaranteeing high returns is lying."
+  },
+  {
+    "id": "q-044",
+    "category": "investment",
+    "question": "A trading app shows you've made $40,000, but says you must pay a 20% \"tax\" before you can withdraw. What's going on?",
+    "options": [
+      "Normal investment taxes",
+      "A small fee worth paying",
+      "A bank error",
+      "A scam. The balance is fake and the money you deposited is gone"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Real platforms take fees from your balance. Demanding more money before you can withdraw is how fake trading apps take even more."
+  },
+  {
+    "id": "q-045",
+    "category": "investment",
+    "question": "Someone on the phone tells you to withdraw cash and put it into a Bitcoin ATM to keep it safe. What should you do?",
+    "options": [
+      "Hang up. No real bank or agency will ever tell you to use a Bitcoin ATM",
+      "Do it quickly before hackers get it",
+      "Ask the bank teller to help you use the ATM",
+      "Only put in half"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Being told to use a Bitcoin ATM means it's a scam, every time. Money sent this way is almost impossible to recover."
+  },
+  {
+    "id": "q-046",
+    "category": "investment",
+    "question": "Where can you check whether a person or company is allowed to sell investments?",
+    "options": [
+      "Their own website",
+      "brokercheck.finra.org and investor.gov",
+      "Their social media reviews",
+      "A WhatsApp group"
+    ],
+    "correctAnswer": 1,
+    "explanation": "FINRA BrokerCheck and the SEC's investor.gov let you look up licensed brokers and advisers, and see any past problems, for free."
+  },
+  {
+    "id": "q-047",
+    "category": "investment",
+    "question": "After losing money to a scam, you're contacted by a company that promises to recover it for an upfront fee. This is:",
+    "options": [
+      "A lucky break",
+      "How law enforcement usually works",
+      "Very likely a second scam, called a recovery scam",
+      "Worth it if the fee is small"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Recovery scammers target people who've already lost money. Report losses for free at ic3.gov and reportfraud.ftc.gov instead."
+  },
+  {
+    "id": "q-048",
+    "category": "investment",
+    "question": "A friendly stranger in a WhatsApp group shares screenshots of huge profits and invites you to their \"VIP\" investing platform. What should you do?",
+    "options": [
+      "Join, since the screenshots prove it works",
+      "Invest a small amount to test it",
+      "Ask the group members if it's real",
+      "Leave the group. Screenshots are easy to fake and this is a common scam"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Many members in these groups are fake accounts. The platform is controlled by scammers, and deposits disappear."
   }
 ]

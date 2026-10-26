@@ -22,6 +22,12 @@ import ResourceCenter from './pages/ResourceCenter.jsx';
 import AffiliateMarketplace from './pages/AffiliateMarketplace.jsx';
 import EmergencyDirectory from './pages/EmergencyDirectory.jsx';
 import NotFound from './pages/NotFound.jsx';
+import LearningPath from './pages/learn/LearningPath.jsx';
+import ModulePage from './pages/learn/ModulePage.jsx';
+import FinalExamPage from './pages/learn/FinalExamPage.jsx';
+import CertificatePage from './pages/learn/CertificatePage.jsx';
+import VerifyCertificatePage from './pages/VerifyCertificatePage.jsx';
+import { ProgressContext, useProgressState } from './member/useProgressState.js';
 import SignUpPage from './pages/account/SignUpPage.jsx';
 import VerifyEmailPage from './pages/account/VerifyEmailPage.jsx';
 import WelcomePage from './pages/account/WelcomePage.jsx';
@@ -40,6 +46,7 @@ export default function SeniorCyberSecure() {
   const [profileStatus, setProfileStatus] = useState('idle');
 
   const isLoggedIn = authState === 'authenticated';
+  const progressState = useProgressState(isLoggedIn);
 
   // Once signed in, load the member's email and profile
   useEffect(() => {
@@ -176,6 +183,7 @@ export default function SeniorCyberSecure() {
 
   return (
     <MemberContext.Provider value={member}>
+    <ProgressContext.Provider value={progressState}>
     <div className="min-h-screen bg-slate-50" style={{ fontFamily: "'Source Sans 3', 'Segoe UI', sans-serif" }}>
       <ScrollToTop />
       <Navigation
@@ -197,6 +205,11 @@ export default function SeniorCyberSecure() {
             <Route path={PATHS.emergency} element={<EmergencyDirectory />} />
             <Route path={PATHS.resources} element={<ResourceCenter />} />
             <Route path={PATHS.marketplace} element={<AffiliateMarketplace />} />
+            <Route path={PATHS.learn} element={<LearningPath />} />
+            <Route path={PATHS.finalExam} element={<FinalExamPage />} />
+            <Route path={`${PATHS.learn}/:moduleKey`} element={<ModulePage />} />
+            <Route path={`${PATHS.learn}/:moduleKey/:step`} element={<ModulePage />} />
+            <Route path={`${PATHS.verify}/:certId`} element={<VerifyCertificatePage />} />
             <Route path={PATHS.training} element={<TrainingLab />} />
             <Route path={`${PATHS.training}/quiz`} element={<TrainingLab view="quiz" />} />
             <Route path={`${PATHS.training}/:categoryKey`} element={<TrainingLab />} />
@@ -226,6 +239,7 @@ export default function SeniorCyberSecure() {
 
             {/* Members only */}
             <Route path={PATHS.dashboard} element={membersOnly(dashboardElement)} />
+            <Route path={PATHS.certificate} element={membersOnly(<CertificatePage />)} />
             <Route path={PATHS.welcome} element={membersOnly(<WelcomePage />)} />
             <Route path={PATHS.profile} element={membersOnly(<ProfilePage />)} />
 
@@ -240,6 +254,7 @@ export default function SeniorCyberSecure() {
 
       <Footer />
     </div>
+    </ProgressContext.Provider>
     </MemberContext.Provider>
   );
 }
