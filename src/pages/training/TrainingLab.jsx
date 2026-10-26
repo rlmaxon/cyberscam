@@ -29,7 +29,8 @@ export default function TrainingLab({ view: forcedView }) {
     let cancelled = false;
     (async () => {
       try {
-        const [mods, quiz] = await Promise.all([loadModules(), loadQuiz().catch(() => [])]);
+        const [allMods, quiz] = await Promise.all([loadModules(), loadQuiz().catch(() => [])]);
+        const mods = allMods.filter((m) => m.examplesFile);
         const sets = await Promise.all(mods.map((m) => loadExamples(m.examplesFile).catch(() => [])));
         if (cancelled) return;
         setCategories(mods.map((m) => ({

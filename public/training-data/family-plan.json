@@ -1,0 +1,38 @@
+[
+  {
+    "key": "code-word",
+    "title": "Choose a family code word",
+    "detail": "Pick a word or phrase that every family member knows, and that a stranger couldn't guess or find online (not a pet's name or a street you lived on). If someone calls claiming to be family in an emergency, ask for the code word.",
+    "warning": "Don't type your code word on this website or anywhere online. Say it out loud together, and keep it out of texts and emails."
+  },
+  {
+    "key": "trusted-numbers",
+    "title": "Write down your trusted phone numbers",
+    "detail": "Put these on paper by the phone or on the fridge: the fraud number on the back of each bank card, and two family members or friends you can call to double-check anything. The printable plan has spaces for them."
+  },
+  {
+    "key": "call-before-pay",
+    "title": "Agree on the \"call before you pay\" rule",
+    "detail": "Promise each other: nobody sends money, gift cards, wire transfers, or cryptocurrency because of a phone call, text, email, or online message without first calling someone on the trusted list."
+  },
+  {
+    "key": "voicemail",
+    "title": "Send unknown callers to voicemail",
+    "detail": "On an iPhone: open Settings, then Phone (on newer iPhones: Settings, Apps, Phone), and turn on \"Silence Unknown Callers.\" On Android: open the Phone app's settings and turn on call screening or spam blocking. Real callers will leave a message."
+  },
+  {
+    "key": "two-step",
+    "title": "Turn on two-step login for email",
+    "detail": "Two-step login (also called two-factor) means a thief needs your phone as well as your password. Use the \"Lock It Down\" guides on this site, and ask a family member to help if you'd like."
+  },
+  {
+    "key": "credit-freeze",
+    "title": "Freeze your credit",
+    "detail": "A credit freeze stops anyone from opening new accounts in your name. It's free, and it doesn't affect your credit score. Contact each of the three credit bureaus: Equifax, Experian, and TransUnion. You can lift it any time you need to apply for credit."
+  },
+  {
+    "key": "monthly-talk",
+    "title": "Talk about scams once a month",
+    "detail": "Pick a regular time, like a Sunday phone call, to share any strange calls or messages. Doing the Scam of the Week together makes it easy. There's no blame: everyone gets these calls."
+  }
+]

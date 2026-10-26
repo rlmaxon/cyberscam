@@ -622,5 +622,83 @@
     ],
     "correctAnswer": 3,
     "explanation": "Many members in these groups are fake accounts. The platform is controlled by scammers, and deposits disappear."
+  },
+  {
+    "id": "q-049",
+    "category": "mindset",
+    "question": "Why do scammers try to make you scared, excited, or upset?",
+    "options": [
+      "Because they're nervous too",
+      "Because strong feelings make it harder to think clearly",
+      "Because it's required by law",
+      "Because it makes the call shorter"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Research shows strong emotions, whether fear or excitement, make it harder to spot a scam. If you feel a rush of emotion, that's your signal to pause."
+  },
+  {
+    "id": "q-050",
+    "category": "mindset",
+    "question": "A pushy caller won't take no for an answer. What's the right thing to do?",
+    "options": [
+      "Keep listening so you're not rude",
+      "Explain your reasons until they understand",
+      "Hang up. You don't owe a stranger an explanation",
+      "Agree to something small so they'll stop"
+    ],
+    "correctAnswer": 2,
+    "explanation": "\"No, thank you\" is a complete answer, and hanging up is not rude. The longer you stay on the line, the more chances they have to wear you down."
+  },
+  {
+    "id": "q-051",
+    "category": "mindset",
+    "question": "Which three warning signs together almost always mean a scam?",
+    "options": [
+      "A friendly voice, a local number, and good manners",
+      "Strong feelings, a hurry, and a request for secrecy",
+      "A long email, a logo, and a signature",
+      "A phone call during the day"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Strong feelings + hurry + secrecy = scam. When you notice them, pause, hang up, and check."
+  },
+  {
+    "id": "q-052",
+    "category": "mindset",
+    "question": "What does \"Pause, Hang up, Check\" mean?",
+    "options": [
+      "Wait a minute, then do what the caller says",
+      "Stop, end the call or don't reply, then check by calling a number you already know or someone you trust",
+      "Put the caller on hold while you look for your bank card",
+      "Check your email for a confirmation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Pausing breaks the scammer's rush. Hanging up ends their pressure. Checking with a number you already know tells you the truth."
+  },
+  {
+    "id": "q-053",
+    "category": "mindset",
+    "question": "A caller says, \"Don't tell anyone about this call, not even your family.\" What should you do?",
+    "options": [
+      "Keep it secret as asked",
+      "Treat it as a warning sign. Hang up and tell someone you trust",
+      "Only tell your bank",
+      "Ask why it's secret"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Secrecy keeps you away from people who would spot the scam. Real banks, police, and agencies never ask you to hide things from your family."
+  },
+  {
+    "id": "q-054",
+    "category": "mindset",
+    "question": "If someone you know was tricked by a scam, what's the most helpful thing to say?",
+    "options": [
+      "\"How could you fall for that?\"",
+      "\"It's not your fault. These scammers are professionals. Let's report it together.\"",
+      "\"Don't tell anyone, it's embarrassing.\"",
+      "\"You should have known better.\""
+    ],
+    "correctAnswer": 1,
+    "explanation": "Shame stops people from reporting and getting help. Scams fool smart, careful people every day. Kindness helps them act quickly."
   }
 ]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "2026-10-12",
+    "weekOf": "2026-10-12",
+    "headline": "Medicare open enrollment calls",
+    "tip": "Medicare open enrollment runs October 15 to December 7, and scammers know it. Medicare won't call you to sell a plan or ask for your Medicare number.",
+    "example": {
+      "id": "week-2026-10-12",
+      "title": "\"Your Medicare Plan Is Changing\"",
+      "type": "phone",
+      "isScam": true,
+      "sender": "Caller ID: \"Medicare Benefits\"",
+      "subject": "Phone call",
+      "body": "\"Hello! It's open enrollment season, and your current Medicare plan is being discontinued. I can switch you to a better plan with extra dental and vision at no cost today. I'll just need to confirm your Medicare number and your Social Security number.\"",
+      "redFlags": ["Medicare called you uninvited", "Asks for your Medicare and Social Security numbers", "Claims your plan is being \"discontinued\" to scare you", "Pressure to switch today"],
+      "explanation": "Medicare doesn't call you to sell plans or ask for your numbers. Real plan changes come in the mail, in your Annual Notice of Change.",
+      "howToSpot": "Hang up. To compare plans, call 1-800-MEDICARE or visit medicare.gov, or talk to your local SHIP counselor (free Medicare help)."
+    }
+  },
+  {
+    "id": "2026-10-19",
+    "weekOf": "2026-10-19",
+    "headline": "Fake jury duty calls",
+    "tip": "Courts usually contact jurors by mail. They don't call to demand a fine for missing jury duty.",
+    "example": {
+      "id": "week-2026-10-19",
+      "title": "\"You Missed Jury Duty\"",
+      "type": "phone",
+      "isScam": true,
+      "sender": "Caller ID: \"County Sheriff\"",
+      "subject": "Phone call",
+      "body": "\"This is Deputy Harris with the County Sheriff's Office. You failed to appear for jury duty and a warrant has been issued for your arrest. You can resolve this today by paying a $1,200 fine. Stay on the line and I'll tell you how to pay with prepaid cards.\"",
+      "redFlags": ["Threat of arrest", "A fine paid by phone with prepaid cards", "Told to stay on the line", "Caller ID can be faked"],
+      "explanation": "Courts and sheriffs don't call to collect fines for missed jury duty, and they never take prepaid or gift cards.",
+      "howToSpot": "Hang up. Look up your local court's number yourself and call to ask."
+    }
+  },
+  {
+    "id": "2026-10-26",
+    "weekOf": "2026-10-26",
+    "headline": "\"Your package is on hold\" texts",
+    "tip": "Package texts surge as holiday shopping begins. Check deliveries in the store's app or on the shipper's real website, never through a text link.",
+    "example": {
+      "id": "week-2026-10-26",
+      "title": "Delivery \"Address Problem\" Text",
+      "type": "text",
+      "isScam": true,
+      "sender": "+1 (555) 012-9981",
+      "subject": "Text Message",
+      "body": "USPS: Your package is on hold due to an incomplete address. Please update your details within 12 hours or it will be returned: usps-redeliver-help.com",
+      "redFlags": ["A link that isn't usps.com", "12-hour deadline", "Unexpected text about a package", "Asks you to \"update your details\""],
+      "explanation": "The fake site asks for your address, then a small \"redelivery fee\" to capture your card number.",
+      "howToSpot": "Don't tap the link. Track packages using the tracking number from the store you ordered from, or at usps.com. Forward the text to 7726."
+    }
+  },
+  {
+    "id": "2026-11-02",
+    "weekOf": "2026-11-02",
+    "headline": "A real bank alert, for comparison",
+    "tip": "Not every message is a scam. Real alerts don't ask for passwords or codes, and you can always check by calling the number on your card.",
+    "example": {
+      "id": "week-2026-11-02",
+      "title": "Low Balance Alert You Signed Up For",
+      "type": "text",
+      "isScam": false,
+      "sender": "Your bank's usual short code (72166)",
+      "subject": "Text Message",
+      "body": "First National: Your checking account ending in 4821 is below your $100 alert amount. No reply needed. To manage alerts, open the First National app.",
+      "redFlags": [],
+      "explanation": "This is a normal alert: it comes from the same number as your other bank alerts, it shows only the last four digits, there's no link, and it tells you to use the bank's own app.",
+      "howToSpot": "Even with real alerts, check your account by opening the bank's app yourself or calling the number on your card."
+    }
+  },
+  {
+    "id": "2026-11-09",
+    "weekOf": "2026-11-09",
+    "headline": "Charity scams after disasters",
+    "tip": "After hurricanes and fires, fake charities appear overnight. Give to groups you already know, through their own website.",
+    "example": {
+      "id": "week-2026-11-09",
+      "title": "Urgent Hurricane Relief Call",
+      "type": "phone",
+      "isScam": true,
+      "sender": "Unknown number: (555) 018-6620",
+      "subject": "Phone call",
+      "body": "\"Families are sleeping in their cars tonight after the hurricane. Can we count on you for $100? We need to get supplies out today. The fastest way to help is a gift card. Just read me the numbers and I'll make sure it gets to a family.\"",
+      "redFlags": ["Pressure to give right now", "Asks for a gift card", "A charity you've never heard of", "Strong emotional appeal"],
+      "explanation": "Real charities never ask for gift cards, and they're happy to let you give later through their website.",
+      "howToSpot": "Say \"I'll give through your website,\" then hang up. Check charities at give.org or charitynavigator.org before donating."
+    }
+  },
+  {
+    "id": "2026-11-16",
+    "weekOf": "2026-11-16",
+    "headline": "QR code parking tickets",
+    "tip": "Scammers put fake QR code stickers on parking meters and fake tickets on windshields. Pay through the official parking app or the city's website.",
+    "example": {
+      "id": "week-2026-11-16",
+      "title": "Ticket on Your Windshield with a QR Code",
+      "type": "letter",
+      "isScam": true,
+      "sender": "Paper notice under your windshield wiper",
+      "subject": "PARKING VIOLATION NOTICE",
+      "body": "PARKING VIOLATION — Expired meter\nFine: $45.00\nPay within 24 hours to avoid a $150 late penalty.\n\nScan the QR code below to pay now.\n[QR code]",
+      "redFlags": ["Pay only by QR code", "24-hour deadline with a big penalty", "No city name, officer, or citation number you can check"],
+      "explanation": "The QR code leads to a fake payment page that steals your card number.",
+      "howToSpot": "Look up your city's parking office yourself to check any ticket. Don't scan QR codes on stickers or notices you weren't expecting."
+    }
+  },
+  {
+    "id": "2026-11-23",
+    "weekOf": "2026-11-23",
+    "headline": "Too-good holiday deals",
+    "tip": "Fake online stores pop up before Black Friday with huge discounts. Shop at stores you know, and pay with a credit card.",
+    "example": {
+      "id": "week-2026-11-23",
+      "title": "80% Off Name-Brand Shoes",
+      "type": "social",
+      "isScam": true,
+      "sender": "Sponsored ad on Facebook",
+      "subject": "Facebook ad",
+      "body": "🔥 BLACK FRIDAY CLEARANCE 🔥 Store closing! All name-brand walking shoes 80% OFF — only $19.99. Limited stock, sale ends tonight! Shop now at comfy-shoes-outlet.shop",
+      "redFlags": ["Prices far too good to be true", "\"Store closing\" and \"ends tonight\" pressure", "A web address you've never heard of"],
+      "explanation": "Fake stores take your payment and send nothing, or send cheap knockoffs. Some also save your card number.",
+      "howToSpot": "Type the brand's real website yourself. Pay with a credit card so you can dispute the charge."
+    }
+  },
+  {
+    "id": "2026-11-30",
+    "weekOf": "2026-11-30",
+    "headline": "Gift card \"help\" from the boss or pastor",
+    "tip": "Scammers pretend to be someone you know, like a pastor, a boss, or a club leader, and ask you to buy gift cards as a favor.",
+    "example": {
+      "id": "week-2026-11-30",
+      "title": "\"Can You Do Me a Quick Favor?\"",
+      "type": "email",
+      "isScam": true,
+      "sender": "Pastor Tom <pastor.tom.office@gmail.com>",
+      "subject": "Quick favor",
+      "body": "Hi, are you available? I'm in a meeting and can't talk on the phone. I need to get some gift cards for a few church members who are going through a hard time. Can you pick up 4 Apple gift cards at $100 each? Send me photos of the backs and I'll pay you back on Sunday. Please keep this between us for now.",
+      "redFlags": ["\"Can't talk on the phone\"", "Asks for gift cards and photos of the backs", "Asks for secrecy", "A Gmail address instead of the church's usual email"],
+      "explanation": "Scammers copy the names of people you trust. Once you send photos of the card numbers, the money is gone.",
+      "howToSpot": "Call the person on a number you already have. A real pastor or boss will never mind you checking."
+    }
+  }
+]

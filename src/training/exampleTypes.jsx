@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MessageSquare, ShoppingCart, Monitor, Phone, FileText, Users, Globe, Landmark, Heart, TrendingUp } from 'lucide-react';
+import { Mail, MessageSquare, ShoppingCart, Monitor, Phone, FileText, Users, Globe, Landmark, Heart, TrendingUp, ShieldCheck } from 'lucide-react';
 
 // How each kind of scam example is labeled and colored, used everywhere examples appear.
 export const EXAMPLE_TYPES = {
@@ -28,7 +28,7 @@ export function TypeBadge({ type, size = 'sm' }) {
 // Icons for each module (from modules.json "iconKey")
 const MODULE_ICONS = {
   mail: Mail, message: MessageSquare, phone: Phone, monitor: Monitor,
-  landmark: Landmark, cart: ShoppingCart, heart: Heart, trending: TrendingUp,
+  landmark: Landmark, cart: ShoppingCart, heart: Heart, trending: TrendingUp, shield: ShieldCheck,
 };
 export function ModuleIcon({ iconKey, className = 'w-6 h-6' }) {
   const Icon = MODULE_ICONS[iconKey] ?? Mail;
@@ -45,6 +45,7 @@ export const MODULE_COLORS = {
   marketplace: 'from-purple-500 to-violet-600',
   romance: 'from-pink-500 to-rose-500',
   investment: 'from-teal-500 to-cyan-600',
+  mindset: 'from-indigo-500 to-blue-700',
 };
 
 // The message itself, shown the way it would look in real life (no answer shown).

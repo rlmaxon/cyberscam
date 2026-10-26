@@ -208,12 +208,12 @@ export default function LandingPage() {
             <FeatureCard
               icon={<BookOpen className="w-8 h-8" />}
               title="Training Modules"
-              description="Eight short lessons covering email, text, phone, pop-up, government, marketplace, romance, and investment scams, each with a quick check at the end."
+              description="Short lessons on why scams work and how to say no, plus email, text, phone, pop-up, government, marketplace, romance, and investment scams, each with a quick check at the end."
             />
             <FeatureCard
               icon={<FileText className="w-8 h-8" />}
-              title="Printable Examples"
-              description="Print any scam example with its red flags and keep it by the computer or phone as a reminder."
+              title="Scam of the Week"
+              description="A new 2-minute “scam or safe?” challenge every week, based on the scams going around right now. A great thing to do together."
             />
             <FeatureCard
               icon={<Play className="w-8 h-8" />}
@@ -232,8 +232,8 @@ export default function LandingPage() {
             />
             <FeatureCard
               icon={<Users className="w-8 h-8" />}
-              title="Family Safety Plan (Coming Soon)"
-              description="A simple plan you and your parent fill out together: a family code word, trusted numbers, and who to call."
+              title="Family Safety Plan"
+              description="Seven simple steps to do together with your parent: a family code word, trusted numbers, and a “call before you pay” rule."
             />
           </div>
 

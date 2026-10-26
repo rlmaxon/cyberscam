@@ -1,5 +1,31 @@
 [
   {
+    "id": "f-017",
+    "category": "mindset",
+    "question": "A caller is very friendly but keeps pushing you to decide right now. You feel uncomfortable saying no. What should you do?",
+    "options": [
+      "Stay on the line so you don't seem rude",
+      "Say \"No, thank you\" and hang up. You don't owe them a reason",
+      "Agree, then cancel later",
+      "Ask them to call back in five minutes"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Being polite to a scammer only helps the scammer. Rushing you is a warning sign. You always have permission to hang up."
+  },
+  {
+    "id": "f-018",
+    "category": "mindset",
+    "question": "Which is a good habit for unknown phone numbers?",
+    "options": [
+      "Always answer in case it's important",
+      "Let them go to voicemail. Real callers leave a message",
+      "Call back every missed number right away",
+      "Answer and stay silent"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Letting unknown calls go to voicemail gives you time to think and check. Real callers leave a message you can verify."
+  },
+  {
     "id": "f-001",
     "category": "email",
     "question": "An email from \"Your Bank\" says there's a problem with your account and has a big \"Fix It Now\" button. The email uses your real name. What's the safest choice?",

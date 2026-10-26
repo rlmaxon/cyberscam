@@ -6,6 +6,7 @@ import { useMember } from '../member/MemberContext.jsx';
 import { useProgress } from '../member/useProgressState.js';
 import { useTrainingData } from '../training/content.js';
 import { moduleStatus, passedCount, currentModuleIndex, moduleProgress, nextStep, allModulesPassed } from '../training/progress.js';
+import ScamShield from '../components/learn/ScamShield.jsx';
 
 export default function MemberDashboard() {
   const go = useGo();
@@ -41,12 +42,26 @@ export default function MemberDashboard() {
           </p>
         </div>
 
+        {/* Scam Shield */}
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-8 grid sm:grid-cols-[auto_1fr] gap-6 items-center">
+          <ScamShield progress={progress} modules={modules} size={150} />
+          <div>
+            <h2 className="text-2xl font-bold text-slate-800 mb-2">Your Scam Shield</h2>
+            <p className="text-lg text-slate-700 mb-4">Every lesson you pass fills in another section of your shield.</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button type="button" onClick={() => go('badges')} className="px-5 py-3 min-h-[48px] rounded-xl bg-amber-100 text-amber-900 font-semibold hover:bg-amber-200">My badges</button>
+              <button type="button" onClick={() => go('scamOfTheWeek')} className="px-5 py-3 min-h-[48px] rounded-xl bg-blue-100 text-blue-900 font-semibold hover:bg-blue-200">Scam of the Week</button>
+              <button type="button" onClick={() => go('familyPlan')} className="px-5 py-3 min-h-[48px] rounded-xl bg-green-100 text-green-900 font-semibold hover:bg-green-200">Family Safety Plan</button>
+            </div>
+          </div>
+        </div>
+
         {/* Quick Actions Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <DashboardCard
             icon={<Play className="w-8 h-8" />}
             title="My Training"
-            description={modules.length ? `${done} of ${modules.length} lessons complete${finalPassed ? ', certificate earned!' : ''}` : 'Eight short lessons with a certificate at the end'}
+            description={modules.length ? `${done} of ${modules.length} lessons complete${finalPassed ? ', certificate earned!' : ''}` : 'Short lessons with a certificate at the end'}
             buttonText={current ? 'Continue' : finalPassed ? 'View Certificate' : 'Final Exam'}
             onClick={() => go(continueTarget)}
             color="blue"

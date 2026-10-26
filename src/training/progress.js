@@ -8,7 +8,10 @@
 
 export const STEPS = ['learn', 'practice', 'actions', 'check'];
 
-export const emptyProgress = () => ({ modules: {}, finalExam: null, lastModuleKey: null, certificateId: null });
+export const emptyProgress = () => ({
+  modules: {}, finalExam: null, lastModuleKey: null, certificateId: null,
+  weekly: {}, familyPlan: {}, badgesSeen: null, // null = never shown the badge screen yet
+});
 
 export const moduleProgress = (progress, key) => progress?.modules?.[key] ?? {};
 
@@ -16,10 +19,22 @@ export const isStepDone = (mp, step) => (step === 'check' ? !!mp.passed : !!mp[s
 
 export const stepsDone = (mp) => STEPS.filter((s) => isStepDone(mp, s)).length;
 
-// Modules unlock in order: each opens once the one before it is passed.
+// Lessons unlock in order: each opens once the lesson before it is passed.
+// "Standalone" lessons (like Start Here) are always open and never block the others,
+// so adding one never locks anyone out partway through.
 export function isUnlocked(progress, modules, index) {
-  if (index <= 0) return true;
-  return !!moduleProgress(progress, modules[index - 1]?.key).passed;
+  if (index <= 0 || modules[index]?.standalone) return true;
+  for (let j = index - 1; j >= 0; j--) {
+    if (!modules[j].standalone) return !!moduleProgress(progress, modules[j].key).passed;
+  }
+  return true;
+}
+
+// The lesson that must be finished before this one opens (null if none).
+export function blockingModule(modules, index) {
+  if (modules[index]?.standalone) return null;
+  for (let j = index - 1; j >= 0; j--) if (!modules[j].standalone) return modules[j];
+  return null;
 }
 
 export function moduleStatus(progress, modules, index) {
@@ -45,7 +60,8 @@ export function nextStep(mp) {
 }
 
 export function hasAnyProgress(progress) {
-  return Object.keys(progress?.modules ?? {}).length > 0 || !!progress?.finalExam;
+  return Object.keys(progress?.modules ?? {}).length > 0 || !!progress?.finalExam
+    || Object.keys(progress?.weekly ?? {}).length > 0 || Object.values(progress?.familyPlan ?? {}).some(Boolean);
 }
 
 // Combine two progress records (e.g. this device and the member's account),
@@ -77,6 +93,16 @@ export function mergeProgress(a, b) {
   }
   out.lastModuleKey = b?.lastModuleKey ?? a?.lastModuleKey ?? null;
   out.certificateId = b?.certificateId ?? a?.certificateId ?? null;
+  out.weekly = { ...(a?.weekly ?? {}) };
+  for (const [k, v] of Object.entries(b?.weekly ?? {})) {
+    const prev = out.weekly[k];
+    out.weekly[k] = prev ? { ...v, correct: !!(prev.correct || v.correct) } : v;
+  }
+  out.familyPlan = { ...(a?.familyPlan ?? {}) };
+  for (const [k, v] of Object.entries(b?.familyPlan ?? {})) if (v) out.familyPlan[k] = true;
+  out.badgesSeen = a?.badgesSeen == null && b?.badgesSeen == null
+    ? null
+    : [...new Set([...(a?.badgesSeen ?? []), ...(b?.badgesSeen ?? [])])];
   return out;
 }
 

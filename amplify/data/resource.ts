@@ -36,6 +36,8 @@ const schema = a.schema({
       finalExam: a.json(),
       lastModuleKey: a.string(),
       certificateId: a.string(),
+      // { weekly: { [weekId]: { correct, at } }, familyPlan: { [itemKey]: true }, badgesSeen: [badgeId] }
+      extras: a.json(),
       owner: lockedOwner(),
     })
     .authorization((allow) => [allow.owner()]),

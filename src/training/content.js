@@ -24,6 +24,8 @@ export const loadModules = () => load('modules.json');
 export const loadExamples = (file) => load(file);
 export const loadQuiz = () => load('quiz.json');
 export const loadFinalExam = () => load('final-exam.json');
+export const loadFamilyPlan = () => load('family-plan.json');
+export const loadScamOfTheWeek = () => load('scam-of-the-week.json');
 
 // Loads modules plus anything else a page needs, with simple loading/error state.
 export function useTrainingData(extra = {}) {
@@ -40,6 +42,7 @@ export function useTrainingData(extra = {}) {
           extra.finalExam ? loadFinalExam() : [],
           Promise.all(
             (extra.examplesFor === 'all' ? modules : modules.filter((m) => m.key === extra.examplesFor))
+              .filter((m) => m.examplesFile)
               .map((m) => loadExamples(m.examplesFile).then((list) => [m.key, list]).catch(() => [m.key, []])),
           ),
         ]);
