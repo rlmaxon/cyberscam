@@ -1,6 +1,19 @@
-# Training Lab Content
+# Training Content
 
-This folder contains all the scam examples and quiz content for the Training Lab.
+This folder holds everything the lessons and the Scam Example Library show.
+
+| File | What it is |
+|------|------------|
+| `modules.json` | The 8 lessons, in order: title, summary, lesson text, the 4 practice examples (`practice`), the "What To Do" checklist (`actions`), and which examples file belongs to it |
+| `*-scams.json` | Scam (and some safe) examples for each lesson |
+| `quiz.json` | Quick Check questions. `category` must match a lesson `key`. Each lesson uses all of its questions (6 today) |
+| `final-exam.json` | Final exam questions (16 today, 2 per lesson) |
+
+The pass mark (80%) is in `src/config.json` under `training`.
+
+### Adding a lesson
+
+Add an entry to `modules.json` (unique `key`, next `number`), create its examples file, list 3–4 example IDs in `practice` (include at least one safe example), and add questions to `quiz.json` with `category` set to the new key. It appears in the learning path, dashboard, and library automatically. Note that it locks the final exam for anyone who hasn't done it yet.
 
 ## How to Update Content
 
@@ -22,7 +35,7 @@ Each example follows this structure:
 {
   "id": "unique-id",
   "title": "Short Descriptive Title",
-  "type": "email|text|marketplace|popup",
+  "type": "email|text|phone|popup|letter|social|website|marketplace",
   "difficulty": "beginner|intermediate|advanced",
   "isScam": true,
   "sender": "Who it appears to come from",
@@ -41,7 +54,7 @@ For legitimate (non-scam) examples, set `isScam` to `false` and leave `redFlags`
 ```json
 {
   "id": "q-unique-id",
-  "category": "email|text|marketplace|popup",
+  "category": "<lesson key from modules.json>",
   "question": "The question text",
   "options": ["Option A", "Option B", "Option C", "Option D"],
   "correctAnswer": 0,

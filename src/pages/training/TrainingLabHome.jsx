@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MessageSquare, BookOpen, Play, ArrowRight, Monitor, Printer, ArrowLeft, ShoppingCart, Award } from 'lucide-react';
+import { exampleType } from '../../training/exampleTypes.jsx';
 import { useGo } from '../../routes.js';
 
 // ---- Training Lab Home ----
@@ -13,9 +14,9 @@ export default function TrainingLabHome({ categories, examples, quizQuestions, n
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 bg-blue-100 border border-blue-200 rounded-full px-4 py-2 mb-4">
           <BookOpen className="w-4 h-4 text-blue-600" />
-          <span className="text-blue-700 text-sm font-medium">Free Training</span>
+          <span className="text-blue-700 text-sm font-medium">Example Library</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">Scam Spotter Training Lab</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">Scam Example Library</h1>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto">
           Study real-world scam examples, learn how to spot the red flags, and test your knowledge with interactive quizzes.
         </p>
@@ -28,7 +29,7 @@ export default function TrainingLabHome({ categories, examples, quizQuestions, n
           <p className="text-sm text-slate-600">Real Examples</p>
         </div>
         <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
-          <p className="text-2xl font-bold text-green-600">4</p>
+          <p className="text-2xl font-bold text-green-600">{categories.length}</p>
           <p className="text-sm text-slate-600">Scam Categories</p>
         </div>
         <div className="bg-white rounded-xl shadow border border-slate-200 p-4 text-center">
@@ -120,13 +121,8 @@ export default function TrainingLabHome({ categories, examples, quizQuestions, n
 
 // ---- Example Card (compact) ----
 function ExampleCard({ example, onClick }) {
-  const typeConfig = {
-    email: { icon: <Mail className="w-4 h-4" />, bg: 'bg-blue-100 text-blue-700' },
-    text: { icon: <MessageSquare className="w-4 h-4" />, bg: 'bg-green-100 text-green-700' },
-    marketplace: { icon: <ShoppingCart className="w-4 h-4" />, bg: 'bg-purple-100 text-purple-700' },
-    popup: { icon: <Monitor className="w-4 h-4" />, bg: 'bg-red-100 text-red-700' }
-  };
-  const tc = typeConfig[example.type] || typeConfig.email;
+  const t = exampleType(example.type);
+  const tc = { icon: <t.Icon className="w-5 h-5" />, label: t.label, bg: t.bg, headerBg: t.headerBg };
   const diffColors = {
     beginner: 'bg-green-100 text-green-700',
     intermediate: 'bg-yellow-100 text-yellow-700',
@@ -140,7 +136,7 @@ function ExampleCard({ example, onClick }) {
     >
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <span className={`px-2 py-1 rounded-full text-xs font-medium ${tc.bg} flex items-center gap-1`}>
-          {tc.icon} {example.type}
+          {tc.icon} {tc.label}
         </span>
         <span className={`px-2 py-1 rounded-full text-xs font-medium ${diffColors[example.difficulty] || ''}`}>
           {example.difficulty}

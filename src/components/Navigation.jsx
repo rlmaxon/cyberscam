@@ -35,8 +35,8 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
             <NavButton active={currentPage === 'emergency'} onClick={() => go('emergency')}>
               <Phone className="w-4 h-4" /> Emergency Hotline
             </NavButton>
-            <NavButton active={currentPage === 'training'} onClick={() => go('training')}>
-              <BookOpen className="w-4 h-4" /> Training Lab
+            <NavButton active={currentPage === 'learn' || currentPage === 'finalExam' || currentPage === 'training'} onClick={() => go('learn')}>
+              <BookOpen className="w-4 h-4" /> Training
             </NavButton>
 
             {isLoggedIn ? (
@@ -74,7 +74,7 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
             <MobileNavButton onClick={() => { go('resources'); setMobileMenuOpen(false); }}>Lock It Down</MobileNavButton>
             <MobileNavButton onClick={() => { go('marketplace'); setMobileMenuOpen(false); }}>Security Toolbox</MobileNavButton>
             <MobileNavButton onClick={() => { go('emergency'); setMobileMenuOpen(false); }}>Emergency Hotline</MobileNavButton>
-            <MobileNavButton onClick={() => { go('training'); setMobileMenuOpen(false); }}>Training Lab</MobileNavButton>
+            <MobileNavButton onClick={() => { go('learn'); setMobileMenuOpen(false); }}>Training</MobileNavButton>
             {isLoggedIn ? (
               <>
                 <MobileNavButton onClick={() => { go('dashboard'); setMobileMenuOpen(false); }} highlight>Member Area</MobileNavButton>

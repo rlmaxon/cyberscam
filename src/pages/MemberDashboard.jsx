@@ -3,10 +3,25 @@ import { Shield, AlertTriangle, Lock, Phone, ChevronRight, ExternalLink, CheckCi
 import config from '../config.json';
 import { useGo } from '../routes.js';
 import { useMember } from '../member/MemberContext.jsx';
+import { useProgress } from '../member/useProgressState.js';
+import { useTrainingData } from '../training/content.js';
+import { moduleStatus, passedCount, currentModuleIndex, moduleProgress, nextStep, allModulesPassed } from '../training/progress.js';
 
 export default function MemberDashboard() {
   const go = useGo();
   const { profile } = useMember();
+  const { progress } = useProgress();
+  const { modules } = useTrainingData();
+  const done = passedCount(progress, modules);
+  const currentIdx = currentModuleIndex(progress, modules);
+  const current = currentIdx !== null ? modules[currentIdx] : null;
+  const finalPassed = !!progress.finalExam?.passed;
+  const continueTarget = current
+    ? `/learn/${current.key}/${nextStep(moduleProgress(progress, current.key))}`
+    : finalPassed ? '/certificate' : '/learn/final-exam';
+  const continueLabel = current
+    ? `${done > 0 || Object.keys(progress.modules).length ? 'Continue' : 'Start'} Lesson ${current.number}: ${current.title}`
+    : finalPassed ? 'View My Certificate' : 'Take the Final Exam';
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
@@ -22,7 +37,7 @@ export default function MemberDashboard() {
             </div>
           </div>
           <p className="text-green-50">
-            Practice spotting scams in the Training Lab, test yourself with the quiz, and keep emergency numbers close by.
+            Work through the lessons at your own pace, and keep emergency numbers close by.
           </p>
         </div>
 
@@ -30,10 +45,10 @@ export default function MemberDashboard() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <DashboardCard
             icon={<Play className="w-8 h-8" />}
-            title="Training Lab"
-            description="Practice spotting scams with interactive email, text, and popup simulations"
-            buttonText="Start Training"
-            onClick={() => go('training')}
+            title="My Training"
+            description={modules.length ? `${done} of ${modules.length} lessons complete${finalPassed ? ', certificate earned!' : ''}` : 'Eight short lessons with a certificate at the end'}
+            buttonText={current ? 'Continue' : finalPassed ? 'View Certificate' : 'Final Exam'}
+            onClick={() => go(continueTarget)}
             color="blue"
           />
           <DashboardCard
@@ -56,18 +71,44 @@ export default function MemberDashboard() {
 
         {/* Module Progress */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-8">
-          <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-blue-600" />
-            Training Modules
-          </h2>
-          <div className="space-y-4">
-            {/* Real progress tracking arrives with member accounts; until then, link straight to each topic. */}
-            <ModuleItem number={1} title="Email Scams" status="available" onClick={() => go('/training/email')} />
-            <ModuleItem number={2} title="Text Message Scams" status="available" onClick={() => go('/training/text')} />
-            <ModuleItem number={3} title="Pop-up Scams" status="available" onClick={() => go('/training/popup')} />
-            <ModuleItem number={4} title="Marketplace Scams" status="available" onClick={() => go('/training/marketplace')} />
+          <div className="flex items-center justify-between gap-4 mb-4 flex-wrap">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-blue-600" />
+              My Lessons
+            </h2>
+            <span className="text-lg text-slate-600">{done} of {modules.length} complete</span>
           </div>
-          <p className="text-slate-500 mt-4">Progress tracking and certificates are coming soon.</p>
+          <div className="w-full bg-slate-200 rounded-full h-3 mb-6" aria-hidden="true">
+            <div className="bg-green-600 h-3 rounded-full" style={{ width: `${modules.length ? (done / modules.length) * 100 : 0}%` }} />
+          </div>
+          <button
+            type="button"
+            onClick={() => go(continueTarget)}
+            className="w-full mb-6 py-4 px-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-lg font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 shadow flex items-center justify-center gap-2"
+          >
+            {continueLabel} <ArrowRight className="w-5 h-5" />
+          </button>
+          <div className="space-y-3">
+            {modules.map((m, i) => {
+              const st = moduleStatus(progress, modules, i);
+              const status = st === 'completed' ? 'completed' : st === 'locked' ? 'locked' : 'in-progress';
+              return (
+                <ModuleItem
+                  key={m.key}
+                  number={m.number}
+                  title={m.title}
+                  status={status}
+                  onClick={st === 'locked' ? undefined : () => go(`/learn/${m.key}`)}
+                />
+              );
+            })}
+            <ModuleItem
+              number="★"
+              title="Final Exam & Certificate"
+              status={finalPassed ? 'completed' : allModulesPassed(progress, modules) ? 'in-progress' : 'locked'}
+              onClick={allModulesPassed(progress, modules) ? () => go(finalPassed ? '/certificate' : '/learn/final-exam') : undefined}
+            />
+          </div>
         </div>
 
         {/* Resources Quick Links */}
@@ -118,7 +159,7 @@ function ModuleItem({ number, title, status, onClick }) {
   const statusConfig = {
     available: { icon: <ChevronRight className="w-5 h-5 text-blue-500" />, bg: 'bg-white hover:bg-blue-50', text: 'text-blue-700', label: 'Open' },
     completed: { icon: <CheckCircle className="w-5 h-5 text-green-500" />, bg: 'bg-green-50', text: 'text-green-700', label: 'Completed' },
-    'in-progress': { icon: <Play className="w-5 h-5 text-blue-500" />, bg: 'bg-blue-50', text: 'text-blue-700', label: 'In Progress' },
+    'in-progress': { icon: <Play className="w-5 h-5 text-blue-600" />, bg: 'bg-blue-50 hover:bg-blue-100', text: 'text-blue-700', label: 'Open' },
     locked: { icon: <Lock className="w-5 h-5 text-slate-400" />, bg: 'bg-slate-50', text: 'text-slate-500', label: 'Locked' }
   };
 

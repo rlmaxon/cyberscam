@@ -1,0 +1,107 @@
+[
+  {
+    "id": "romance-001",
+    "title": "The Overseas Sweetheart's Emergency",
+    "type": "social",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "\"David\" (met on a dating site 5 weeks ago)",
+    "subject": "WhatsApp message",
+    "body": "My darling, I've never felt this way about anyone. As soon as this contract on the oil rig ends, I'm coming to be with you forever.\n\nBut something terrible happened. My daughter is in the hospital in Lagos and they won't treat her until I pay $4,800. My bank account is frozen because I'm offshore. Could you wire the money or send Apple gift cards? I'll pay you back the moment I land. You're the only one I can trust. Please don't tell your family yet, they won't understand us.",
+    "redFlags": [
+      "Says \"forever\" after only a few weeks of messages",
+      "Works far away and can't meet in person",
+      "A sudden medical emergency needing money",
+      "Asks for a wire transfer or gift cards",
+      "Asks you to keep it secret from family"
+    ],
+    "explanation": "This follows the classic romance scam script. After weeks of building trust, the \"emergency\" arrives. If you pay, there will be another emergency, and then another.",
+    "howToSpot": "Never send money to someone you've never met in person. Talk to a trusted friend or relative. A real partner won't ask you to keep secrets from your family."
+  },
+  {
+    "id": "romance-002",
+    "title": "\"Military\" Officer Needs Leave Fees",
+    "type": "social",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "\"Sgt. Michael Ross\" on Facebook",
+    "subject": "Facebook message",
+    "body": "Good morning my queen. I counted the days until I could talk to you again. I finally got approval for leave so I can come home and meet you in person!\n\nThe only problem is that my commanding officer says I have to pay a $2,200 leave fee before they release me, and soldiers can't access their bank accounts while deployed. If you could send it through this payment agent, I'll be on a plane next week. I can't video call because of base security rules.",
+    "redFlags": [
+      "\"Leave fees\" don't exist in the U.S. military",
+      "Can't video call, with an excuse",
+      "Asks you to pay through an \"agent\"",
+      "Uses romance to make the request feel urgent"
+    ],
+    "explanation": "Scammers often pretend to be deployed soldiers using stolen photos. The military doesn't charge fees for leave, travel, or communication, and service members can use their own money.",
+    "howToSpot": "Ask for a live video call. A real person will find a way. Do a reverse image search on their photos, which often turn up under a different name."
+  },
+  {
+    "id": "romance-003",
+    "title": "Package Stuck in Customs",
+    "type": "email",
+    "difficulty": "intermediate",
+    "isScam": true,
+    "sender": "Global Express Customs <clearance@globalexpress-delivery.net>",
+    "subject": "Parcel held: customs clearance fee required",
+    "body": "Dear Recipient,\n\nA parcel addressed to you from Mr. Robert Hale (United Kingdom) is being held at customs. Declared contents: jewelry, cash gift ($50,000), personal letter.\n\nTo release the parcel, a clearance and anti-terrorism certificate fee of $1,350 must be paid within 72 hours by wire transfer. Failure to pay will result in the parcel being destroyed.\n\nGlobal Express Customs Department",
+    "redFlags": [
+      "A \"gift\" package from an online love interest",
+      "A huge cash gift in a package",
+      "Made-up \"anti-terrorism certificate\" fee",
+      "Wire transfer and 72-hour deadline"
+    ],
+    "explanation": "This is a common next step in a romance scam: the sweetheart \"sends a gift,\" and a fake delivery company demands fees. There is no package. Each fee leads to another.",
+    "howToSpot": "Real carriers don't charge you to receive a gift, and nobody mails $50,000 in cash. Don't pay, and tell someone you trust."
+  },
+  {
+    "id": "romance-004",
+    "title": "A Genuine Match Suggests Meeting",
+    "type": "social",
+    "difficulty": "advanced",
+    "isScam": false,
+    "sender": "\"Linda\" on a dating app",
+    "subject": "Dating app message",
+    "body": "I really enjoyed our video call last night. It was fun to finally see you laugh at my terrible jokes! Would you like to meet for coffee this Saturday at the Main Street Café, around 10? It's a nice public spot. No pressure at all if you'd rather wait. Just let me know what works for you.",
+    "redFlags": [],
+    "explanation": "This shows healthy signs: you've already had a live video call, they suggest meeting in a public place, there's no pressure, and nobody is asking for money or personal information.",
+    "howToSpot": "Even with a real match, meet in a public place and tell a friend where you'll be."
+  },
+  {
+    "id": "romance-005",
+    "title": "Online Friend Offers to Teach Crypto Investing",
+    "type": "text",
+    "difficulty": "advanced",
+    "isScam": true,
+    "sender": "\"Amy\" (started as a wrong-number text)",
+    "subject": "Text Message",
+    "body": "Good morning! I just made $2,300 this week on the trading app my uncle uses. He has inside knowledge of the crypto market. I could show you how. Start small, maybe $1,000, and watch it grow. I want you to have a comfortable retirement too ❤️ Download the app here: trade-goldenx.com",
+    "redFlags": [
+      "Started as a \"wrong number\" text and became a friendship",
+      "Brags about big, easy profits",
+      "\"Inside knowledge\" from a relative",
+      "Pushes a trading app from an unknown website",
+      "Uses affection to build trust"
+    ],
+    "explanation": "This is sometimes called \"pig butchering\": scammers build a friendship or romance, then steer you to a fake investment app. The app shows big gains, but when you try to withdraw, they demand fees, and the money is gone.",
+    "howToSpot": "Be wary of any online friend who brings up investing. Never download trading apps from links sent by people you've only met online."
+  },
+  {
+    "id": "romance-006",
+    "title": "\"I Love You\" After Three Days",
+    "type": "social",
+    "difficulty": "beginner",
+    "isScam": true,
+    "sender": "\"Richard\" on a dating site",
+    "subject": "Dating site message",
+    "body": "I know we've only been talking for three days, but I've never connected with anyone like this. I think I'm falling in love with you. Let's leave this site, it's full of fake people. Here's my WhatsApp number. I'm a widower and an engineer working in Dubai, so we'll have to talk by message for now. Tell me everything about yourself.",
+    "redFlags": [
+      "Says \"love\" after just a few days",
+      "Wants to move off the dating site quickly",
+      "Works overseas, so can't meet",
+      "Asks you to share everything about yourself"
+    ],
+    "explanation": "Moving you off the dating site lets the scammer avoid the site's safety checks. Quick declarations of love and a far-away job are early signs of a romance scam, before money ever comes up.",
+    "howToSpot": "Stay on the dating site's messages until you've met in person. Go slowly, and ask for a video call early."
+  }
+]

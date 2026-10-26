@@ -1,0 +1,388 @@
+[
+  {
+    "key": "email",
+    "number": 1,
+    "title": "Phishing Emails",
+    "summary": "Fake emails that pretend to be your bank, Amazon, or another company you trust.",
+    "minutes": 10,
+    "iconKey": "mail",
+    "examplesFile": "email-scams.json",
+    "practice": ["email-001", "email-003", "email-004", "email-007"],
+    "lesson": {
+      "intro": "Phishing (say it like \"fishing\") is when a scammer sends an email that looks like it's from a company you trust. They want you to click a link, open an attachment, or type in a password or card number.",
+      "sections": [
+        {
+          "heading": "What phishing emails look like",
+          "paragraphs": [
+            "Scammers copy real logos and colors, so an email can look exactly like one from your bank or Amazon. The trick is in the details."
+          ],
+          "bullets": [
+            "The sender's address is a little off, like \"amaz0n-ship.com\" (a zero instead of an \"o\") or a free Gmail or Outlook address",
+            "It creates a panic: \"Your account will be locked in 24 hours\" or \"You were charged $849\"",
+            "It starts with \"Dear Customer\" instead of your name",
+            "It asks you to click a link to \"verify,\" \"confirm,\" or \"cancel\""
+          ]
+        },
+        {
+          "heading": "Why it works",
+          "paragraphs": [
+            "Scammers count on you acting fast before you stop to think. A fake charge or a locked account makes anyone want to fix it right away. That rush is exactly what they want."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Never use the links, phone numbers, or attachments in a surprise email. Instead, go to the company yourself: type the website address you already know, open their app, or call the number on the back of your card or on a past statement."
+          ]
+        }
+      ],
+      "keyPoint": "If an email rushes you to click, stop. Go to the company yourself instead of using the email."
+    },
+    "actions": [
+      "Don't click links or open attachments in the email",
+      "Check the sender's full email address, not just the name",
+      "Contact the company using a phone number or website you already trust",
+      "If you clicked or typed a password, change that password right away",
+      "If you shared a card or bank number, call your bank using the number on your card",
+      "Forward phishing emails to reportphishing@apwg.org, then delete them"
+    ]
+  },
+  {
+    "key": "text",
+    "number": 2,
+    "title": "Text Message Scams",
+    "summary": "Fake texts about packages, tolls, bank alerts, and \"wrong numbers.\"",
+    "minutes": 10,
+    "iconKey": "message",
+    "examplesFile": "text-scams.json",
+    "practice": ["text-001", "text-005", "text-003", "text-006"],
+    "lesson": {
+      "intro": "Text message scams (sometimes called \"smishing\") work just like phishing emails, but they arrive on your phone. Because texts feel personal and urgent, they can be even more convincing.",
+      "sections": [
+        {
+          "heading": "Common scam texts",
+          "paragraphs": [],
+          "bullets": [
+            "\"Your package can't be delivered. Pay a $1.99 fee here.\"",
+            "\"You owe an unpaid toll. Pay now to avoid a penalty.\"",
+            "\"Did you make a $500 purchase? Reply YES or NO.\" (pretending to be your bank)",
+            "A friendly \"wrong number\" text that turns into a long chat, then a money or investment pitch"
+          ]
+        },
+        {
+          "heading": "What gives them away",
+          "paragraphs": [
+            "Real companies rarely text you a link to pay a fee. The link usually goes to a strange web address, not the company's real site. Even replying \"STOP\" or \"NO\" tells the scammer your number is active."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Don't tap links in surprise texts and don't reply. If you're worried about a package, toll, or bank charge, check by going to the company's real website or app, or by calling a number you trust."
+          ]
+        }
+      ],
+      "keyPoint": "Don't tap, don't reply. Check with the company yourself, using a number or app you trust."
+    },
+    "actions": [
+      "Don't tap any links in the text",
+      "Don't reply, not even \"STOP\" or \"wrong number\"",
+      "Forward the text to 7726 (it spells SPAM) to report it to your phone company",
+      "Delete the text and block the number",
+      "Check any package, toll, or bank issue using the company's real app or website",
+      "If you entered card details, call your bank right away"
+    ]
+  },
+  {
+    "key": "phone",
+    "number": 3,
+    "title": "Phone & Voice Scams",
+    "summary": "Calls from \"family in trouble,\" fake bank fraud departments, and AI voice copies.",
+    "minutes": 12,
+    "iconKey": "phone",
+    "examplesFile": "phone-scams.json",
+    "practice": ["phone-001", "phone-002", "phone-005", "phone-003"],
+    "lesson": {
+      "intro": "Some of the most costly scams start with a phone call. A calm, confident voice, or a frightened one that sounds like a family member, can be very hard to say no to.",
+      "sections": [
+        {
+          "heading": "The \"grandparent\" scam and AI voice copies",
+          "paragraphs": [
+            "A caller says they're your grandchild (or a lawyer or police officer for them). There's been an accident or an arrest, they need money right now, and they beg you not to tell anyone.",
+            "Today, scammers can copy a real person's voice using a few seconds of video from social media. The voice may truly sound like someone you love."
+          ]
+        },
+        {
+          "heading": "Fake bank and \"fraud department\" calls",
+          "paragraphs": [
+            "A caller says they're from your bank's fraud team. They say your account is under attack and you must move your money to a \"safe account,\" or read them a code that was just texted to you. A real bank will never ask you to do either."
+          ]
+        },
+        {
+          "heading": "Caller ID can lie",
+          "paragraphs": [
+            "Scammers can make any name or number appear on your screen, even your bank's real number or \"Police.\" Don't trust caller ID on its own."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Hang up and call back using a number you already know. Call your grandchild or their parents directly. Agree on a family code word ahead of time that a real family member would know."
+          ],
+          "bullets": [
+            "Nobody legitimate asks to be paid with gift cards, wire transfers, cryptocurrency, or cash picked up by a courier",
+            "Never read a texted verification code to someone who called you"
+          ]
+        }
+      ],
+      "keyPoint": "Hang up and call back on a number you know. Secrecy and rush are signs of a scam."
+    },
+    "actions": [
+      "Hang up. You don't need to be polite to a scammer",
+      "Call the person or company back using a number you already have",
+      "Ask a question only the real person would know, or use your family code word",
+      "Never pay with gift cards, wire transfers, cryptocurrency, or cash by courier",
+      "Never share a code that was texted to you",
+      "Add your number to the Do Not Call Registry at donotcall.gov or 1-888-382-1222"
+    ]
+  },
+  {
+    "key": "popup",
+    "number": 4,
+    "title": "Tech-Support Pop-ups",
+    "summary": "Scary warnings on your screen that tell you to call \"Microsoft\" or \"Apple.\"",
+    "minutes": 10,
+    "iconKey": "monitor",
+    "examplesFile": "popup-scams.json",
+    "practice": ["popup-001", "popup-006", "popup-002", "popup-005"],
+    "lesson": {
+      "intro": "A tech-support scam starts with a loud, scary warning that suddenly fills your screen. It says your computer is infected and you must call a phone number right away.",
+      "sections": [
+        {
+          "heading": "What the warning looks like",
+          "paragraphs": [],
+          "bullets": [
+            "Red warning signs, flashing text, or a beeping or talking alarm",
+            "Microsoft, Apple, or Windows logos to look official",
+            "A phone number to call \"Certified Technicians\"",
+            "\"Do not turn off your computer\" or \"Do not close this window\""
+          ]
+        },
+        {
+          "heading": "What really happens if you call",
+          "paragraphs": [
+            "The \"technician\" asks you to install a program so they can control your computer. They show you fake problems, charge you for repairs you don't need, and may get into your bank accounts. Some then call back later pretending to offer a refund."
+          ]
+        },
+        {
+          "heading": "The truth",
+          "paragraphs": [
+            "Microsoft and Apple never put phone numbers in error messages, and they never call you out of the blue. The warning is just a web page. Your computer is almost always fine."
+          ]
+        }
+      ],
+      "keyPoint": "Never call a number from a pop-up. Close the browser, and your computer is almost always fine."
+    },
+    "actions": [
+      "Don't call the number and don't click anything on the warning",
+      "Close the web browser. If it won't close, restart the computer",
+      "Never let a stranger connect to your computer remotely",
+      "If you already let someone in, turn off the computer and have a trusted person check it",
+      "Change your passwords from a different device, and call your bank if you paid anything",
+      "Keep your computer's automatic updates turned on"
+    ]
+  },
+  {
+    "key": "government",
+    "number": 5,
+    "title": "Government Impostor Scams",
+    "summary": "Fake calls and letters from the IRS, Social Security, and Medicare.",
+    "minutes": 12,
+    "iconKey": "landmark",
+    "examplesFile": "government-scams.json",
+    "practice": ["gov-001", "gov-002", "gov-006", "gov-004"],
+    "lesson": {
+      "intro": "Scammers love to pretend to be the government, because people take official warnings seriously. They threaten arrest, lost benefits, or legal trouble unless you act right now.",
+      "sections": [
+        {
+          "heading": "What the real agencies will NOT do",
+          "paragraphs": [],
+          "bullets": [
+            "The IRS will not call to demand immediate payment, threaten arrest, or ask for gift cards, wire transfers, or cryptocurrency",
+            "Social Security will not \"suspend\" your Social Security number or threaten you",
+            "Medicare will not call you out of the blue to ask for your Medicare number",
+            "No government agency will ask you to pay at a Bitcoin ATM or keep the call secret"
+          ]
+        },
+        {
+          "heading": "How they really reach you",
+          "paragraphs": [
+            "If the IRS needs to reach you about taxes you owe, it usually starts by sending a letter in the mail. Real agencies give you time, explain your rights, and let you call them back."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Hang up, and call the agency yourself using the official number below. If the problem is real, they will tell you."
+          ],
+          "bullets": [
+            "IRS: 1-800-829-1040",
+            "Social Security: 1-800-772-1213",
+            "Medicare: 1-800-MEDICARE (1-800-633-4227)"
+          ]
+        }
+      ],
+      "keyPoint": "Government agencies don't threaten, rush, or ask for gift cards. Hang up and call the official number."
+    },
+    "actions": [
+      "Hang up or don't reply",
+      "Don't give your Social Security, Medicare, or bank numbers to anyone who contacted you",
+      "Call the agency yourself using the official number on its .gov website",
+      "Report IRS impostors at tigta.gov and Social Security impostors at oig.ssa.gov",
+      "Report it to the FTC at reportfraud.ftc.gov",
+      "If you paid with a gift card, call the card company right away and keep the receipt"
+    ]
+  },
+  {
+    "key": "marketplace",
+    "number": 6,
+    "title": "Online Marketplace Scams",
+    "summary": "Tricks on Facebook Marketplace, Craigslist, and online shopping sites.",
+    "minutes": 10,
+    "iconKey": "cart",
+    "examplesFile": "marketplace-scams.json",
+    "practice": ["market-001", "market-004", "market-002", "market-006"],
+    "lesson": {
+      "intro": "Buying and selling online is handy, and scammers know it. Whether you're the buyer or the seller, a few tricks show up again and again.",
+      "sections": [
+        {
+          "heading": "When you're selling",
+          "paragraphs": [],
+          "bullets": [
+            "A \"buyer\" sends a check for MORE than your price and asks you to send back the difference. The check later bounces, and you lose the money",
+            "A \"buyer\" asks you to read them a code sent to your phone \"to prove you're real.\" That code lets them take over your account"
+          ]
+        },
+        {
+          "heading": "When you're buying",
+          "paragraphs": [],
+          "bullets": [
+            "Prices that are far too good to be true, like a puppy, car, or concert tickets for a fraction of the normal cost",
+            "The seller can't meet in person and wants a deposit first",
+            "They push you to pay with Zelle, Venmo, gift cards, or a wire transfer, which are hard to get back"
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Meet in a public place (many police stations have safe exchange spots), see the item before you pay, and pay in person. When buying from a website, use a credit card, which gives you the most protection."
+          ]
+        }
+      ],
+      "keyPoint": "See it before you pay, never accept overpayments, and never share a code texted to you."
+    },
+    "actions": [
+      "Don't send money back from an overpayment, and don't ship before the payment truly clears",
+      "Never share a verification code texted to your phone",
+      "Meet in a public place and see the item before you pay",
+      "Use a credit card for online purchases",
+      "Report the account to the marketplace and block it",
+      "If you paid, contact your bank or payment app right away"
+    ]
+  },
+  {
+    "key": "romance",
+    "number": 7,
+    "title": "Romance Scams",
+    "summary": "Online \"sweethearts\" who build trust and then ask for money.",
+    "minutes": 12,
+    "iconKey": "heart",
+    "examplesFile": "romance-scams.json",
+    "practice": ["romance-001", "romance-002", "romance-006", "romance-004"],
+    "lesson": {
+      "intro": "Romance scammers create fake online profiles to build a loving relationship. It can last weeks or months. Then there's an emergency, and they need money. These scams cause some of the biggest losses, and the heartbreak too.",
+      "sections": [
+        {
+          "heading": "Warning signs",
+          "paragraphs": [],
+          "bullets": [
+            "They say \"I love you\" very quickly",
+            "They live far away: overseas, on an oil rig, or in the military",
+            "They always have a reason they can't video chat or meet in person",
+            "They ask you to move from the dating site to texting or WhatsApp",
+            "There's suddenly an emergency: medical bills, customs fees, a plane ticket to finally visit",
+            "They offer to teach you about investing in cryptocurrency"
+          ]
+        },
+        {
+          "heading": "Why kind people fall for it",
+          "paragraphs": [
+            "These scammers are professionals who use scripts. They're patient and attentive, and they make you feel special. Being fooled has nothing to do with being foolish."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Never send money, gift cards, or crypto to someone you have only met online. Talk to a trusted friend or family member about a new online relationship. Scammers will try to keep it secret."
+          ]
+        }
+      ],
+      "keyPoint": "Never send money to someone you've only met online, no matter how real the relationship feels."
+    },
+    "actions": [
+      "Stop sending money and stop sharing personal information",
+      "Talk to a trusted friend or family member about it",
+      "Do a reverse image search on their photos (a family member can help)",
+      "Report the profile to the dating site or social media app",
+      "Report it to the FBI at ic3.gov and the FTC at reportfraud.ftc.gov",
+      "If you sent money, call your bank or the payment company right away"
+    ]
+  },
+  {
+    "key": "investment",
+    "number": 8,
+    "title": "Investment & Crypto Scams",
+    "summary": "\"Guaranteed\" returns, crypto ATMs, and fake trading apps.",
+    "minutes": 12,
+    "iconKey": "trending",
+    "examplesFile": "investment-scams.json",
+    "practice": ["invest-001", "invest-003", "invest-006", "invest-005"],
+    "lesson": {
+      "intro": "Investment scams promise to grow your money quickly and safely. Today many use cryptocurrency, because it's hard to trace and nearly impossible to get back.",
+      "sections": [
+        {
+          "heading": "Warning signs",
+          "paragraphs": [],
+          "bullets": [
+            "\"Guaranteed\" returns, \"no risk,\" or doubling your money",
+            "Pressure to invest right now before you \"miss out\"",
+            "A new online friend or \"mentor\" who wants to teach you to trade",
+            "A trading website or app that shows big gains, but you have to pay \"fees\" or \"taxes\" to withdraw",
+            "Being told to pay at a Bitcoin ATM or to move your savings into crypto"
+          ]
+        },
+        {
+          "heading": "The \"recovery\" trap",
+          "paragraphs": [
+            "After a loss, scammers may contact you again pretending to be lawyers or agents who can get your money back for an upfront fee. That's a second scam."
+          ]
+        },
+        {
+          "heading": "The safe habit",
+          "paragraphs": [
+            "Check anyone offering investments at brokercheck.finra.org and investor.gov. Talk to someone you trust before moving any savings. Real investments never come with guarantees."
+          ]
+        }
+      ],
+      "keyPoint": "Guaranteed returns and crypto pressure mean scam. Check first, and never pay to withdraw your own money."
+    },
+    "actions": [
+      "Don't send more money, even if the app says you need to pay a fee to withdraw",
+      "Never use a Bitcoin ATM because someone told you to",
+      "Look up the person or company at brokercheck.finra.org and investor.gov",
+      "Talk to a trusted family member or your own financial advisor",
+      "Report it at ic3.gov and reportfraud.ftc.gov",
+      "Beware of anyone who offers to recover your lost money for a fee"
+    ]
+  }
+]

@@ -1,0 +1,210 @@
+[
+  {
+    "id": "f-001",
+    "category": "email",
+    "question": "An email from \"Your Bank\" says there's a problem with your account and has a big \"Fix It Now\" button. The email uses your real name. What's the safest choice?",
+    "options": [
+      "Sign in through your bank's app or a web address you type yourself",
+      "Click the button, since it used your real name",
+      "Reply and ask what the problem is",
+      "Forward it to your bank's email"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Scammers can find your name easily. Whatever the email looks like, go to your bank yourself instead of using its links."
+  },
+  {
+    "id": "f-002",
+    "category": "email",
+    "question": "An email says \"Your Geek Squad subscription renewed for $399. Call to cancel.\" You never had Geek Squad. What should you do?",
+    "options": [
+      "Call to cancel the charge",
+      "Ignore and delete it. Check your bank or card statement if you're unsure",
+      "Reply asking for a refund",
+      "Click the link to cancel"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Fake renewal emails want you to call, where the \"agent\" will try to get into your computer or bank. Check your real statement instead."
+  },
+  {
+    "id": "f-003",
+    "category": "text",
+    "question": "A text says you owe $3.95 for an unpaid toll and includes a link. You did drive on a toll road recently. What should you do?",
+    "options": [
+      "Pay it, since it's a small amount",
+      "Reply to ask which road",
+      "Check your toll account using the official website or app you already use",
+      "Forward it to friends to warn them"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Fake toll texts are very common, and the small amount is meant to make you pay without thinking. The real goal is your card number. Check your account through the official site."
+  },
+  {
+    "id": "f-004",
+    "category": "text",
+    "question": "What's the best response to a text from an unknown number that just says \"Hi, how are you?\"",
+    "options": [
+      "Reply politely",
+      "Ask who it is",
+      "Reply STOP",
+      "Don't reply. Delete it and block the number"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Friendly texts from strangers are often the start of romance or investment scams. Not replying is the safest choice."
+  },
+  {
+    "id": "f-005",
+    "category": "phone",
+    "question": "Your \"granddaughter\" calls crying about an emergency. You ask for the family code word and she says she forgot it. What should you do?",
+    "options": [
+      "Hang up and call her, or her parents, on numbers you know",
+      "Send the money anyway, since she's upset",
+      "Ask her to call back tomorrow",
+      "Send half the money"
+    ],
+    "correctAnswer": 0,
+    "explanation": "If the caller can't give the code word, treat it as a scam. A quick call to a number you know will tell you the truth."
+  },
+  {
+    "id": "f-006",
+    "category": "phone",
+    "question": "A caller from your \"bank\" asks you to read them the code they just texted you, to stop a fraudulent charge. What should you do?",
+    "options": [
+      "Read it quickly to stop the fraud",
+      "Never share it. Hang up and call the number on your card",
+      "Read only part of it",
+      "Ask them to read it to you first"
+    ],
+    "correctAnswer": 1,
+    "explanation": "That code lets the scammer into your account. Real banks never ask for it."
+  },
+  {
+    "id": "f-007",
+    "category": "popup",
+    "question": "Your screen freezes with a message: \"Apple Security Alert — Your iPhone is infected. Call Apple Support at 1-888-555-0123.\" What's true?",
+    "options": [
+      "Apple uses alerts like this",
+      "You should call quickly before your data is stolen",
+      "It's a fake web page. Close it and don't call",
+      "Only call if the number is toll-free"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Apple and Microsoft never put phone numbers in warnings. Close the browser tab or app."
+  },
+  {
+    "id": "f-008",
+    "category": "popup",
+    "question": "Which of these is a REAL software update?",
+    "options": [
+      "A browser pop-up saying \"Your Chrome is out of date, download the fix here\"",
+      "An email with an update attachment",
+      "A pop-up with a phone number to call for the update",
+      "An update offered in your computer's own Settings (Windows Update, or System Settings on a Mac)"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Real updates come from your device's own settings or app store, never from pop-ups, emails, or phone calls."
+  },
+  {
+    "id": "f-009",
+    "category": "government",
+    "question": "Which of these would the real IRS do?",
+    "options": [
+      "Send a letter by mail explaining what you owe and your right to appeal",
+      "Call and threaten arrest unless you pay today",
+      "Ask for payment in gift cards",
+      "Text you a link to pay"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Real IRS contact usually begins with a letter. It gives you time, payment options through irs.gov, and your right to disagree."
+  },
+  {
+    "id": "f-010",
+    "category": "government",
+    "question": "A text says you're eligible for a Social Security increase if you confirm your identity at \"ssa-benefits-update.com.\" What's true?",
+    "options": [
+      "You must click to get the increase",
+      "Increases happen automatically, and the real site ends in ssa.gov, so it's a scam",
+      "It's real because it mentions Social Security",
+      "Click, but only enter your name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Benefit increases are automatic. Any website not ending in .gov that claims to be Social Security is fake."
+  },
+  {
+    "id": "f-011",
+    "category": "marketplace",
+    "question": "You're selling a chair for $100. A buyer mails a check for $1,100 and asks you to send back $1,000. What should you do?",
+    "options": [
+      "Deposit the check and send the $1,000 back",
+      "Wait one day, then send the money",
+      "Don't accept it. This is an overpayment scam, and the check will bounce",
+      "Send back $900 instead"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Fake checks can seem to clear, then bounce days later, and you'd owe the bank the full amount. Never accept overpayments."
+  },
+  {
+    "id": "f-012",
+    "category": "marketplace",
+    "question": "What's the safest way to buy a used item from a stranger online?",
+    "options": [
+      "Pay a deposit by Zelle first",
+      "Have it shipped after paying with a gift card",
+      "Wire money to the seller",
+      "Meet in a public place, see the item, then pay"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Seeing the item in person before paying protects you. Many police stations have safe exchange spots."
+  },
+  {
+    "id": "f-013",
+    "category": "romance",
+    "question": "Your online sweetheart, whom you've never met, asks you to help with their plane ticket so they can finally visit. What should you do?",
+    "options": [
+      "Don't send money. Talk to a trusted friend or family member",
+      "Pay, since they're finally coming",
+      "Send gift cards instead",
+      "Pay half and they pay half"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The visit that needs your money is a classic romance scam ending. Talking it over with someone you trust can break the spell."
+  },
+  {
+    "id": "f-014",
+    "category": "romance",
+    "question": "Which is a HEALTHY sign in a new online relationship?",
+    "options": [
+      "They say \"I love you\" in the first week",
+      "They suggest a video call and meeting in a public place",
+      "They need money for an emergency",
+      "They ask you to keep the relationship secret"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Real people are happy to video chat and meet in public. Rushing, secrecy, and money requests are warning signs."
+  },
+  {
+    "id": "f-015",
+    "category": "investment",
+    "question": "A new online friend shows you how they made $10,000 on a crypto app and offers to help you start. What should you do?",
+    "options": [
+      "Start with a small amount",
+      "Ask for screenshots first",
+      "Decline. Online friends who push investing are a common scam",
+      "Invest only what you can afford to lose"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Fake friendships that lead to investing are one of the most costly scams today. The app and the profits are fake."
+  },
+  {
+    "id": "f-016",
+    "category": "investment",
+    "question": "You realize you've been scammed out of money. What should you do?",
+    "options": [
+      "Keep it to yourself because you're embarrassed",
+      "Pay a recovery company to get it back",
+      "Send more money to unlock the account",
+      "Call your bank or payment company right away, and report it at reportfraud.ftc.gov and ic3.gov"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Acting fast gives you the best chance of stopping more losses. Reporting is free and helps protect others. Scams happen to smart people, and there's no shame in it."
+  }
+]

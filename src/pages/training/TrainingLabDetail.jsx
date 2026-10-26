@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { Shield, AlertTriangle, Mail, MessageSquare, ChevronDown, XCircle, BookOpen, Monitor, Printer, ArrowLeft, ShoppingCart, ChevronUp } from 'lucide-react';
+import { exampleType } from '../../training/exampleTypes.jsx';
 
 // ---- Example Detail View ----
 export default function TrainingLabDetail({ example, navigateTo, categoryKey }) {
   const [showRedFlags, setShowRedFlags] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
-  const typeConfig = {
-    email: { icon: <Mail className="w-5 h-5" />, label: 'EMAIL', bg: 'bg-blue-100 text-blue-700', headerBg: 'bg-blue-50' },
-    text: { icon: <MessageSquare className="w-5 h-5" />, label: 'TEXT MESSAGE', bg: 'bg-green-100 text-green-700', headerBg: 'bg-green-50' },
-    marketplace: { icon: <ShoppingCart className="w-5 h-5" />, label: 'MARKETPLACE', bg: 'bg-purple-100 text-purple-700', headerBg: 'bg-purple-50' },
-    popup: { icon: <Monitor className="w-5 h-5" />, label: 'POP-UP', bg: 'bg-red-100 text-red-700', headerBg: 'bg-red-50' }
-  };
-  const tc = typeConfig[example.type] || typeConfig.email;
+  const t = exampleType(example.type);
+  const tc = { icon: <t.Icon className="w-5 h-5" />, label: t.label, bg: t.bg, headerBg: t.headerBg };
 
   const handlePrint = () => {
     window.print();

@@ -97,5 +97,18 @@
     ],
     "explanation": "A website cannot scan your computer for viruses — this is a fundamental limitation of web browsers for security reasons. Any pop-up claiming to have found viruses on your computer is 100% fake, every time, no exceptions. These scam pop-ups either try to sell you fake antivirus software (stealing your credit card info) or trick you into downloading actual malware disguised as 'antivirus.' Use only legitimate antivirus software like Norton, Bitdefender, or Malwarebytes — downloaded directly from their official websites.",
     "howToSpot": "Websites cannot scan your computer. Any browser pop-up claiming to have found viruses is always fake. Only trust antivirus software you installed yourself from a legitimate source."
+  },
+  {
+    "id": "popup-006",
+    "title": "A Real Windows Update Notice",
+    "type": "popup",
+    "difficulty": "intermediate",
+    "isScam": false,
+    "sender": "Windows notification (bottom-right corner of the screen)",
+    "subject": "Windows Update",
+    "body": "Updates are available\n\nYour device needs to restart to finish installing important security updates. Save your work, then restart now, or schedule a time that works for you.\n\n[ Restart now ]   [ Schedule the restart ]   [ Not now ]",
+    "redFlags": [],
+    "explanation": "This is a normal Windows Update message. It appears as a small notification from Windows itself, not inside a web page. It has no phone number, no countdown, and no scary warnings, and it lets you choose when to restart.",
+    "howToSpot": "Real updates come from your computer's own Settings (Windows Update, or System Settings on a Mac). They never ask you to call anyone or pay."
   }
 ]
