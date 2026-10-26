@@ -42,11 +42,15 @@ const parse = (v) => {
 };
 
 function fromRecord(r) {
+  const extras = parse(r.extras) ?? {};
   return {
     modules: parse(r.modules) ?? {},
     finalExam: parse(r.finalExam),
     lastModuleKey: r.lastModuleKey ?? null,
     certificateId: r.certificateId ?? null,
+    weekly: extras.weekly ?? {},
+    familyPlan: extras.familyPlan ?? {},
+    badgesSeen: extras.badgesSeen ?? null,
   };
 }
 
@@ -56,6 +60,7 @@ function toFields(p) {
     finalExam: p.finalExam ? JSON.stringify(p.finalExam) : null,
     lastModuleKey: p.lastModuleKey ?? null,
     certificateId: p.certificateId ?? null,
+    extras: JSON.stringify({ weekly: p.weekly ?? {}, familyPlan: p.familyPlan ?? {}, badgesSeen: p.badgesSeen ?? null }),
   };
 }
 

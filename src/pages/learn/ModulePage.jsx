@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, BookOpen, Search, ListChecks, ClipboardCheck, CheckCircle, Lock, Lightbulb, Printer,
-  ShieldAlert, ShieldCheck, XCircle, Award, UserPlus,
+  ShieldAlert, ShieldCheck, XCircle, Award, UserPlus, MessageCircle, ThumbsUp,
 } from 'lucide-react';
 import config from '../../config.json';
 import { PATHS } from '../../routes.js';
@@ -11,7 +11,7 @@ import { useProgress } from '../../member/useProgressState.js';
 import { useTrainingData } from '../../training/content.js';
 import { ExampleMessage, ModuleIcon } from '../../training/exampleTypes.jsx';
 import {
-  STEPS, isStepDone, isUnlocked, moduleProgress, nextStep, recordModuleScore, recordStep,
+  STEPS, blockingModule, isStepDone, isUnlocked, moduleProgress, nextStep, recordModuleScore, recordStep,
 } from '../../training/progress.js';
 import QuizRunner from '../../components/learn/QuizRunner.jsx';
 import { BigButton, ErrorBlock, LoadingBlock } from '../../components/learn/LearnParts.jsx';
@@ -38,7 +38,7 @@ export default function ModulePage() {
   if (!module) return <Navigate to={PATHS.learn} replace />;
 
   if (!isUnlocked(progress, modules, index)) {
-    const prev = modules[index - 1];
+    const prev = blockingModule(modules, index);
     return (
       <Shell>
         <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center">
@@ -66,7 +66,9 @@ export default function ModulePage() {
   };
 
   const questions = quiz.filter((q) => q.category === moduleKey);
-  const nextModule = modules[index + 1];
+  // After passing, go to the next lesson that isn't finished yet (or the final exam).
+  const nextModule = modules.slice(index + 1).find((m) => !moduleProgress(progress, m.key).passed)
+    ?? modules.find((m, i) => i !== index && !moduleProgress(progress, m.key).passed);
 
   return (
     <Shell>
@@ -87,7 +89,8 @@ export default function ModulePage() {
         <nav aria-label="Lesson steps">
           <ol className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {STEPS.map((s, i) => {
-              const { label, Icon } = STEP_INFO[s];
+              const { Icon } = STEP_INFO[s];
+              const label = s === 'practice' && module.practiceType === 'respond' ? 'What Would You Say?' : STEP_INFO[s].label;
               const done = isStepDone(mp, s);
               const active = s === step;
               const open = canOpen(s);
@@ -117,8 +120,11 @@ export default function ModulePage() {
         </nav>
       </header>
 
-      {step === 'learn' && <LessonStep module={module} onDone={() => completeStep('learn', 'practice')} />}
-      {step === 'practice' && (
+      {step === 'learn' && <LessonStep module={module} nextLabel={module.practiceType === 'respond' ? 'What Would You Say?' : 'Spot the Red Flags'} onDone={() => completeStep('learn', 'practice')} />}
+      {step === 'practice' && module.practiceType === 'respond' && (
+        <RespondStep key={moduleKey} items={module.responses ?? []} onDone={() => completeStep('practice', 'actions')} />
+      )}
+      {step === 'practice' && module.practiceType !== 'respond' && (
         <PracticeStep
           key={moduleKey}
           items={module.practice.map((id) => (examples[moduleKey] || []).find((e) => e.id === id)).filter(Boolean)}
@@ -152,7 +158,7 @@ function Card({ children }) {
 }
 
 // ---- Step 1: Learn ----
-function LessonStep({ module, onDone }) {
+function LessonStep({ module, nextLabel, onDone }) {
   const { lesson } = module;
   return (
     <Card>
@@ -178,7 +184,7 @@ function LessonStep({ module, onDone }) {
         <Lightbulb className="w-7 h-7 text-amber-600 flex-shrink-0" />
         <p className="text-xl font-semibold text-amber-900"><span className="sr-only">Remember: </span>{lesson.keyPoint}</p>
       </div>
-      <BigButton tone="orange" onClick={onDone}>Next: Spot the Red Flags <ArrowRight className="w-5 h-5" /></BigButton>
+      <BigButton tone="orange" onClick={onDone}>Next: {nextLabel} <ArrowRight className="w-5 h-5" /></BigButton>
     </Card>
   );
 }
@@ -259,6 +265,64 @@ function PracticeStep({ items, onDone }) {
   );
 }
 
+// ---- Step 2 (Start Here lesson): "What would you say?" ----
+function RespondStep({ items, onDone }) {
+  const [i, setI] = useState(0);
+  const [choice, setChoice] = useState(null);
+  const item = items[i];
+
+  useEffect(() => { window.scrollTo(0, 0); }, [i]);
+  if (!item) return <Card><BigButton tone="orange" onClick={onDone}>Next: What To Do <ArrowRight className="w-5 h-5" /></BigButton></Card>;
+
+  const last = i === items.length - 1;
+  const chosen = choice !== null ? item.options[choice] : null;
+  const best = item.options.find((o) => o.best);
+
+  return (
+    <Card>
+      <div className="flex items-center justify-between mb-4 gap-3">
+        <h2 className="text-2xl font-bold text-slate-800">What would you say?</h2>
+        <p className="text-lg text-slate-600">Situation {i + 1} of {items.length}</p>
+      </div>
+      <div className="bg-slate-100 border-2 border-slate-300 rounded-xl p-5 mb-6">
+        <p className="text-lg text-slate-900 leading-relaxed">{item.situation}</p>
+      </div>
+      <div className="space-y-3" role="group" aria-label="Your response">
+        {item.options.map((o, k) => {
+          const picked = choice === k;
+          let style = 'border-slate-300 bg-white hover:border-blue-400 hover:bg-blue-50';
+          if (choice !== null) style = o.best ? 'border-green-600 bg-green-50' : picked ? 'border-amber-500 bg-amber-50' : 'border-slate-200 bg-slate-50 opacity-70';
+          return (
+            <button key={k} type="button" disabled={choice !== null} onClick={() => setChoice(k)}
+              className={`w-full p-4 min-h-[56px] rounded-xl border-2 text-left text-lg text-slate-800 flex gap-3 items-start ${style}`}>
+              {choice !== null && o.best ? <ThumbsUp className="w-6 h-6 text-green-700 flex-shrink-0" /> : <MessageCircle className="w-6 h-6 text-slate-500 flex-shrink-0" />}
+              <span>{o.text}</span>
+            </button>
+          );
+        })}
+      </div>
+      {chosen && (
+        <div className="mt-6 space-y-4" role="status">
+          <div className={`p-5 rounded-xl border-2 ${chosen.best ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
+            <p className={`text-xl font-bold mb-1 ${chosen.best ? 'text-green-800' : 'text-amber-900'}`}>{chosen.best ? 'Great answer!' : 'There\'s a better way.'}</p>
+            <p className="text-lg text-slate-800">{chosen.feedback}</p>
+          </div>
+          {!chosen.best && (
+            <div className="p-5 rounded-xl border-2 bg-green-50 border-green-300">
+              <p className="text-lg font-bold text-green-800 mb-1">Try saying:</p>
+              <p className="text-lg text-slate-800">{best.text}</p>
+              <p className="text-base text-slate-700 mt-2">{best.feedback}</p>
+            </div>
+          )}
+          {last
+            ? <BigButton tone="orange" onClick={onDone}>Next: What To Do <ArrowRight className="w-5 h-5" /></BigButton>
+            : <BigButton onClick={() => { setI(i + 1); setChoice(null); }}>Next Situation <ArrowRight className="w-5 h-5" /></BigButton>}
+        </div>
+      )}
+    </Card>
+  );
+}
+
 // ---- Step 3: What To Do ----
 function ActionsStep({ module, onDone }) {
   const [checked, setChecked] = useState({});
@@ -277,6 +341,17 @@ function ActionsStep({ module, onDone }) {
             </li>
           ))}
         </ul>
+        {module.sayThis?.length > 0 && (
+          <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-5 mb-6">
+            <h3 className="text-xl font-bold text-indigo-900 mb-3 flex items-center gap-2"><MessageCircle className="w-6 h-6" /> What to say</h3>
+            <ul className="space-y-2">
+              {module.sayThis.map((line) => (
+                <li key={line} className="text-lg text-indigo-950 bg-white border border-indigo-200 rounded-xl px-4 py-3">{line}</li>
+              ))}
+            </ul>
+            <p className="text-base text-indigo-900 mt-3">Tip: write your favorite phrase on a card and keep it by the phone.</p>
+          </div>
+        )}
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 text-lg text-slate-700">
           Need help now? See the <Link to={PATHS.emergency} className="text-blue-700 font-semibold underline">Emergency Directory</Link> for
           numbers to call, including the AARP Fraud Watch Helpline (877-908-3360).
@@ -301,7 +376,7 @@ function CheckStep({ module, questions, nextModule, onFinish }) {
     <BigButton as={Link} to={PATHS.finalExam} tone="green"><Award className="w-6 h-6" /> Take the Final Exam</BigButton>
   ) : (
     <div className="w-full space-y-3">
-      <p className="text-lg text-slate-700 text-center">You've finished all 8 lessons! Create a free account to take the final exam and get your certificate. Your progress comes with you.</p>
+      <p className="text-lg text-slate-700 text-center">You've finished all the lessons! Create a free account to take the final exam and get your certificate. Your progress comes with you.</p>
       <BigButton as={Link} to={PATHS.signup} tone="green"><UserPlus className="w-6 h-6" /> Create a Free Account</BigButton>
     </div>
   );

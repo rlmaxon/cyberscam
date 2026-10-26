@@ -1,13 +1,174 @@
 [
   {
-    "key": "email",
+    "key": "mindset",
     "number": 1,
+    "standalone": true,
+    "title": "Start Here: Why Scams Work",
+    "summary": "The scammer's playbook, and your permission to hang up.",
+    "minutes": 10,
+    "iconKey": "shield",
+    "examplesFile": null,
+    "practiceType": "respond",
+    "practice": [],
+    "responses": [
+      {
+        "id": "respond-1",
+        "situation": "Your phone rings. A calm, official-sounding man says: \"This is the fraud department at your bank. Your account is being drained right now. Don't hang up, or you could lose everything.\"",
+        "options": [
+          {
+            "text": "\"Oh no! What do I need to do?\"",
+            "best": false,
+            "feedback": "This is exactly what he wants. Now he's in charge of the conversation, and the next step will be a code, a \"safe account,\" or gift cards."
+          },
+          {
+            "text": "\"How do I know you're really from my bank?\"",
+            "best": false,
+            "feedback": "A fair question, but it keeps you on the line, and scammers always have a convincing answer ready. You don't need to win an argument. You just need to hang up."
+          },
+          {
+            "text": "\"I'm going to hang up and call the number on the back of my card.\" (Then hang up.)",
+            "best": true,
+            "feedback": "Perfect. If there's a real problem, your bank will still be there when you call. A real bank will never be upset that you checked."
+          }
+        ]
+      },
+      {
+        "id": "respond-2",
+        "situation": "A crying voice that sounds like your grandson says: \"Grandma, I'm in trouble and I need money for bail. Please don't tell Mom and Dad. I'm so embarrassed.\"",
+        "options": [
+          {
+            "text": "\"Oh honey, of course. How much do you need?\"",
+            "best": false,
+            "feedback": "Love makes us want to help right away. That's the feeling scammers are counting on. Voices can now be copied with AI, so even a familiar voice needs checking."
+          },
+          {
+            "text": "\"I love you. I'm going to hang up and call you right back on your own phone.\" (Then call him, or his parents.)",
+            "best": true,
+            "feedback": "Exactly right. A real grandchild will understand. If the call was a scam, you'll find out in one quick phone call. Better still, ask for your family code word."
+          },
+          {
+            "text": "\"I won't tell anyone. Where should I send it?\"",
+            "best": false,
+            "feedback": "\"Keep it a secret\" is one of the biggest warning signs there is. Scammers want to keep you away from the people who would spot the scam."
+          }
+        ]
+      },
+      {
+        "id": "respond-3",
+        "situation": "A friendly caller offers you a free medical alert system \"covered by Medicare.\" When you hesitate, she says, \"It will only take a minute. I just need your Medicare number. You wouldn't want to miss out, would you?\"",
+        "options": [
+          {
+            "text": "\"No, thank you.\" (Then hang up, without waiting for her to finish.)",
+            "best": true,
+            "feedback": "That's all it takes. You don't owe a stranger a reason, and hanging up isn't rude. It's smart."
+          },
+          {
+            "text": "\"I'm sorry, I don't think so. Could you tell me a little more first?\"",
+            "best": false,
+            "feedback": "Apologizing and asking for more information keeps the door open. A pushy caller will use every extra minute to wear you down."
+          },
+          {
+            "text": "\"I don't want to be rude... I suppose I can give you the number.\"",
+            "best": false,
+            "feedback": "Being polite to a scammer only helps the scammer. Your Medicare number is like a credit card number. Never give it to someone who called you."
+          }
+        ]
+      },
+      {
+        "id": "respond-4",
+        "situation": "Someone you've been chatting with online for two months says they love you. Now they need $3,000 for a medical bill and say, \"If you really cared about me, you'd help.\"",
+        "options": [
+          {
+            "text": "Send a smaller amount so they don't feel hurt.",
+            "best": false,
+            "feedback": "Any amount leads to another request, and then another. Guilt (\"if you really cared\") is a pressure tactic, not love."
+          },
+          {
+            "text": "\"I don't send money to anyone I haven't met in person. I'm going to talk this over with my daughter.\"",
+            "best": true,
+            "feedback": "A clear, kind boundary. Someone who truly cares about you will respect it. A scammer will get angry, push harder, or disappear."
+          },
+          {
+            "text": "Ask them to promise they'll pay it back.",
+            "best": false,
+            "feedback": "Promises cost a scammer nothing. The money would be gone the moment you sent it."
+          }
+        ]
+      }
+    ],
+    "lesson": {
+      "intro": "Scams don't work because people are foolish. They work because scammers are professionals who use the same playbook again and again, and because most of us were raised to be polite, helpful, and trusting. Those are good qualities. Scammers count on them.",
+      "sections": [
+        {
+          "heading": "The scammer's playbook",
+          "paragraphs": [
+            "Almost every scam uses some of these tricks. Once you know them, you'll start to see them everywhere."
+          ],
+          "bullets": [
+            "Stir up strong feelings: fear, panic, excitement, or love. When we're upset or excited, it's much harder to think clearly. Research shows scammers deliberately use this.",
+            "Rush you: \"right now,\" \"within the hour,\" \"before it's too late.\"",
+            "Pretend to be someone in charge: your bank, the police, the government, Microsoft.",
+            "Ask for secrecy: \"Don't tell your family,\" \"don't tell the bank teller.\"",
+            "Use your good manners: they know polite people don't like to interrupt, hang up, or say no."
+          ]
+        },
+        {
+          "heading": "Why it's so hard to hang up",
+          "paragraphs": [
+            "Many of us were taught it's rude to hang up on someone, to interrupt, or to say no without a good reason. Scammers know this. They keep talking, ask friendly questions, act hurt, or get angry, all to keep you on the line.",
+            "Here's the truth: being polite to a scammer only helps the scammer. The longer the call, the more chances they have to wear you down."
+          ]
+        },
+        {
+          "heading": "Your permission slip",
+          "paragraphs": [],
+          "bullets": [
+            "You may hang up without saying goodbye.",
+            "You don't owe a stranger an explanation. \"No, thank you\" is a complete answer.",
+            "It's always okay to say \"I need to talk to my family first.\" A real company will wait.",
+            "Real banks, agencies, and family members will never be upset that you hung up and called them back to check.",
+            "Letting unknown numbers go to voicemail is perfectly fine. Real callers leave a message."
+          ]
+        },
+        {
+          "heading": "The rule to remember: Pause, Hang up, Check",
+          "paragraphs": [
+            "Whenever you feel rushed, scared, excited, or told to keep a secret: pause. Hang up, or don't reply. Then check, by calling a number you already know or by talking to someone you trust.",
+            "And if you were ever fooled, it's not your fault. Scams fool doctors, lawyers, and police officers too. Report it and tell someone. That's how scams are stopped."
+          ]
+        }
+      ],
+      "keyPoint": "Strong feelings + hurry + secrecy = scam. You always have permission to hang up and check."
+    },
+    "actions": [
+      "Keep a short \"no\" script by the phone (see the phrases below)",
+      "Let unknown numbers go to voicemail. Real callers leave a message",
+      "Hang up the moment you feel rushed, scared, or told to keep a secret",
+      "Call back using a number you already know, never one the caller gives you",
+      "Before sending money or sharing information, talk it over with someone you trust",
+      "If you were tricked, it's not your fault. Report it and tell someone"
+    ],
+    "sayThis": [
+      "No, thank you. (Then hang up.)",
+      "I don't do business over the phone. I'll call the number on my statement.",
+      "I never make decisions on the phone. I talk to my family first.",
+      "Please take me off your list. I'm hanging up now."
+    ]
+  },
+  {
+    "key": "email",
+    "number": 2,
     "title": "Phishing Emails",
     "summary": "Fake emails that pretend to be your bank, Amazon, or another company you trust.",
     "minutes": 10,
     "iconKey": "mail",
     "examplesFile": "email-scams.json",
-    "practice": ["email-001", "email-003", "email-004", "email-007"],
+    "practice": [
+      "email-001",
+      "email-003",
+      "email-004",
+      "email-007"
+    ],
     "lesson": {
       "intro": "Phishing (say it like \"fishing\") is when a scammer sends an email that looks like it's from a company you trust. They want you to click a link, open an attachment, or type in a password or card number.",
       "sections": [
@@ -45,17 +206,26 @@
       "If you clicked or typed a password, change that password right away",
       "If you shared a card or bank number, call your bank using the number on your card",
       "Forward phishing emails to reportphishing@apwg.org, then delete them"
+    ],
+    "sayThis": [
+      "(To yourself) \"I'll go to the company's website myself instead of clicking.\"",
+      "(To family) \"Can you look at this email with me before I do anything?\""
     ]
   },
   {
     "key": "text",
-    "number": 2,
+    "number": 3,
     "title": "Text Message Scams",
     "summary": "Fake texts about packages, tolls, bank alerts, and \"wrong numbers.\"",
     "minutes": 10,
     "iconKey": "message",
     "examplesFile": "text-scams.json",
-    "practice": ["text-001", "text-005", "text-003", "text-006"],
+    "practice": [
+      "text-001",
+      "text-005",
+      "text-003",
+      "text-006"
+    ],
     "lesson": {
       "intro": "Text message scams (sometimes called \"smishing\") work just like phishing emails, but they arrive on your phone. Because texts feel personal and urgent, they can be even more convincing.",
       "sections": [
@@ -91,17 +261,26 @@
       "Delete the text and block the number",
       "Check any package, toll, or bank issue using the company's real app or website",
       "If you entered card details, call your bank right away"
+    ],
+    "sayThis": [
+      "Say nothing at all. You never owe a stranger a reply, not even \"wrong number.\"",
+      "(To family) \"I got a strange text. Does this look real to you?\""
     ]
   },
   {
     "key": "phone",
-    "number": 3,
+    "number": 4,
     "title": "Phone & Voice Scams",
     "summary": "Calls from \"family in trouble,\" fake bank fraud departments, and AI voice copies.",
     "minutes": 12,
     "iconKey": "phone",
     "examplesFile": "phone-scams.json",
-    "practice": ["phone-001", "phone-002", "phone-005", "phone-003"],
+    "practice": [
+      "phone-001",
+      "phone-002",
+      "phone-005",
+      "phone-003"
+    ],
     "lesson": {
       "intro": "Some of the most costly scams start with a phone call. A calm, confident voice, or a frightened one that sounds like a family member, can be very hard to say no to.",
       "sections": [
@@ -144,17 +323,27 @@
       "Never pay with gift cards, wire transfers, cryptocurrency, or cash by courier",
       "Never share a code that was texted to you",
       "Add your number to the Do Not Call Registry at donotcall.gov or 1-888-382-1222"
+    ],
+    "sayThis": [
+      "\"I don't do business over the phone. I'll call you back at the number on my card.\"",
+      "\"What's our family code word?\"",
+      "\"I'm hanging up now.\""
     ]
   },
   {
     "key": "popup",
-    "number": 4,
+    "number": 5,
     "title": "Tech-Support Pop-ups",
     "summary": "Scary warnings on your screen that tell you to call \"Microsoft\" or \"Apple.\"",
     "minutes": 10,
     "iconKey": "monitor",
     "examplesFile": "popup-scams.json",
-    "practice": ["popup-001", "popup-006", "popup-002", "popup-005"],
+    "practice": [
+      "popup-001",
+      "popup-006",
+      "popup-002",
+      "popup-005"
+    ],
     "lesson": {
       "intro": "A tech-support scam starts with a loud, scary warning that suddenly fills your screen. It says your computer is infected and you must call a phone number right away.",
       "sections": [
@@ -190,17 +379,26 @@
       "If you already let someone in, turn off the computer and have a trusted person check it",
       "Change your passwords from a different device, and call your bank if you paid anything",
       "Keep your computer's automatic updates turned on"
+    ],
+    "sayThis": [
+      "(To a \"technician\") \"No. I don't let anyone into my computer.\"",
+      "\"I'm hanging up and calling my family.\""
     ]
   },
   {
     "key": "government",
-    "number": 5,
+    "number": 6,
     "title": "Government Impostor Scams",
     "summary": "Fake calls and letters from the IRS, Social Security, and Medicare.",
     "minutes": 12,
     "iconKey": "landmark",
     "examplesFile": "government-scams.json",
-    "practice": ["gov-001", "gov-002", "gov-006", "gov-004"],
+    "practice": [
+      "gov-001",
+      "gov-002",
+      "gov-006",
+      "gov-004"
+    ],
     "lesson": {
       "intro": "Scammers love to pretend to be the government, because people take official warnings seriously. They threaten arrest, lost benefits, or legal trouble unless you act right now.",
       "sections": [
@@ -241,17 +439,26 @@
       "Report IRS impostors at tigta.gov and Social Security impostors at oig.ssa.gov",
       "Report it to the FTC at reportfraud.ftc.gov",
       "If you paid with a gift card, call the card company right away and keep the receipt"
+    ],
+    "sayThis": [
+      "\"I'll call the agency myself at the official number.\"",
+      "\"I don't pay anything over the phone. Send me a letter.\""
     ]
   },
   {
     "key": "marketplace",
-    "number": 6,
+    "number": 7,
     "title": "Online Marketplace Scams",
     "summary": "Tricks on Facebook Marketplace, Craigslist, and online shopping sites.",
     "minutes": 10,
     "iconKey": "cart",
     "examplesFile": "marketplace-scams.json",
-    "practice": ["market-001", "market-004", "market-002", "market-006"],
+    "practice": [
+      "market-001",
+      "market-004",
+      "market-002",
+      "market-006"
+    ],
     "lesson": {
       "intro": "Buying and selling online is handy, and scammers know it. Whether you're the buyer or the seller, a few tricks show up again and again.",
       "sections": [
@@ -288,17 +495,26 @@
       "Use a credit card for online purchases",
       "Report the account to the marketplace and block it",
       "If you paid, contact your bank or payment app right away"
+    ],
+    "sayThis": [
+      "\"I only do cash or in-app payment, in person.\"",
+      "\"I never share codes from my phone.\""
     ]
   },
   {
     "key": "romance",
-    "number": 7,
+    "number": 8,
     "title": "Romance Scams",
     "summary": "Online \"sweethearts\" who build trust and then ask for money.",
     "minutes": 12,
     "iconKey": "heart",
     "examplesFile": "romance-scams.json",
-    "practice": ["romance-001", "romance-002", "romance-006", "romance-004"],
+    "practice": [
+      "romance-001",
+      "romance-002",
+      "romance-006",
+      "romance-004"
+    ],
     "lesson": {
       "intro": "Romance scammers create fake online profiles to build a loving relationship. It can last weeks or months. Then there's an emergency, and they need money. These scams cause some of the biggest losses, and the heartbreak too.",
       "sections": [
@@ -336,17 +552,27 @@
       "Report the profile to the dating site or social media app",
       "Report it to the FBI at ic3.gov and the FTC at reportfraud.ftc.gov",
       "If you sent money, call your bank or the payment company right away"
+    ],
+    "sayThis": [
+      "\"I don't send money to anyone I haven't met in person.\"",
+      "\"Let's video chat first.\"",
+      "\"I talk about big decisions with my family.\""
     ]
   },
   {
     "key": "investment",
-    "number": 8,
+    "number": 9,
     "title": "Investment & Crypto Scams",
     "summary": "\"Guaranteed\" returns, crypto ATMs, and fake trading apps.",
     "minutes": 12,
     "iconKey": "trending",
     "examplesFile": "investment-scams.json",
-    "practice": ["invest-001", "invest-003", "invest-006", "invest-005"],
+    "practice": [
+      "invest-001",
+      "invest-003",
+      "invest-006",
+      "invest-005"
+    ],
     "lesson": {
       "intro": "Investment scams promise to grow your money quickly and safely. Today many use cryptocurrency, because it's hard to trace and nearly impossible to get back.",
       "sections": [
@@ -383,6 +609,11 @@
       "Talk to a trusted family member or your own financial advisor",
       "Report it at ic3.gov and reportfraud.ftc.gov",
       "Beware of anyone who offers to recover your lost money for a fee"
+    ],
+    "sayThis": [
+      "\"I never invest over the phone or through an app someone sends me.\"",
+      "\"I'll check with my own advisor first.\"",
+      "\"I don't use Bitcoin ATMs.\""
     ]
   }
 ]

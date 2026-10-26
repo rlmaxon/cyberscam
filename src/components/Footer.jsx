@@ -38,6 +38,8 @@ export default function Footer() {
               <li><button onClick={() => go('landing')} className="hover:text-white transition-colors">Home</button></li>
               <li><button onClick={() => go('learn')} className="hover:text-white transition-colors">Training</button></li>
               <li><button onClick={() => go('training')} className="hover:text-white transition-colors">Scam Example Library</button></li>
+              <li><button onClick={() => go('scamOfTheWeek')} className="hover:text-white transition-colors">Scam of the Week</button></li>
+              <li><button onClick={() => go('familyPlan')} className="hover:text-white transition-colors">Family Safety Plan</button></li>
               <li><button onClick={() => go('resources')} className="hover:text-white transition-colors">Privacy Settings</button></li>
               <li><button onClick={() => go('marketplace')} className="hover:text-white transition-colors">Security Tools</button></li>
               <li><button onClick={() => go('emergency')} className="hover:text-white transition-colors">Emergency Hotline</button></li>

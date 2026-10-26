@@ -27,6 +27,10 @@ import ModulePage from './pages/learn/ModulePage.jsx';
 import FinalExamPage from './pages/learn/FinalExamPage.jsx';
 import CertificatePage from './pages/learn/CertificatePage.jsx';
 import VerifyCertificatePage from './pages/VerifyCertificatePage.jsx';
+import BadgesPage from './pages/learn/BadgesPage.jsx';
+import ScamOfTheWeekPage from './pages/learn/ScamOfTheWeekPage.jsx';
+import FamilyPlanPage from './pages/learn/FamilyPlanPage.jsx';
+import BadgeCelebration from './components/learn/BadgeCelebration.jsx';
 import { ProgressContext, useProgressState } from './member/useProgressState.js';
 import SignUpPage from './pages/account/SignUpPage.jsx';
 import VerifyEmailPage from './pages/account/VerifyEmailPage.jsx';
@@ -210,6 +214,10 @@ export default function SeniorCyberSecure() {
             <Route path={`${PATHS.learn}/:moduleKey`} element={<ModulePage />} />
             <Route path={`${PATHS.learn}/:moduleKey/:step`} element={<ModulePage />} />
             <Route path={`${PATHS.verify}/:certId`} element={<VerifyCertificatePage />} />
+            <Route path={PATHS.badges} element={<BadgesPage />} />
+            <Route path={PATHS.scamOfTheWeek} element={<ScamOfTheWeekPage />} />
+            <Route path={`${PATHS.scamOfTheWeek}/:weekId`} element={<ScamOfTheWeekPage />} />
+            <Route path={PATHS.familyPlan} element={<FamilyPlanPage />} />
             <Route path={PATHS.training} element={<TrainingLab />} />
             <Route path={`${PATHS.training}/quiz`} element={<TrainingLab view="quiz" />} />
             <Route path={`${PATHS.training}/:categoryKey`} element={<TrainingLab />} />
@@ -252,6 +260,7 @@ export default function SeniorCyberSecure() {
         )}
       </main>
 
+      {authState !== 'newPasswordRequired' && <BadgeCelebration />}
       <Footer />
     </div>
     </ProgressContext.Provider>

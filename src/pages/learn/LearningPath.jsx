@@ -10,6 +10,8 @@ import {
   moduleProgress, moduleStatus, passedCount, currentModuleIndex, stepsDone, nextStep, hasAnyProgress, allModulesPassed,
 } from '../../training/progress.js';
 import { LoadingBlock, ErrorBlock } from '../../components/learn/LearnParts.jsx';
+import ScamShield from '../../components/learn/ScamShield.jsx';
+import { CalendarCheck, Home, Medal } from 'lucide-react';
 
 export default function LearningPath() {
   const { modules, loading, error } = useTrainingData();
@@ -76,6 +78,24 @@ export default function LearningPath() {
           )}
         </section>
 
+        {/* Shield + extras */}
+        <section className="grid sm:grid-cols-[auto_1fr] gap-6 items-center bg-white rounded-2xl shadow border border-slate-200 p-6 mb-6" aria-label="Your Scam Shield and extras">
+          <Link to={PATHS.badges} className="mx-auto" aria-label="See my badges and Scam Shield">
+            <ScamShield progress={progress} modules={modules} size={150} />
+          </Link>
+          <div className="space-y-3">
+            <Link to={PATHS.badges} className="flex items-center gap-3 p-4 rounded-xl border-2 border-slate-200 hover:border-blue-400 text-lg font-semibold text-slate-800 min-h-[56px]">
+              <Medal className="w-6 h-6 text-amber-500" /> My badges
+            </Link>
+            <Link to={PATHS.scamOfTheWeek} className="flex items-center gap-3 p-4 rounded-xl border-2 border-slate-200 hover:border-blue-400 text-lg font-semibold text-slate-800 min-h-[56px]">
+              <CalendarCheck className="w-6 h-6 text-blue-600" /> This week's 2-minute Scam of the Week
+            </Link>
+            <Link to={PATHS.familyPlan} className="flex items-center gap-3 p-4 rounded-xl border-2 border-slate-200 hover:border-blue-400 text-lg font-semibold text-slate-800 min-h-[56px]">
+              <Home className="w-6 h-6 text-green-600" /> Family Safety Plan
+            </Link>
+          </div>
+        </section>
+
         {!isLoggedIn && (
           <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-5 mb-6 flex gap-3" role="note">
             <Info className="w-6 h-6 text-blue-700 flex-shrink-0 mt-0.5" />
@@ -103,7 +123,7 @@ export default function LearningPath() {
               );
             })}
             <li>
-              <FinalExamRow allDone={allDone} passed={finalPassed} score={progress.finalExam?.bestScore} />
+              <FinalExamRow allDone={allDone} passed={finalPassed} score={progress.finalExam?.bestScore} total={modules.length} />
             </li>
           </ol>
         </section>
@@ -119,6 +139,7 @@ export default function LearningPath() {
 }
 
 function ModuleRow({ module: m, status, steps, score }) {
+  const label = m.standalone ? m.title : `${m.number}. ${m.title}`;
   const locked = status === 'locked';
   const statusText = {
     completed: `Completed${score ? `, score ${score}%` : ''}`,
@@ -139,7 +160,7 @@ function ModuleRow({ module: m, status, steps, score }) {
         <ModuleIcon iconKey={m.iconKey} className="w-7 h-7" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className={`text-lg sm:text-xl font-bold ${locked ? 'text-slate-500' : 'text-slate-800'}`}>{m.number}. {m.title}</p>
+        <p className={`text-lg sm:text-xl font-bold ${locked ? 'text-slate-500' : 'text-slate-800'}`}>{label}</p>
         <p className={`text-base ${locked ? 'text-slate-500' : 'text-slate-600'}`}>{m.summary}</p>
         <p className="text-base text-slate-600 mt-1 flex items-center gap-2 flex-wrap">
           <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" /> {m.minutes} min</span>
@@ -154,7 +175,7 @@ function ModuleRow({ module: m, status, steps, score }) {
   return locked ? <div aria-disabled="true">{body}</div> : <Link to={`${PATHS.learn}/${m.key}`} className="block">{body}</Link>;
 }
 
-function FinalExamRow({ allDone, passed, score }) {
+function FinalExamRow({ allDone, passed, score, total }) {
   const body = (
     <div className={`flex items-center gap-4 p-4 sm:p-5 rounded-2xl border-2 ${allDone ? 'bg-green-50 border-green-300 hover:shadow-md' : 'bg-slate-100 border-slate-200'}`}>
       <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${allDone ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-500'}`}>
@@ -163,7 +184,7 @@ function FinalExamRow({ allDone, passed, score }) {
       <div className="flex-1">
         <p className={`text-lg sm:text-xl font-bold ${allDone ? 'text-slate-800' : 'text-slate-500'}`}>Final Exam & Certificate</p>
         <p className="text-base text-slate-600">
-          {passed ? `Passed${score ? ` with ${score}%` : ''}. Your certificate is ready.` : allDone ? '16 questions covering all lessons. Pass to earn your certificate.' : 'Unlocks after you finish all 8 lessons.'}
+          {passed ? `Passed${score ? ` with ${score}%` : ''}. Your certificate is ready.` : allDone ? 'Questions covering every lesson. Pass to earn your certificate.' : `Unlocks after you finish all ${total} lessons.`}
         </p>
       </div>
       <div className="flex-shrink-0">{passed ? <CheckCircle className="w-7 h-7 text-green-600" /> : allDone ? <ArrowRight className="w-7 h-7 text-green-700" /> : <Lock className="w-7 h-7 text-slate-400" />}</div>
