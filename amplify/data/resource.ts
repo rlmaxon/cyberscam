@@ -53,6 +53,85 @@ const schema = a.schema({
       allow.owner().to(['create', 'read', 'delete']),
       allow.publicApiKey().to(['get']),
     ]),
+
+  // ---- Family Circle ----
+  // A learner can let family members follow their progress. Nothing is shared until the
+  // learner sends an invite link AND approves each person who asks to join.
+  //
+  // The `owner` fields below are filled in by the server with the signed-in member's ID
+  // and can't be set to anyone else. The app reads them to know who an invite or request
+  // really came from, so nobody can pretend to be someone else. None of these models
+  // allow `update` by the owner of a request, invite or cheer, so owners can't be swapped.
+
+  // One per learner who shares. Holds a short summary (lessons passed, badges, last
+  // active) and never any quiz answers, email address, or Family Safety Plan details.
+  // `viewers` lists the members the learner approved; they can read it, nothing more.
+  FamilyShare: a
+    .model({
+      displayName: a.string().required(),
+      summary: a.json(),
+      viewers: a.string().array(),
+      // { [viewerId]: { name, relationship } } so the learner can see who's following
+      viewerNames: a.json(),
+      // Viewers can read who owns the share (to send cheers), but no one can change it.
+      owner: a.string().authorization((allow) => [
+        allow.owner().to(['read', 'delete']),
+        allow.ownersDefinedIn('viewers').to(['read']),
+      ]),
+    })
+    .authorization((allow) => [
+      allow.owner(),
+      allow.ownersDefinedIn('viewers').to(['read']),
+    ]),
+
+  // An invite link the learner sends to family. Anyone signed in who has the link can
+  // look it up by its exact ID (it can't be listed or searched). Using it only creates a
+  // request; the learner still has to approve it.
+  FamilyInvite: a
+    .model({
+      inviterName: a.string().required(),
+      expiresAt: a.datetime().required(),
+      owner: a.string(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'delete']),
+      allow.authenticated().to(['get']),
+    ]),
+
+  FamilyRequestKind: a.enum(['join', 'leave']),
+
+  // "Please let me follow your progress" (join), or "I'd like to stop following" (leave).
+  // Readable by the person who sent it and the learner it's addressed to (`approver`).
+  FamilyRequest: a
+    .model({
+      kind: a.ref('FamilyRequestKind').required(),
+      inviteId: a.id(),
+      shareId: a.id(),
+      requesterName: a.string().required(),
+      relationship: a.string(),
+      // Shown only to the person who sent the request ("Waiting for Mary to say yes")
+      inviterName: a.string(),
+      approver: a.string().required(),
+      owner: a.string(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'delete']),
+      allow.ownerDefinedIn('approver').to(['read', 'delete']),
+    ]),
+
+  // A short, preset note of encouragement from a family member. Only preset messages
+  // are offered (no free text), so cheers can't be used to send anything unkind.
+  Cheer: a
+    .model({
+      message: a.string().required(),
+      fromName: a.string().required(),
+      recipient: a.string().required(),
+      owner: a.string(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'delete']),
+      allow.ownerDefinedIn('recipient').to(['read', 'delete']),
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

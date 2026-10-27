@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, AlertTriangle, Phone, Users, DollarSign, TrendingUp, AlertCircle, FileText, BookOpen, Play, ArrowRight } from 'lucide-react';
+import { Shield, AlertTriangle, Phone, Users, DollarSign, TrendingUp, AlertCircle, FileText, BookOpen, Play, ArrowRight, Heart, Award } from 'lucide-react';
 import config from '../config.json';
 import { StatCard, ScamExample, FeatureCard } from '../components/LandingCards.jsx';
 import { useGo } from '../routes.js';
@@ -204,7 +204,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
             <FeatureCard
               icon={<BookOpen className="w-8 h-8" />}
               title="Training Modules"
@@ -234,6 +234,16 @@ export default function LandingPage() {
               icon={<Users className="w-8 h-8" />}
               title="Family Safety Plan"
               description="Seven simple steps to do together with your parent: a family code word, trusted numbers, and a “call before you pay” rule."
+            />
+            <FeatureCard
+              icon={<Heart className="w-8 h-8" />}
+              title="Follow Their Progress"
+              description="Your parent can invite you to their Family Circle. See the lessons they've passed and the badges they've earned, and send a cheer to keep them going."
+            />
+            <FeatureCard
+              icon={<Award className="w-8 h-8" />}
+              title="Badges and a Scam Shield"
+              description="Every lesson passed earns a badge and fills in another piece of their Scam Shield, so progress is easy to see and fun to celebrate."
             />
           </div>
 

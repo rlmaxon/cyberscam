@@ -7,6 +7,7 @@ import { useProgress } from '../member/useProgressState.js';
 import { useTrainingData } from '../training/content.js';
 import { moduleStatus, passedCount, currentModuleIndex, moduleProgress, nextStep, allModulesPassed } from '../training/progress.js';
 import ScamShield from '../components/learn/ScamShield.jsx';
+import FamilyDashboardCard, { PendingInviteBanner } from '../components/family/FamilyDashboardCard.jsx';
 
 export default function MemberDashboard() {
   const go = useGo();
@@ -42,6 +43,8 @@ export default function MemberDashboard() {
           </p>
         </div>
 
+        <PendingInviteBanner />
+
         {/* Scam Shield */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-8 grid sm:grid-cols-[auto_1fr] gap-6 items-center">
           <ScamShield progress={progress} modules={modules} size={150} />
@@ -55,6 +58,8 @@ export default function MemberDashboard() {
             </div>
           </div>
         </div>
+
+        <FamilyDashboardCard lessonsTotal={modules.length} />
 
         {/* Quick Actions Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

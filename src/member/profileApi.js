@@ -1,4 +1,5 @@
 import { hasDataBackend } from '../amplifyConfig.js';
+import { findFirst } from './listAll.js';
 
 // Thin wrapper around the member-profile API. Every call is made as the signed-in
 // member, and the backend only ever returns that member's own profile.
@@ -17,9 +18,7 @@ export const ROLES = [
 
 export async function loadMyProfile() {
   if (!hasDataBackend) return null;
-  const { data, errors } = await (await api()).models.UserProfile.list({ limit: 1 });
-  if (errors?.length) throw new Error(errors[0].message);
-  return data?.[0] ?? null;
+  return findFirst((await api()).models.UserProfile);
 }
 
 export async function saveMyProfile(existing, fields) {

@@ -1,5 +1,6 @@
 import { hasDataBackend } from '../amplifyConfig.js';
 import { emptyProgress, mergeProgress } from '../training/progress.js';
+import { findFirst } from './listAll.js';
 
 // Where progress is kept:
 // - Always in this browser (so guests can learn without an account).
@@ -67,9 +68,7 @@ function toFields(p) {
 // Returns { record, progress } for the signed-in member, or null when there's no backend.
 export async function loadAccountProgress() {
   if (!hasDataBackend) return null;
-  const { data, errors } = await (await api()).models.TrainingProgress.list({ limit: 1 });
-  if (errors?.length) throw new Error(errors[0].message);
-  const record = data?.[0] ?? null;
+  const record = await findFirst((await api()).models.TrainingProgress);
   return { record, progress: record ? fromRecord(record) : null };
 }
 
