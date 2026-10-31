@@ -31,6 +31,10 @@ import BadgesPage from './pages/learn/BadgesPage.jsx';
 import ScamOfTheWeekPage from './pages/learn/ScamOfTheWeekPage.jsx';
 import FamilyPlanPage from './pages/learn/FamilyPlanPage.jsx';
 import BadgeCelebration from './components/learn/BadgeCelebration.jsx';
+import FamilyCirclePage from './pages/family/FamilyCirclePage.jsx';
+import JoinFamilyPage from './pages/family/JoinFamilyPage.jsx';
+import FollowPage from './pages/family/FollowPage.jsx';
+import { FamilyContext, useFamilyState } from './member/useFamilyState.js';
 import { ProgressContext, useProgressState } from './member/useProgressState.js';
 import SignUpPage from './pages/account/SignUpPage.jsx';
 import VerifyEmailPage from './pages/account/VerifyEmailPage.jsx';
@@ -51,6 +55,7 @@ export default function SeniorCyberSecure() {
 
   const isLoggedIn = authState === 'authenticated';
   const progressState = useProgressState(isLoggedIn);
+  const familyState = useFamilyState({ isLoggedIn, profile, progress: progressState.progress, saving: progressState.saving });
 
   // Once signed in, load the member's email and profile
   useEffect(() => {
@@ -188,6 +193,7 @@ export default function SeniorCyberSecure() {
   return (
     <MemberContext.Provider value={member}>
     <ProgressContext.Provider value={progressState}>
+    <FamilyContext.Provider value={familyState}>
     <div className="min-h-screen bg-slate-50" style={{ fontFamily: "'Source Sans 3', 'Segoe UI', sans-serif" }}>
       <ScrollToTop />
       <Navigation
@@ -250,6 +256,10 @@ export default function SeniorCyberSecure() {
             <Route path={PATHS.certificate} element={membersOnly(<CertificatePage />)} />
             <Route path={PATHS.welcome} element={membersOnly(<WelcomePage />)} />
             <Route path={PATHS.profile} element={membersOnly(<ProfilePage />)} />
+            <Route path={PATHS.family} element={membersOnly(<FamilyCirclePage />)} />
+            <Route path={`${PATHS.familyView}/:shareId`} element={membersOnly(<FollowPage />)} />
+            {/* Invite links work signed out too: the page explains and asks them to sign in */}
+            <Route path={`${PATHS.familyJoin}/:inviteId`} element={<JoinFamilyPage />} />
 
             {/* Old page names people may have bookmarked */}
             <Route path="/resources" element={<Navigate to={PATHS.resources} replace />} />
@@ -263,6 +273,7 @@ export default function SeniorCyberSecure() {
       {authState !== 'newPasswordRequired' && <BadgeCelebration />}
       <Footer />
     </div>
+    </FamilyContext.Provider>
     </ProgressContext.Provider>
     </MemberContext.Provider>
   );

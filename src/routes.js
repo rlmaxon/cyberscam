@@ -20,6 +20,9 @@ export const PATHS = {
   badges: '/badges',
   scamOfTheWeek: '/scam-of-the-week',
   familyPlan: '/family-plan',
+  family: '/family',
+  familyJoin: '/family/join',
+  familyView: '/family/view',
   training: '/training',
   resources: '/lock-it-down',
   marketplace: '/security-toolbox',
@@ -28,7 +31,7 @@ export const PATHS = {
 
 // Pages that need a signed-in member. Everything else is public —
 // emergency help and safety information must never sit behind a login.
-export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile', 'certificate'];
+export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile', 'certificate', 'family', 'familyView'];
 
 export function useGo() {
   const navigate = useNavigate();
