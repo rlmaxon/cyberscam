@@ -6,6 +6,8 @@ import { useProgress } from '../../member/useProgressState.js';
 import { loadScamOfTheWeek } from '../../training/content.js';
 import { ExampleMessage } from '../../training/exampleTypes.jsx';
 import { BigButton, ErrorBlock, LoadingBlock } from '../../components/learn/LearnParts.jsx';
+import { useAlerts } from '../../alerts/alertsApi.js';
+import { LatestAlertStrip } from '../../components/alerts/AlertParts.jsx';
 
 const today = () => new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD, local time
 
@@ -26,6 +28,7 @@ export default function ScamOfTheWeekPage() {
   const { progress, update } = useProgress();
   const [entries, setEntries] = useState(null);
   const [error, setError] = useState(false);
+  const { alerts } = useAlerts();
 
   useEffect(() => { loadScamOfTheWeek().then(setEntries).catch(() => setError(true)); }, []);
 
@@ -60,6 +63,13 @@ export default function ScamOfTheWeekPage() {
           previous={done[entry.id]}
           onAnswer={(correct) => update((p) => ({ ...p, weekly: { ...(p.weekly ?? {}), [entry.id]: { correct, at: new Date().toISOString() } } }))}
         />
+
+        {alerts[0] && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-slate-800 mb-3">Going around right now</h2>
+            <LatestAlertStrip alert={alerts[0]} />
+          </div>
+        )}
 
         <section className="mt-8 bg-white rounded-2xl shadow border border-slate-200 p-6" aria-labelledby="weeks-heading">
           <h2 id="weeks-heading" className="text-2xl font-bold text-slate-800 mb-2">Your weekly challenges</h2>

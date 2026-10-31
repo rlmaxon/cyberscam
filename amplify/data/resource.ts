@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import { mailerApi } from '../functions/mailer/resource';
 
 /**
  * Member data.
@@ -24,6 +25,8 @@ const schema = a.schema({
       notifyScamAlerts: a.boolean().default(true),
       notifyNewTraining: a.boolean().default(false),
       notifyNewVideos: a.boolean().default(false),
+      // Since Phase 5 the email choices that count live in Subscriber (one record per email
+      // address, kept by the mailer). These three only seed it for older accounts.
       owner: lockedOwner(),
     })
     .authorization((allow) => [allow.owner()]),
@@ -132,6 +135,113 @@ const schema = a.schema({
       allow.owner().to(['create', 'read', 'delete']),
       allow.ownerDefinedIn('recipient').to(['read', 'delete']),
     ]),
+
+  // ---- Scam Alerts and email (Phase 5) ----
+
+  ScamAlertSeverity: a.enum(['info', 'warning', 'urgent']),
+
+  // Posted by admins on /admin. Anyone can read them on /alerts.
+  ScamAlert: a
+    .model({
+      title: a.string().required(),
+      summary: a.string().required(),
+      // "What to do", one point per line
+      details: a.string(),
+      severity: a.ref('ScamAlertSeverity').required(),
+      publishedOn: a.date().required(),
+      sourceName: a.string(),
+      sourceUrl: a.url(),
+      // Set by the mailer: 'sending' | 'sent'
+      emailStatus: a.string(),
+      emailedAt: a.datetime(),
+      emailCount: a.integer(),
+    })
+    .authorization((allow) => [
+      allow.publicApiKey().to(['read']),
+      allow.authenticated().to(['read']),
+      allow.group('admin'),
+    ]),
+
+  // One record per email address, written only by the mailer functions (never by the app).
+  // Admins can read the list; everyone else changes their choices through the operations
+  // below, which check the secret link token or the member's sign-in.
+  // `channels` is ['email'] for now; text messages can be added as another channel later.
+  Subscriber: a
+    .model({
+      email: a.string().required(),
+      status: a.string().required(),
+      topics: a.json(),
+      family: a.json(),
+      channels: a.string().array(),
+      source: a.string(),
+      confirmedAt: a.datetime(),
+      unsubscribedAt: a.datetime(),
+    })
+    .authorization((allow) => [allow.group('admin').to(['read'])]),
+
+  // Public: the sign-up form and the links in emails. `website` is a hidden bot trap.
+  subscribeToEmails: a
+    .mutation()
+    .arguments({ email: a.string().required(), topics: a.json().required(), website: a.string() })
+    .returns(a.json())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+  confirmEmailSubscription: a
+    .mutation()
+    .arguments({ token: a.string().required() })
+    .returns(a.json())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+  getEmailPreferences: a
+    .query()
+    .arguments({ token: a.string().required() })
+    .returns(a.json())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+  updateEmailPreferences: a
+    .mutation()
+    .arguments({ token: a.string().required(), topics: a.json(), family: a.json() })
+    .returns(a.json())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+  unsubscribeEmail: a
+    .mutation()
+    .arguments({ token: a.string().required(), scope: a.string() })
+    .returns(a.json())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+
+  // Signed-in members: their own email choices (uses their verified account email).
+  getMyEmailPreferences: a
+    .query()
+    .returns(a.json())
+    .authorization((allow) => [allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+  updateMyEmailPreferences: a
+    .mutation()
+    .arguments({ topics: a.json(), family: a.json() })
+    .returns(a.json())
+    .authorization((allow) => [allow.authenticated()])
+    .handler(a.handler.function(mailerApi)),
+
+  // Admins only (checked again inside the function).
+  emailScamAlert: a
+    .mutation()
+    .arguments({ alertId: a.id().required() })
+    .returns(a.json())
+    .authorization((allow) => [allow.group('admin')])
+    .handler(a.handler.function(mailerApi)),
+  sendEmailAnnouncement: a
+    .mutation()
+    .arguments({ topic: a.string().required(), title: a.string().required(), summary: a.string().required(), path: a.string() })
+    .returns(a.json())
+    .authorization((allow) => [allow.group('admin')])
+    .handler(a.handler.function(mailerApi)),
+  getSubscriberStats: a
+    .query()
+    .returns(a.json())
+    .authorization((allow) => [allow.group('admin')])
+    .handler(a.handler.function(mailerApi)),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -140,7 +250,7 @@ export const data = defineData({
   schema,
   authorizationModes: {
     defaultAuthorizationMode: 'userPool',
-    // Used only for the public certificate check. The key is renewed on every deploy.
+    // Used for the public certificate check, Scam Alerts, and the email sign-up form.
     apiKeyAuthorizationMode: { expiresInDays: 365 },
   },
 });

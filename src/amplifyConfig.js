@@ -9,6 +9,8 @@ const generated = import.meta.glob('../amplify_outputs.json', { eager: true, imp
 const outputs = Object.values(generated)[0];
 
 export const hasDataBackend = Boolean(outputs?.data?.url);
+// Scam Alerts in the database and the email sign-up need the Phase 5 backend.
+export const hasEmailBackend = hasDataBackend && Boolean(outputs?.custom?.emailAlerts);
 
 // The password rules Cognito actually enforces. The Amplify build reads them from the
 // user pool into amplify_outputs.json, so the on-screen checklist always matches AWS.

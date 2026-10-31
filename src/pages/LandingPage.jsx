@@ -3,9 +3,13 @@ import { Shield, AlertTriangle, Phone, Users, DollarSign, TrendingUp, AlertCircl
 import config from '../config.json';
 import { StatCard, ScamExample, FeatureCard } from '../components/LandingCards.jsx';
 import { useGo } from '../routes.js';
+import { useAlerts } from '../alerts/alertsApi.js';
+import { LatestAlertStrip } from '../components/alerts/AlertParts.jsx';
+import SubscribeForm from '../components/alerts/SubscribeForm.jsx';
 
 export default function LandingPage() {
   const go = useGo();
+  const { alerts } = useAlerts();
   return (
     <div>
       {/* Hero Section */}
@@ -60,6 +64,15 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Newest scam alert, right under the hero */}
+      {alerts[0] && (
+        <div className="bg-slate-100 py-6 px-4">
+          <div className="max-w-5xl mx-auto">
+            <LatestAlertStrip alert={alerts[0]} />
+          </div>
+        </div>
+      )}
 
       {/* Statistics Dashboard */}
       <section className="py-16 bg-white">
@@ -255,6 +268,13 @@ export default function LandingPage() {
               Start Free Training <ArrowRight className="w-5 h-5" />
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Email sign-up */}
+      <section className="py-16 bg-slate-100">
+        <div className="max-w-2xl mx-auto px-4">
+          <SubscribeForm heading="Get free scam alerts by email" />
         </div>
       </section>
 

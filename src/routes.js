@@ -27,11 +27,16 @@ export const PATHS = {
   resources: '/lock-it-down',
   marketplace: '/security-toolbox',
   emergency: '/emergency',
+  alerts: '/alerts',
+  subscribe: '/subscribe',
+  subscribeConfirm: '/subscribe/confirm',
+  emailPreferences: '/email-preferences',
+  admin: '/admin',
 };
 
 // Pages that need a signed-in member. Everything else is public —
 // emergency help and safety information must never sit behind a login.
-export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile', 'certificate', 'family', 'familyView'];
+export const PROTECTED_PAGES = ['dashboard', 'welcome', 'profile', 'certificate', 'family', 'familyView', 'admin'];
 
 export function useGo() {
   const navigate = useNavigate();

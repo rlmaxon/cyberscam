@@ -4,6 +4,8 @@ import { Sparkles } from 'lucide-react';
 import { PATHS } from '../../routes.js';
 import { useMember } from '../../member/MemberContext.jsx';
 import { saveMyProfile } from '../../member/profileApi.js';
+import { hasEmailBackend } from '../../amplifyConfig.js';
+import { updateMyPreferences } from '../../alerts/emailApi.js';
 import { AccountCard } from '../../components/account/FormParts.jsx';
 import ProfileForm from '../../components/account/ProfileForm.jsx';
 
@@ -15,8 +17,10 @@ export default function WelcomePage() {
   // Already set up, or profiles aren't switched on yet: go straight to the dashboard
   if (profile || profileStatus === 'unavailable') return <Navigate to={PATHS.dashboard} replace />;
 
-  const handleSave = async (fields) => {
+  const handleSave = async (fields, email) => {
     const saved = await saveMyProfile(null, fields);
+    // Their email is already verified, so no confirmation email is needed.
+    if (hasEmailBackend) await updateMyPreferences(email.topics, email.family);
     setProfile(saved);
     navigate(PATHS.dashboard, { replace: true });
   };

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { signIn, signOut, getCurrentUser, confirmSignIn, resetPassword, confirmResetPassword, fetchUserAttributes, resendSignUpCode } from 'aws-amplify/auth';
+import { signIn, signOut, getCurrentUser, confirmSignIn, resetPassword, confirmResetPassword, fetchUserAttributes, fetchAuthSession, resendSignUpCode } from 'aws-amplify/auth';
 import { PATHS } from './routes.js';
-import { hasDataBackend } from './amplifyConfig.js';
+import { hasDataBackend, hasEmailBackend } from './amplifyConfig.js';
+import { getMyPreferences, updateMyPreferences } from './alerts/emailApi.js';
 import { MemberContext } from './member/MemberContext.jsx';
 import { loadMyProfile } from './member/profileApi.js';
 
@@ -40,6 +41,11 @@ import SignUpPage from './pages/account/SignUpPage.jsx';
 import VerifyEmailPage from './pages/account/VerifyEmailPage.jsx';
 import WelcomePage from './pages/account/WelcomePage.jsx';
 import ProfilePage from './pages/account/ProfilePage.jsx';
+import ScamAlertsPage from './pages/alerts/ScamAlertsPage.jsx';
+import SubscribePage from './pages/alerts/SubscribePage.jsx';
+import ConfirmSubscriptionPage from './pages/alerts/ConfirmSubscriptionPage.jsx';
+import EmailPreferencesPage from './pages/alerts/EmailPreferencesPage.jsx';
+import AdminPage from './pages/admin/AdminPage.jsx';
 
 // ==================== MAIN APP ====================
 // authState: 'loading' | 'authenticated' | 'unauthenticated' | 'newPasswordRequired'
@@ -52,6 +58,8 @@ export default function SeniorCyberSecure() {
   const [email, setEmail] = useState('');
   const [profile, setProfile] = useState(null);
   const [profileStatus, setProfileStatus] = useState('idle');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const emailSynced = useRef(false);
 
   const isLoggedIn = authState === 'authenticated';
   const progressState = useProgressState(isLoggedIn);
@@ -63,11 +71,20 @@ export default function SeniorCyberSecure() {
       setEmail('');
       setProfile(null);
       setProfileStatus('idle');
+      setIsAdmin(false);
+      emailSynced.current = false;
       return;
     }
     let cancelled = false;
     fetchUserAttributes()
       .then((attrs) => !cancelled && setEmail(attrs.email ?? ''))
+      .catch(() => {});
+    // Admins are members of the Cognito "admin" group (the backend checks this too)
+    fetchAuthSession()
+      .then(({ tokens }) => {
+        const groups = tokens?.accessToken?.payload?.['cognito:groups'];
+        if (!cancelled) setIsAdmin(Array.isArray(groups) && groups.includes('admin'));
+      })
       .catch(() => {});
     if (!hasDataBackend) {
       setProfileStatus('unavailable');
@@ -79,6 +96,21 @@ export default function SeniorCyberSecure() {
     }
     return () => { cancelled = true; };
   }, [isLoggedIn]);
+
+  // Members who chose email alerts before the email system existed (Phase 2 profiles):
+  // copy those choices across once, so they start getting the emails they asked for.
+  useEffect(() => {
+    if (!hasEmailBackend || !profile || emailSynced.current) return;
+    emailSynced.current = true;
+    getMyPreferences().then((r) => {
+      if (r.ok && r.prefs === null) {
+        updateMyPreferences(
+          { scamAlerts: !!profile.notifyScamAlerts, newTraining: !!profile.notifyNewTraining, newVideos: !!profile.notifyNewVideos },
+          { cheers: true, familyUpdates: true },
+        );
+      }
+    });
+  }, [profile]);
 
   // Restore session from Cognito tokens on page load
   useEffect(() => {
@@ -188,7 +220,7 @@ export default function SeniorCyberSecure() {
   const needsWelcome = isLoggedIn && profileStatus === 'ready' && !profile;
   const dashboardElement = needsWelcome ? <Navigate to={PATHS.welcome} replace /> : <MemberDashboard />;
 
-  const member = { isLoggedIn, email, profile, profileStatus, setProfile };
+  const member = { isLoggedIn, isAdmin, email, profile, profileStatus, setProfile };
 
   return (
     <MemberContext.Provider value={member}>
@@ -224,6 +256,12 @@ export default function SeniorCyberSecure() {
             <Route path={PATHS.scamOfTheWeek} element={<ScamOfTheWeekPage />} />
             <Route path={`${PATHS.scamOfTheWeek}/:weekId`} element={<ScamOfTheWeekPage />} />
             <Route path={PATHS.familyPlan} element={<FamilyPlanPage />} />
+            <Route path={PATHS.alerts} element={<ScamAlertsPage />} />
+            <Route path={`${PATHS.alerts}/:alertId`} element={<ScamAlertsPage />} />
+            <Route path={PATHS.subscribe} element={<SubscribePage />} />
+            <Route path={PATHS.subscribeConfirm} element={<ConfirmSubscriptionPage />} />
+            <Route path={PATHS.emailPreferences} element={<EmailPreferencesPage />} />
+            <Route path="/unsubscribe" element={<Navigate to={`${PATHS.emailPreferences}${location.search}`} replace />} />
             <Route path={PATHS.training} element={<TrainingLab />} />
             <Route path={`${PATHS.training}/quiz`} element={<TrainingLab view="quiz" />} />
             <Route path={`${PATHS.training}/:categoryKey`} element={<TrainingLab />} />
@@ -258,6 +296,7 @@ export default function SeniorCyberSecure() {
             <Route path={PATHS.profile} element={membersOnly(<ProfilePage />)} />
             <Route path={PATHS.family} element={membersOnly(<FamilyCirclePage />)} />
             <Route path={`${PATHS.familyView}/:shareId`} element={membersOnly(<FollowPage />)} />
+            <Route path={PATHS.admin} element={membersOnly(<AdminPage />)} />
             {/* Invite links work signed out too: the page explains and asks them to sign in */}
             <Route path={`${PATHS.familyJoin}/:inviteId`} element={<JoinFamilyPage />} />
 
