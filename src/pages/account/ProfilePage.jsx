@@ -27,7 +27,11 @@ export default function ProfilePage() {
     setProfile(saved);
     if (hasEmailBackend) {
       const r = await updateMyPreferences(email.topics, email.family);
-      if (!r.ok) throw new Error(r.error);
+      if (!r.ok) {
+        const err = new Error(r.error);
+        err.userMessage = `Your name and role were saved, but your email choices were not. ${r.error}`;
+        throw err;
+      }
       setEmailPrefs(r.prefs);
     }
   };
