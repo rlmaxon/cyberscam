@@ -7,7 +7,9 @@ Live at https://www.seniorcybersecurityedu.com/.
 
 React 18, Vite 6, Tailwind CSS 3, React Router 7, lucide-react icons, and AWS Amplify:
 Cognito sign-in plus an Amplify Gen 2 backend (AppSync + DynamoDB) for member profiles,
-training progress, and certificates.
+training progress, certificates, Family Circle, Scam Alerts, and email subscriptions.
+Email goes out through Amazon SES from three small Lambda functions
+(`amplify/functions/mailer/`).
 Hosted on AWS Amplify Hosting, which builds from `main` using `amplify.yml`. The build
 deploys the backend first (`ampx pipeline-deploy`), then the site.
 
@@ -17,11 +19,14 @@ deploys the backend first (`ampx pipeline-deploy`), then the site.
 npm ci
 npm run dev      # http://localhost:5173
 npm run build    # production build into dist/ (not committed)
+npm run test:mailer        # tests for the email logic (no AWS needed)
+npm run typecheck:backend  # type-check the amplify/ folder
 ```
 
 Locally there's no `amplify_outputs.json`, so the site runs with sign-in only and profile
 features show "coming soon". See `docs/auth-design.md`. One-time AWS setup for the
-backend is in `docs/phase2-aws-setup.md`.
+backend is in `docs/phase2-aws-setup.md`; email setup (SES and the admin group) is in
+`docs/phase5-aws-setup.md`.
 
 ## Where things live
 
@@ -31,6 +36,9 @@ backend is in `docs/phase2-aws-setup.md`.
 | `src/pages/account/` | Sign-up, email verification, welcome, and profile pages |
 | `src/member/` | Profile API calls, member context, plain-language sign-in errors |
 | `amplify/` | Amplify Gen 2 backend: reuses the existing sign-in (`auth/`) and defines member data (`data/`) |
+| `amplify/functions/mailer/` | Email sign-up, confirmation, unsubscribe, alert and family emails (logic in `core.ts`, templates in `emails.ts`) |
+| `src/alerts/` | Scam Alerts and email API calls |
+| `src/pages/alerts/`, `src/pages/admin/` | Scam Alerts, email sign-up, confirm and preference pages; site admin page |
 | `src/routes.js` | Page URLs (`PATHS`) and which pages need a login |
 | `src/pages/` | One file per page; the Training Lab is in `src/pages/training/` |
 | `src/components/` | Navigation, footer, and shared cards |
@@ -52,12 +60,17 @@ backend is in `docs/phase2-aws-setup.md`.
 | `/verify/:id` | Public certificate check | No |
 | `/training` | Scam Example Library (plus `/training/quiz`, `/training/:topic`, `/training/:topic/:exampleId`) | No |
 | `/emergency` | Emergency Directory | No |
+| `/alerts`, `/alerts/:id` | Scam Alerts (starter alerts plus ones posted on `/admin`) | No |
+| `/subscribe` | Email sign-up (double opt-in) | No |
+| `/subscribe/confirm` | Confirmation link from the sign-up email | No |
+| `/email-preferences` | Change or stop emails, from the link in any email (`/unsubscribe` redirects here) | No |
+| `/admin` | Post alerts, email subscribers, announce new training (Cognito `admin` group) | Yes, admins |
 | `/lock-it-down` | Privacy and security settings guides | No |
 | `/security-toolbox` | Recommended security products | No |
 | `/signup`, `/verify-email` | Create a free account, confirm email | — |
 | `/login`, `/forgot-password`, `/reset-password` | Member sign-in | — |
 | `/welcome` | First-time setup (name, role, email alerts) | Yes |
-| `/profile` | Edit profile and email alerts | Yes |
+| `/profile` | Edit profile, email alerts, and Family Circle emails | Yes |
 | `/dashboard` | Member dashboard | Yes |
 
 ## Hosting note: page URLs need a rewrite rule
@@ -71,6 +84,25 @@ The site uses real page URLs, so AWS Amplify must send any page address to
 
 Without it, opening or refreshing a page such as `/emergency` directly shows a
 "not found" error from Amplify.
+
+## Scam Alerts and email
+
+- **Starter alerts** are in `public/training-data/alerts.json` (edit with a commit).
+  Alerts posted on `/admin` are stored in the database and appear above them.
+- **Sign-up** needs no account. Nothing is sent until the person taps the link in the
+  confirmation email. Confirmation emails are limited to one every 10 minutes and five a
+  day per address, and the form gives the same answer either way.
+- **Members** choose their emails on `/profile`. Their email is already verified, so
+  there's no confirmation step.
+- **Every email** has a "change which emails you get" link and an unsubscribe link, plus
+  the one-click `List-Unsubscribe` header that Gmail, Yahoo and Apple Mail use.
+- **Family Circle emails:** a learner gets an email when approved family send a cheer
+  (at most one every two hours), and family get an email when the person they follow earns
+  a badge or the certificate. Both are on by default and can be turned off.
+- **Text messages** are shown as "coming soon". No phone numbers are collected. Each
+  subscriber record has a `channels` list (`["email"]`) so texts can be added later.
+- Sending is paced at about 8 emails a second. One send can reach roughly 7,000 people
+  within the 15-minute Lambda limit; past that, the worker will need batching.
 
 ## Roadmap
 

@@ -1,0 +1,45 @@
+{
+  "note": "Starter scam alerts shown on /alerts alongside the ones posted on /admin. Edit with a commit. Fields match the ScamAlert model: severity is info, warning, or urgent; details has one point per line.",
+  "alerts": [
+    {
+      "id": "medicare-open-enrollment-2026",
+      "title": "Medicare open enrollment: watch out for “Medicare” callers",
+      "summary": "Medicare open enrollment runs from October 15 to December 7, 2026. Scammers call pretending to be from Medicare. They offer a “new card” or a “better plan” and ask for your Medicare number or bank details.",
+      "details": "- Medicare will not call you out of the blue to ask for your Medicare number or bank information.\n- Caller ID can be faked to show “Medicare.” Don't trust it.\n- Hang up. Then call 1-800-MEDICARE (1-800-633-4227) yourself, using the number on your Medicare card.\n- For free, unbiased help comparing plans, contact your State Health Insurance Assistance Program (SHIP).\n- Treat your Medicare number like a credit card number.",
+      "severity": "warning",
+      "publishedOn": "2026-10-31",
+      "sourceName": "Centers for Medicare & Medicaid Services",
+      "sourceUrl": "https://www.cms.gov/center/openenrollment.asp"
+    },
+    {
+      "id": "unpaid-toll-texts",
+      "title": "Texts about “unpaid tolls” are almost always fake",
+      "summary": "Scam texts claim you owe money for tolls and must pay right away, even if you haven't driven on a toll road. The link goes to a fake page that steals your card or bank details. The same trick is used in texts about “missed packages.”",
+      "details": "- Don't tap the link and don't reply, not even “STOP.”\n- If you're worried, call your toll agency using a number you already know, like the one on your toll account or the back of your toll tag.\n- Report the text with your phone's “Report Junk” option, or forward it to 7726 (SPAM). Then delete it.",
+      "severity": "warning",
+      "publishedOn": "2026-10-31",
+      "sourceName": "Federal Trade Commission",
+      "sourceUrl": "https://www.consumer.ftc.gov/consumer-alerts/2025/01/got-text-about-unpaid-tolls-its-probably-scam"
+    },
+    {
+      "id": "gold-bar-courier",
+      "title": "No real agency will send a courier to pick up your cash or gold",
+      "summary": "Scammers pose as tech support, your bank, or a government agency. They say your accounts were hacked and that you must turn your savings into cash or gold “to keep it safe.” Then they send a courier to your door to collect it. The money is never seen again.",
+      "details": "- The government and real businesses will never ask you to buy gold or other precious metals.\n- Never hand cash or valuables to a courier or someone you don't know, and don't share your home address.\n- Don't call phone numbers that appear in a pop-up, text, or email you weren't expecting.\n- Never let someone you don't know take control of your computer.\n- Stop and call a family member or your bank, using a number you already know.",
+      "severity": "urgent",
+      "publishedOn": "2026-10-31",
+      "sourceName": "FBI Internet Crime Complaint Center (IC3)",
+      "sourceUrl": "https://www.ic3.gov/PSA/2024/PSA240129"
+    },
+    {
+      "id": "fake-fund-recovery",
+      "title": "Lost money to a scam? Watch out for fake “recovery” helpers",
+      "summary": "After someone is scammed, a second scammer often reaches out claiming to be from the FBI's crime complaint center (IC3), a lawyer, or a recovery company. They promise to get your money back for a fee. It's another scam.",
+      "details": "- IC3 never contacts people directly by phone, email, social media, or apps.\n- IC3 never charges a fee to recover money, and it doesn't send you to companies that do.\n- Don't send money, gift cards, or cryptocurrency to anyone you've met only by phone or online.\n- To report a scam, go to ic3.gov yourself.\n- If you're 60 or older and want help filing a report, call the DOJ Elder Justice Hotline at 1-833-372-8311.",
+      "severity": "warning",
+      "publishedOn": "2026-10-31",
+      "sourceName": "FBI Internet Crime Complaint Center (IC3)",
+      "sourceUrl": "https://ic3.gov/PSA/2025/PSA250418"
+    }
+  ]
+}

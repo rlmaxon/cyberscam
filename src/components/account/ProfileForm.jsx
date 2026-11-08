@@ -1,15 +1,22 @@
 import React, { useId, useState } from 'react';
-import { Save, Bell, MessageSquare } from 'lucide-react';
+import { Save, Bell, Users } from 'lucide-react';
 import { ROLES } from '../../member/profileApi.js';
+import { DEFAULT_FAMILY } from '../../alerts/emailApi.js';
 import { TextField, Notice, SubmitButton } from './FormParts.jsx';
+import { NewsChoices, FamilyChoices, TextAlertsComingSoon } from '../alerts/EmailChoices.jsx';
 
 // Used by both the first-time Welcome step and the Profile page.
-export default function ProfileForm({ initial, onSave, submitLabel }) {
+// initialEmail: { topics, family } from the email system, when known. Otherwise the
+// choices saved on the profile are used.
+export default function ProfileForm({ initial, initialEmail, onSave, submitLabel, showFamily = false }) {
   const [displayName, setDisplayName] = useState(initial?.displayName ?? '');
   const [role, setRole] = useState(initial?.role ?? '');
-  const [notifyScamAlerts, setScam] = useState(initial?.notifyScamAlerts ?? true);
-  const [notifyNewTraining, setTraining] = useState(initial?.notifyNewTraining ?? false);
-  const [notifyNewVideos, setVideos] = useState(initial?.notifyNewVideos ?? false);
+  const [topics, setTopics] = useState(() => initialEmail?.topics ?? {
+    scamAlerts: initial?.notifyScamAlerts ?? true,
+    newTraining: initial?.notifyNewTraining ?? false,
+    newVideos: initial?.notifyNewVideos ?? false,
+  });
+  const [family, setFamily] = useState(() => initialEmail?.family ?? DEFAULT_FAMILY);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
@@ -23,7 +30,16 @@ export default function ProfileForm({ initial, onSave, submitLabel }) {
     if (!role) return setError('Please choose the option that describes you best.');
     setLoading(true);
     try {
-      await onSave({ displayName: displayName.trim(), role, notifyScamAlerts, notifyNewTraining, notifyNewVideos });
+      await onSave(
+        {
+          displayName: displayName.trim(),
+          role,
+          notifyScamAlerts: !!topics.scamAlerts,
+          notifyNewTraining: !!topics.newTraining,
+          notifyNewVideos: !!topics.newVideos,
+        },
+        { topics, family },
+      );
       setSaved(true);
     } catch (err) {
       setError('We couldn\'t save your settings. Please check your internet connection and try again.');
@@ -74,22 +90,24 @@ export default function ProfileForm({ initial, onSave, submitLabel }) {
 
       <fieldset>
         <legend className="block text-base font-semibold text-slate-700 mb-1 flex items-center gap-2">
-          <Bell className="w-5 h-5 text-blue-600" /> Email me when…
+          <Bell className="w-5 h-5 text-blue-600" /> Email me about…
         </legend>
         <p className="text-base text-slate-500 mb-3">You can change these any time. We never share your email.</p>
         <div className="space-y-3">
-          <Checkbox checked={notifyScamAlerts} onChange={setScam} label="A new scam is going around" hint="Recommended. Short warnings about scams targeting seniors right now." />
-          <Checkbox checked={notifyNewTraining} onChange={setTraining} label="New training lessons are added" />
-          <Checkbox checked={notifyNewVideos} onChange={setVideos} label="New training videos are posted" />
-          <div className="flex items-start gap-4 p-4 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-500">
-            <MessageSquare className="w-6 h-6 flex-shrink-0 mt-0.5" />
-            <span>
-              <span className="block text-lg font-semibold">Text message alerts</span>
-              <span className="block text-base">Coming soon</span>
-            </span>
-          </div>
+          <NewsChoices topics={topics} onChange={setTopics} />
+          <TextAlertsComingSoon />
         </div>
       </fieldset>
+
+      {showFamily && (
+        <fieldset>
+          <legend className="block text-base font-semibold text-slate-700 mb-1 flex items-center gap-2">
+            <Users className="w-5 h-5 text-blue-600" /> Family Circle emails
+          </legend>
+          <p className="text-base text-slate-500 mb-3">Only sent if you use the Family Circle.</p>
+          <FamilyChoices family={family} onChange={setFamily} />
+        </fieldset>
+      )}
 
       {error && <Notice>{error}</Notice>}
       {saved && <Notice tone="success">Your settings are saved.</Notice>}
@@ -101,14 +119,3 @@ export default function ProfileForm({ initial, onSave, submitLabel }) {
   );
 }
 
-function Checkbox({ checked, onChange, label, hint }) {
-  return (
-    <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-colors ${checked ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-slate-300'}`}>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="mt-1 w-6 h-6 accent-blue-600 flex-shrink-0" />
-      <span>
-        <span className="block text-lg font-semibold text-slate-800">{label}</span>
-        {hint && <span className="block text-base text-slate-600">{hint}</span>}
-      </span>
-    </label>
-  );
-}

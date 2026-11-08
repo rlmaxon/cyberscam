@@ -8,12 +8,15 @@ import { useTrainingData } from '../training/content.js';
 import { moduleStatus, passedCount, currentModuleIndex, moduleProgress, nextStep, allModulesPassed } from '../training/progress.js';
 import ScamShield from '../components/learn/ScamShield.jsx';
 import FamilyDashboardCard, { PendingInviteBanner } from '../components/family/FamilyDashboardCard.jsx';
+import { useAlerts } from '../alerts/alertsApi.js';
 
 export default function MemberDashboard() {
   const go = useGo();
-  const { profile } = useMember();
+  const { profile, isAdmin } = useMember();
   const { progress } = useProgress();
   const { modules } = useTrainingData();
+  const { alerts } = useAlerts();
+  const latestAlert = alerts[0];
   const done = passedCount(progress, modules);
   const currentIdx = currentModuleIndex(progress, modules);
   const current = currentIdx !== null ? modules[currentIdx] : null;
@@ -82,9 +85,9 @@ export default function MemberDashboard() {
           <DashboardCard
             icon={<AlertTriangle className="w-8 h-8" />}
             title="Latest Scam Alerts"
-            description="Stay informed about new scam tactics targeting seniors"
-            buttonText="Coming Soon"
-            disabled
+            description={latestAlert ? `Newest: ${latestAlert.title}` : 'Scams going around right now, and what to do'}
+            buttonText="See Scam Alerts"
+            onClick={() => go(latestAlert ? `/alerts/${encodeURIComponent(latestAlert.id)}` : 'alerts')}
             color="red"
           />
         </div>
@@ -139,6 +142,7 @@ export default function MemberDashboard() {
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <QuickLink icon={<UserCircle />} label="My Profile & Alerts" onClick={() => go('profile')} />
+            {isAdmin && <QuickLink icon={<Settings />} label="Site Admin" onClick={() => go('admin')} />}
             <QuickLink icon={<Phone />} label="Emergency Hotline" onClick={() => go('emergency')} />
             <QuickLink icon={<Settings />} label="Privacy Settings" onClick={() => go('resources')} />
             <QuickLink icon={<ShoppingBag />} label="Security Tools" onClick={() => go('marketplace')} />
@@ -163,7 +167,7 @@ function DashboardCard({ icon, title, description, buttonText, onClick, color, d
         {icon}
       </div>
       <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
-      <p className="text-slate-600 text-sm mb-4">{description}</p>
+      <p className="text-slate-600 text-base mb-4">{description}</p>
       <button
         onClick={onClick}
         disabled={disabled}

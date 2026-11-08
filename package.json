@@ -1,12 +1,14 @@
 {
   "name": "senior-cyber-secure-website",
   "version": "1.0.0",
-  "description": "Senior Cyber Secure - The Parent Protection Kit Online Companion Website",
+  "description": "Senior Cyber Secure: free scam-safety training for seniors and the families who love them",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:mailer": "tsx --test amplify/functions/mailer/core.test.ts",
+    "typecheck:backend": "tsc -p amplify/tsconfig.json"
   },
   "dependencies": {
     "aws-amplify": "^6.0.0",
@@ -19,6 +21,13 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.25.1",
     "@aws-amplify/backend-cli": "^1.10.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.1161.0",
+    "@aws-sdk/client-dynamodb": "^3.1161.0",
+    "@aws-sdk/client-lambda": "^3.1161.0",
+    "@aws-sdk/client-sesv2": "^3.1161.0",
+    "@aws-sdk/lib-dynamodb": "^3.1161.0",
+    "@aws-sdk/util-dynamodb": "^3.996.9",
+    "@types/aws-lambda": "^8.10.164",
     "@types/node": "^20.19.43",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

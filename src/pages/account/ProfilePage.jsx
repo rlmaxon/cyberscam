@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserCircle, ArrowLeft, RefreshCw } from 'lucide-react';
 import { PATHS } from '../../routes.js';
 import { useMember } from '../../member/MemberContext.jsx';
 import { saveMyProfile } from '../../member/profileApi.js';
+import { hasEmailBackend } from '../../amplifyConfig.js';
+import { getMyPreferences, updateMyPreferences } from '../../alerts/emailApi.js';
 import { AccountCard, Notice } from '../../components/account/FormParts.jsx';
 import ProfileForm from '../../components/account/ProfileForm.jsx';
 
 export default function ProfilePage() {
   const { email, profile, profileStatus, setProfile } = useMember();
 
-  const handleSave = async (fields) => {
+  // The email choices that count are kept by the email system (they may have been changed
+  // from a link in an email), so load them before showing the form.
+  const [emailPrefs, setEmailPrefs] = useState(hasEmailBackend ? undefined : null);
+  useEffect(() => {
+    if (!hasEmailBackend) return;
+    let cancelled = false;
+    getMyPreferences().then((r) => !cancelled && setEmailPrefs(r.ok ? r.prefs : null));
+    return () => { cancelled = true; };
+  }, []);
+
+  const handleSave = async (fields, email) => {
     const saved = await saveMyProfile(profile, fields);
     setProfile(saved);
+    if (hasEmailBackend) {
+      const r = await updateMyPreferences(email.topics, email.family);
+      if (!r.ok) throw new Error(r.error);
+      setEmailPrefs(r.prefs);
+    }
   };
 
   let body;
-  if (profileStatus === 'loading' || profileStatus === 'idle') {
+  if (profileStatus === 'loading' || profileStatus === 'idle' || emailPrefs === undefined) {
     body = (
       <p className="text-lg text-slate-600 flex items-center gap-2">
         <RefreshCw className="w-5 h-5 animate-spin" /> Loading your settings…
@@ -27,7 +44,7 @@ export default function ProfilePage() {
   } else if (profileStatus === 'error') {
     body = <Notice>We couldn't load your settings. Please refresh the page to try again.</Notice>;
   } else {
-    body = <ProfileForm initial={profile} onSave={handleSave} submitLabel="Save Changes" />;
+    body = <ProfileForm initial={profile} initialEmail={emailPrefs} onSave={handleSave} submitLabel="Save Changes" showFamily />;
   }
 
   return (

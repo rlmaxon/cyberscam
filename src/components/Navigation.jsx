@@ -1,11 +1,13 @@
 import React from 'react';
-import { Shield, Lock, Phone, Menu, X, Home, BookOpen, ShoppingBag, Settings, LogOut } from 'lucide-react';
+import { Shield, Lock, Phone, Menu, X, Home, BookOpen, ShoppingBag, Settings, LogOut, ShieldAlert } from 'lucide-react';
+import { useMember } from '../member/MemberContext.jsx';
 import config from '../config.json';
 import { useGo, usePageKey } from '../routes.js';
 
 export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, setMobileMenuOpen }) {
   const go = useGo();
   const currentPage = usePageKey();
+  const { isAdmin } = useMember();
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50 border-b-4 border-blue-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,12 +40,16 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
             <NavButton active={currentPage === 'learn' || currentPage === 'finalExam' || currentPage === 'training'} onClick={() => go('learn')}>
               <BookOpen className="w-4 h-4" /> Training
             </NavButton>
+            <NavButton active={currentPage === 'alerts' || currentPage === 'subscribe'} onClick={() => go('alerts')}>
+              <ShieldAlert className="w-4 h-4" /> Scam Alerts
+            </NavButton>
 
             {isLoggedIn ? (
               <>
                 <NavButton active={currentPage === 'dashboard'} onClick={() => go('dashboard')} highlight>
                   <BookOpen className="w-4 h-4" /> Member Area
                 </NavButton>
+
                 <button onClick={handleLogout} className="ml-1 px-3 py-2 text-sm whitespace-nowrap text-slate-600 hover:text-red-600 transition-colors flex items-center gap-1">
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
@@ -75,9 +81,11 @@ export default function Navigation({ isLoggedIn, handleLogout, mobileMenuOpen, s
             <MobileNavButton onClick={() => { go('marketplace'); setMobileMenuOpen(false); }}>Security Toolbox</MobileNavButton>
             <MobileNavButton onClick={() => { go('emergency'); setMobileMenuOpen(false); }}>Emergency Hotline</MobileNavButton>
             <MobileNavButton onClick={() => { go('learn'); setMobileMenuOpen(false); }}>Training</MobileNavButton>
+            <MobileNavButton onClick={() => { go('alerts'); setMobileMenuOpen(false); }}>Scam Alerts</MobileNavButton>
             {isLoggedIn ? (
               <>
                 <MobileNavButton onClick={() => { go('dashboard'); setMobileMenuOpen(false); }} highlight>Member Area</MobileNavButton>
+                {isAdmin && <MobileNavButton onClick={() => { go('admin'); setMobileMenuOpen(false); }}>Admin</MobileNavButton>}
                 <MobileNavButton onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Logout</MobileNavButton>
               </>
             ) : (
@@ -94,7 +102,8 @@ function NavButton({ children, active, onClick, highlight }) {
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-2 transition-all ${
+      // Icons show only on wide screens so every item fits on one line at laptop widths
+      className={`px-2.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap [&>svg]:hidden 2xl:[&>svg]:inline-block flex items-center gap-2 transition-all ${
         highlight 
           ? 'bg-green-100 text-green-700 hover:bg-green-200' 
           : active 
