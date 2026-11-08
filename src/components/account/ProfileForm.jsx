@@ -42,7 +42,8 @@ export default function ProfileForm({ initial, initialEmail, onSave, submitLabel
       );
       setSaved(true);
     } catch (err) {
-      setError('We couldn\'t save your settings. Please check your internet connection and try again.');
+      // Errors from the email system carry a plain-language reason; show it.
+      setError(err?.userMessage ?? 'We couldn\'t save your settings. Please check your internet connection and try again.');
     } finally {
       setLoading(false);
     }

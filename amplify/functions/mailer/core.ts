@@ -353,7 +353,8 @@ export async function updateMyPreferences(
 ): Promise<Result> {
   const found = await memberEmail(deps, identity);
   if (!found) return fail('Please sign in again.', 'NO_MEMBER');
-  if (!found.verified) return fail('Please confirm your email address first.', 'NOT_VERIFIED');
+  // Accounts created by hand in Cognito may never have had their email confirmed.
+  if (!found.verified) return fail("Your account's email address hasn't been confirmed yet, so we can't send you email. Please contact us and we'll fix it.", 'NOT_VERIFIED');
   const id = subscriberId(found.email);
   const rec = (await deps.getSubscriber(id)) ?? newRecord(deps, found.email, { source: 'member', status: 'active' });
   rec.topics = cleanTopics(args.topics, rec.topics);
