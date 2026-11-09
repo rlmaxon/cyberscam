@@ -32,6 +32,8 @@ export const PATHS = {
   subscribeConfirm: '/subscribe/confirm',
   emailPreferences: '/email-preferences',
   admin: '/admin',
+  affiliateDisclosure: '/affiliate-disclosure',
+  downloads: '/downloads',
 };
 
 // Pages that need a signed-in member. Everything else is public —

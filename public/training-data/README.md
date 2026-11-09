@@ -63,3 +63,18 @@ For legitimate (non-scam) examples, set `isScam` to `false` and leave `redFlags`
 ```
 
 `correctAnswer` is the index (0-3) of the correct option.
+
+## Wallet card text (`card` in modules.json)
+
+Each lesson has a `card` used for its printable wallet card (`/downloads`):
+
+```json
+"card": {
+  "redFlags": ["Four short red flags", "under about 45 characters each", "...", "..."],
+  "rule": "One short rule, like: Hang up. Call back on a number you already know.",
+  "say": "Optional: one short phrase to say"
+}
+```
+
+Keep them short: the wallet card is 3.5 by 2 inches. The checklist PDF uses `actions`,
+`sayThis`, and `lesson.keyPoint`.

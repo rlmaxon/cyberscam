@@ -14,6 +14,8 @@ import {
   STEPS, blockingModule, isStepDone, isUnlocked, moduleProgress, nextStep, recordModuleScore, recordStep,
 } from '../../training/progress.js';
 import QuizRunner from '../../components/learn/QuizRunner.jsx';
+import RecommendedTools from '../../components/affiliate/RecommendedTools.jsx';
+import { DownloadButtons } from '../../components/learn/DownloadButtons.jsx';
 import { BigButton, ErrorBlock, LoadingBlock } from '../../components/learn/LearnParts.jsx';
 
 const STEP_INFO = {
@@ -359,6 +361,7 @@ function ActionsStep({ module, onDone }) {
       </div>
       <div className="flex flex-col sm:flex-row gap-3">
         <BigButton tone="white" onClick={() => window.print()} className="no-print sm:w-auto"><Printer className="w-5 h-5" /> Print this list</BigButton>
+        <DownloadButtons module={module} only="checklist" className="no-print sm:w-auto" />
         <BigButton tone="orange" onClick={onDone} className="no-print">Next: Quick Check <ArrowRight className="w-5 h-5" /></BigButton>
       </div>
     </Card>
@@ -381,10 +384,26 @@ function CheckStep({ module, questions, nextModule, onFinish }) {
     </div>
   );
   const intro = useMemo(() => `${questions.length} questions. You need ${config.training.passMark}% to pass, and you can retake it as often as you like.`, [questions.length]);
+  // After the Quick Check is passed (never during it): printable materials, then optional tools.
+  const [passed, setPassed] = useState(false);
+  const finish = async (score, didPass) => {
+    setPassed(didPass);
+    await onFinish?.(score, didPass);
+  };
   return (
     <div>
       <p className="text-lg text-slate-700 mb-4">{intro}</p>
-      <QuizRunner questions={questions} passMark={config.training.passMark} title={`Quick Check: ${module.title}`} onFinish={onFinish} passedAction={passedAction} />
+      <QuizRunner questions={questions} passMark={config.training.passMark} title={`Quick Check: ${module.title}`} onFinish={finish} passedAction={passedAction} />
+      {passed && (
+        <>
+          <section className="mt-8 bg-white rounded-2xl shadow border-2 border-slate-200 p-6" aria-labelledby="takeaway-heading">
+            <h2 id="takeaway-heading" className="text-2xl font-bold text-slate-800 mb-2">Take it with you</h2>
+            <p className="text-lg text-slate-700 mb-4">Print a wallet card and a checklist for this lesson. Keep one by the phone and share one with family.</p>
+            <DownloadButtons module={module} />
+          </section>
+          <RecommendedTools moduleKey={module.key} />
+        </>
+      )}
     </div>
   );
 }

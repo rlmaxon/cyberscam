@@ -77,9 +77,9 @@ export default function MemberDashboard() {
           <DashboardCard
             icon={<FileText className="w-8 h-8" />}
             title="Downloadable Materials"
-            description="Print reference cards, checklists, and action plan worksheets"
-            buttonText="Coming Soon"
-            disabled
+            description="Print wallet cards and checklists for every lesson"
+            buttonText="Print Cards & Checklists"
+            onClick={() => go('downloads')}
             color="purple"
           />
           <DashboardCard

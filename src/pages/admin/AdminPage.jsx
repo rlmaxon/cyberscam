@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Megaphone, Users, Pencil, Trash2, Send, RefreshCw, Lock, ShieldAlert, Plus } from 'lucide-react';
+import { Megaphone, Users, Pencil, Trash2, Send, RefreshCw, Lock, ShieldAlert, Plus, MousePointerClick } from 'lucide-react';
 import { PATHS } from '../../routes.js';
 import { useMember } from '../../member/MemberContext.jsx';
-import { hasEmailBackend } from '../../amplifyConfig.js';
+import { hasEmailBackend, hasClickTracking } from '../../amplifyConfig.js';
+import { clickStats, pageLabel } from '../../affiliate/products.js';
 import { listAlertsForAdmin, saveAlert, deleteAlert, SEVERITIES, formatAlertDate } from '../../alerts/alertsApi.js';
 import { emailAlertToSubscribers, sendAnnouncement, getSubscriberStats } from '../../alerts/emailApi.js';
 import { Notice, SubmitButton } from '../../components/account/FormParts.jsx';
@@ -252,6 +253,8 @@ function AdminTools() {
         </Section>
 
         <AnnouncementForm stats={stats} />
+
+        {hasClickTracking && <AffiliateClicks />}
       </div>
     </div>
   );
@@ -306,6 +309,53 @@ function AnnouncementForm({ stats }) {
         )}
         <SubmitButton loading={busy} loadingText="Sending…"><Send className="w-5 h-5" aria-hidden="true" /> Send announcement</SubmitButton>
       </form>
+    </Section>
+  );
+}
+
+// Clicks on Security Toolbox product links over the last 30 days. Counts only: no
+// information about who clicked. Use it to see which programs are worth joining.
+function AffiliateClicks() {
+  const [data, setData] = useState(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    clickStats(30).then(setData).catch(() => setFailed(true));
+  }, []);
+  return (
+    <Section icon={<MousePointerClick className="w-7 h-7 text-green-700" aria-hidden="true" />} title="Product link clicks (last 30 days)">
+      {failed ? (
+        <Notice>We couldn't load the click counts.</Notice>
+      ) : !data ? (
+        <p className="text-lg text-slate-600">Loading…</p>
+      ) : !data.products.length ? (
+        <p className="text-lg text-slate-600">No clicks yet. Counts appear here as people use the Security Toolbox links.</p>
+      ) : (
+        <>
+          <p className="text-lg text-slate-700 mb-4"><strong>{data.total}</strong> click{data.total === 1 ? '' : 's'} since {data.since}.</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-lg">
+              <thead>
+                <tr className="border-b-2 border-slate-200">
+                  <th scope="col" className="py-2 pr-4">Product</th>
+                  <th scope="col" className="py-2 pr-4">Clicks</th>
+                  <th scope="col" className="py-2">Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.products.map((p) => (
+                  <tr key={p.product} className="border-b border-slate-100 align-top">
+                    <th scope="row" className="py-2 pr-4 font-semibold">{p.name}</th>
+                    <td className="py-2 pr-4">{p.clicks}</td>
+                    <td className="py-2 text-base text-slate-600">
+                      {Object.entries(p.pages).sort((a, b) => b[1] - a[1]).map(([page, n]) => `${pageLabel(page)}: ${n}`).join(' · ')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
     </Section>
   );
 }

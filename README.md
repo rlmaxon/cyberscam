@@ -64,9 +64,11 @@ backend is in `docs/phase2-aws-setup.md`; email setup (SES and the admin group) 
 | `/subscribe` | Email sign-up (double opt-in) | No |
 | `/subscribe/confirm` | Confirmation link from the sign-up email | No |
 | `/email-preferences` | Change or stop emails, from the link in any email (`/unsubscribe` redirects here) | No |
-| `/admin` | Post alerts, email subscribers, announce new training (Cognito `admin` group) | Yes, admins |
+| `/admin` | Post alerts, email subscribers, announce new training, product click counts (Cognito `admin` group) | Yes, admins |
+| `/downloads` | Printable wallet cards and checklists for every lesson (PDF) | No |
+| `/affiliate-disclosure` | Affiliate Disclosure | No |
 | `/lock-it-down` | Privacy and security settings guides | No |
-| `/security-toolbox` | Recommended security products | No |
+| `/security-toolbox` | Recommended security products (affiliate links) | No |
 | `/signup`, `/verify-email` | Create a free account, confirm email | — |
 | `/login`, `/forgot-password`, `/reset-password` | Member sign-in | — |
 | `/welcome` | First-time setup (name, role, email alerts) | Yes |
@@ -103,6 +105,16 @@ Without it, opening or refreshing a page such as `/emergency` directly shows a
   subscriber record has a `channels` list (`["email"]`) so texts can be added later.
 - Sending is paced at about 8 emails a second. One send can reach roughly 7,000 people
   within the 15-minute Lambda limit; past that, the worker will need batching.
+
+## Affiliate links and printables
+
+- **Affiliate links:** paste tracking links into `affiliateUrl` in `src/config.json`.
+  `docs/affiliate-setup.md` has the details. Product links are marked
+  `rel="sponsored noopener"`, and clicks are counted by product and page only
+  (`AffiliateClickDaily`, written by the AppSync resolver `amplify/data/recordAffiliateClick.js`).
+- **Printables:** wallet cards and checklists are built in the browser from
+  `modules.json` (`card.redFlags`, `card.rule`, `card.say`, `actions`, `sayThis`) by
+  `src/training/printables.js`. Editing a lesson's text updates its PDFs.
 
 ## Roadmap
 

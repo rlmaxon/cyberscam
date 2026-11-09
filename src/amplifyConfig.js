@@ -11,6 +11,8 @@ const outputs = Object.values(generated)[0];
 export const hasDataBackend = Boolean(outputs?.data?.url);
 // Scam Alerts in the database and the email sign-up need the Phase 5 backend.
 export const hasEmailBackend = hasDataBackend && Boolean(outputs?.custom?.emailAlerts);
+// Counting clicks on Security Toolbox links needs the Phase 6 backend.
+export const hasClickTracking = hasDataBackend && Boolean(outputs?.custom?.affiliateClicks);
 
 // The password rules Cognito actually enforces. The Amplify build reads them from the
 // user pool into amplify_outputs.json, so the on-screen checklist always matches AWS.

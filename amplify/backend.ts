@@ -100,5 +100,5 @@ worker.addEventSource(new DynamoEventSource(tables.FamilyShare, {
 }));
 
 backend.addOutput({
-  custom: { emailAlerts: true },
+  custom: { emailAlerts: true, affiliateClicks: true },
 });

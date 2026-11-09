@@ -46,6 +46,8 @@ import SubscribePage from './pages/alerts/SubscribePage.jsx';
 import ConfirmSubscriptionPage from './pages/alerts/ConfirmSubscriptionPage.jsx';
 import EmailPreferencesPage from './pages/alerts/EmailPreferencesPage.jsx';
 import AdminPage from './pages/admin/AdminPage.jsx';
+import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage.jsx';
+import DownloadsPage from './pages/learn/DownloadsPage.jsx';
 
 // ==================== MAIN APP ====================
 // authState: 'loading' | 'authenticated' | 'unauthenticated' | 'newPasswordRequired'
@@ -262,6 +264,8 @@ export default function SeniorCyberSecure() {
             <Route path={PATHS.subscribeConfirm} element={<ConfirmSubscriptionPage />} />
             <Route path={PATHS.emailPreferences} element={<EmailPreferencesPage />} />
             <Route path="/unsubscribe" element={<Navigate to={`${PATHS.emailPreferences}${location.search}`} replace />} />
+            <Route path={PATHS.affiliateDisclosure} element={<AffiliateDisclosurePage />} />
+            <Route path={PATHS.downloads} element={<DownloadsPage />} />
             <Route path={PATHS.training} element={<TrainingLab />} />
             <Route path={`${PATHS.training}/quiz`} element={<TrainingLab view="quiz" />} />
             <Route path={`${PATHS.training}/:categoryKey`} element={<TrainingLab />} />
