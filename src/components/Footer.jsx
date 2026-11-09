@@ -41,6 +41,7 @@ export default function Footer() {
               <li><button onClick={() => go('alerts')} className="hover:text-white transition-colors">Scam Alerts</button></li>
               <li><button onClick={() => go('subscribe')} className="hover:text-white transition-colors">Get Alerts by Email</button></li>
               <li><button onClick={() => go('scamOfTheWeek')} className="hover:text-white transition-colors">Scam of the Week</button></li>
+              <li><button onClick={() => go('downloads')} className="hover:text-white transition-colors">Printable Cards</button></li>
               <li><button onClick={() => go('familyPlan')} className="hover:text-white transition-colors">Family Safety Plan</button></li>
               <li><button onClick={() => go('family')} className="hover:text-white transition-colors">Family Circle</button></li>
               <li><button onClick={() => go('resources')} className="hover:text-white transition-colors">Privacy Settings</button></li>
@@ -77,7 +78,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-6 text-slate-500 text-sm">
               <button className="hover:text-white transition-colors">Privacy Policy</button>
-              <button className="hover:text-white transition-colors">Affiliate Disclosure</button>
+              <button onClick={() => go('affiliateDisclosure')} className="hover:text-white transition-colors">Affiliate Disclosure</button>
               <button className="hover:text-white transition-colors">Terms of Service</button>
             </div>
           </div>

@@ -153,7 +153,17 @@
       "I don't do business over the phone. I'll call the number on my statement.",
       "I never make decisions on the phone. I talk to my family first.",
       "Please take me off your list. I'm hanging up now."
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "Strong feelings: fear, panic, excitement, or love",
+        "A rush: \"right now,\" \"before it's too late\"",
+        "Someone \"in charge\": bank, police, government",
+        "A request for secrecy: \"don't tell anyone\""
+      ],
+      "rule": "Pause. Hang up. Check with someone you trust.",
+      "say": "No, thank you."
+    }
   },
   {
     "key": "email",
@@ -210,7 +220,17 @@
     "sayThis": [
       "(To yourself) \"I'll go to the company's website myself instead of clicking.\"",
       "(To family) \"Can you look at this email with me before I do anything?\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "A sender address that's a little off",
+        "Panic: \"account locked,\" \"you were charged\"",
+        "\"Dear Customer\" instead of your name",
+        "A link to \"verify,\" \"confirm,\" or \"cancel\""
+      ],
+      "rule": "Don't click. Go to the company's website yourself.",
+      "say": "Can you look at this email with me?"
+    }
   },
   {
     "key": "text",
@@ -265,7 +285,16 @@
     "sayThis": [
       "Say nothing at all. You never owe a stranger a reply, not even \"wrong number.\"",
       "(To family) \"I got a strange text. Does this look real to you?\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "A fee for a package or an \"unpaid toll\"",
+        "\"Did you make this purchase? Reply YES or NO\"",
+        "A link from a number you don't know",
+        "A friendly \"wrong number\" that keeps chatting"
+      ],
+      "rule": "Don't tap. Don't reply. Check with the company yourself."
+    }
   },
   {
     "key": "phone",
@@ -328,7 +357,17 @@
       "\"I don't do business over the phone. I'll call you back at the number on my card.\"",
       "\"What's our family code word?\"",
       "\"I'm hanging up now.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "A loved one in trouble who needs money now",
+        "\"Don't tell anyone\" about the call",
+        "Pay by gift card, wire, crypto, or courier",
+        "Asks you to read them a code from a text"
+      ],
+      "rule": "Hang up. Call back on a number you already know.",
+      "say": "I'll call you back at the number on my card."
+    }
   },
   {
     "key": "popup",
@@ -383,7 +422,17 @@
     "sayThis": [
       "(To a \"technician\") \"No. I don't let anyone into my computer.\"",
       "\"I'm hanging up and calling my family.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "Flashing warnings, alarms, or a talking voice",
+        "Microsoft or Apple logos to look official",
+        "A phone number to call for \"support\"",
+        "\"Do not turn off your computer\""
+      ],
+      "rule": "Never call the number. Close the browser.",
+      "say": "No. I don't let anyone into my computer."
+    }
   },
   {
     "key": "government",
@@ -443,7 +492,17 @@
     "sayThis": [
       "\"I'll call the agency myself at the official number.\"",
       "\"I don't pay anything over the phone. Send me a letter.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "Threats of arrest or a \"suspended\" number",
+        "Demands to pay right now, by phone",
+        "Gift cards, wire transfers, or a Bitcoin ATM",
+        "Asks for your Medicare or Social Security number"
+      ],
+      "rule": "Hang up. Call the agency's official number yourself.",
+      "say": "I'll call the agency myself at the official number."
+    }
   },
   {
     "key": "marketplace",
@@ -499,7 +558,17 @@
     "sayThis": [
       "\"I only do cash or in-app payment, in person.\"",
       "\"I never share codes from my phone.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "A buyer who overpays and wants change back",
+        "Asks you to read them a code from your phone",
+        "A price far too good to be true",
+        "Pay first by Zelle, gift card, or wire"
+      ],
+      "rule": "See it before you pay. Never share a code.",
+      "say": "I never share codes from my phone."
+    }
   },
   {
     "key": "romance",
@@ -557,7 +626,17 @@
       "\"I don't send money to anyone I haven't met in person.\"",
       "\"Let's video chat first.\"",
       "\"I talk about big decisions with my family.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "\"I love you\" very quickly",
+        "Lives far away, can't video chat or meet",
+        "A sudden emergency that needs money",
+        "Wants to teach you about crypto"
+      ],
+      "rule": "Never send money to someone you've only met online.",
+      "say": "I don't send money to anyone I haven't met in person."
+    }
   },
   {
     "key": "investment",
@@ -614,6 +693,16 @@
       "\"I never invest over the phone or through an app someone sends me.\"",
       "\"I'll check with my own advisor first.\"",
       "\"I don't use Bitcoin ATMs.\""
-    ]
+    ],
+    "card": {
+      "redFlags": [
+        "\"Guaranteed\" returns or \"no risk\"",
+        "Pressure to invest before you \"miss out\"",
+        "An online \"mentor\" who teaches trading",
+        "Fees or taxes to withdraw your own money"
+      ],
+      "rule": "Check with your own advisor before you invest.",
+      "say": "I'll check with my own advisor first."
+    }
   }
 ]

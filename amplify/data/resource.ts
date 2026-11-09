@@ -242,6 +242,27 @@ const schema = a.schema({
     .returns(a.json())
     .authorization((allow) => [allow.group('admin')])
     .handler(a.handler.function(mailerApi)),
+
+  // ---- Affiliate click counts (Phase 6) ----
+
+  // One row per day, product, and page (id "2026-11-08#norton-360#toolbox"), counting clicks
+  // on Security Toolbox links. No personal data. Only admins can read it; it's written only
+  // by recordAffiliateClick below.
+  AffiliateClickDaily: a
+    .model({
+      day: a.date().required(),
+      product: a.string().required(),
+      page: a.string().required(),
+      clicks: a.integer().required(),
+    })
+    .authorization((allow) => [allow.group('admin').to(['read'])]),
+
+  recordAffiliateClick: a
+    .mutation()
+    .arguments({ product: a.string().required(), page: a.string().required() })
+    .returns(a.boolean())
+    .authorization((allow) => [allow.publicApiKey(), allow.authenticated()])
+    .handler(a.handler.custom({ dataSource: a.ref('AffiliateClickDaily'), entry: './recordAffiliateClick.js' })),
 });
 
 export type Schema = ClientSchema<typeof schema>;

@@ -23,24 +23,29 @@
       "color": "blue",
       "items": [
         {
+          "id": "norton-360",
           "name": "Norton 360",
-          "price": "$49.99/year",
           "url": "https://norton.com",
-          "rating": 4.5
+          "affiliateUrl": ""
         },
         {
+          "id": "bitdefender",
           "name": "Bitdefender",
-          "price": "$39.99/year",
           "url": "https://bitdefender.com",
-          "rating": 4.7
+          "affiliateUrl": ""
         },
         {
+          "id": "malwarebytes",
           "name": "Malwarebytes",
-          "price": "$44.99/year",
           "url": "https://malwarebytes.com",
-          "rating": 4.4
+          "affiliateUrl": ""
         }
-      ]
+      ],
+      "recommendFor": [
+        "email",
+        "popup"
+      ],
+      "why": "Blocks many dangerous links and fake pop-ups before they reach you."
     },
     {
       "category": "VPN",
@@ -50,24 +55,26 @@
       "color": "purple",
       "items": [
         {
+          "id": "nordvpn",
           "name": "NordVPN",
-          "price": "$3.99/month",
           "url": "https://nordvpn.com",
-          "rating": 4.6
+          "affiliateUrl": ""
         },
         {
+          "id": "expressvpn",
           "name": "ExpressVPN",
-          "price": "$6.67/month",
           "url": "https://expressvpn.com",
-          "rating": 4.5
+          "affiliateUrl": ""
         },
         {
+          "id": "surfshark",
           "name": "Surfshark",
-          "price": "$2.49/month",
           "url": "https://surfshark.com",
-          "rating": 4.4
+          "affiliateUrl": ""
         }
-      ]
+      ],
+      "recommendFor": [],
+      "why": "Best for public WiFi at cafés, airports, and hotels."
     },
     {
       "category": "Password Manager",
@@ -77,24 +84,28 @@
       "color": "green",
       "items": [
         {
+          "id": "1password",
           "name": "1Password",
-          "price": "$2.99/month",
           "url": "https://1password.com",
-          "rating": 4.8
+          "affiliateUrl": ""
         },
         {
+          "id": "dashlane",
           "name": "Dashlane",
-          "price": "$4.99/month",
           "url": "https://dashlane.com",
-          "rating": 4.5
+          "affiliateUrl": ""
         },
         {
+          "id": "bitwarden",
           "name": "Bitwarden",
-          "price": "Free / $10/year",
           "url": "https://bitwarden.com",
-          "rating": 4.6
+          "affiliateUrl": ""
         }
-      ]
+      ],
+      "recommendFor": [
+        "email"
+      ],
+      "why": "Fake login pages don’t fool it: it only fills in your password on the real site."
     },
     {
       "category": "Data Removal",
@@ -104,24 +115,30 @@
       "color": "orange",
       "items": [
         {
+          "id": "deleteme",
           "name": "DeleteMe",
-          "price": "$129/year",
           "url": "https://joindeleteme.com",
-          "rating": 4.5
+          "affiliateUrl": ""
         },
         {
+          "id": "incogni",
           "name": "Incogni",
-          "price": "$77.88/year",
           "url": "https://incogni.com",
-          "rating": 4.3
+          "affiliateUrl": ""
         },
         {
+          "id": "kanary",
           "name": "Kanary",
-          "price": "$89/year",
           "url": "https://kanary.com",
-          "rating": 4.2
+          "affiliateUrl": ""
         }
-      ]
+      ],
+      "recommendFor": [
+        "phone",
+        "text",
+        "government"
+      ],
+      "why": "Removes your phone number and address from sites scammers use to find you."
     }
   ],
   "privacyGuides": [
@@ -374,5 +391,10 @@
         "url": "https://www.idtheftcenter.org"
       }
     ]
+  },
+  "affiliate": {
+    "note": "Paste each program's tracking link into a product's affiliateUrl. Empty means the plain url is used. Set amazonAssociate to true once any Amazon Associates link is live (Amazon requires its statement on the disclosure page). See docs/affiliate-setup.md.",
+    "amazonAssociate": false,
+    "disclosureUpdated": "2026-11-08"
   }
 }
